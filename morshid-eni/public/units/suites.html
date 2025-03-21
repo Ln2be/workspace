@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المتتاليات العددية - نموذج متكامل</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <style>
+      :root {
+        --primary: #2a5c82;
+        --secondary: #e76f51;
+        --accent: #2a9d8f;
+      }
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        color: var(--primary);
+        text-align: center;
+      }
+      .exercise {
+        background: #e8f5e9;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border: 2px solid var(--accent);
+      }
+      .steps {
+        margin: 15px 0;
+        padding-right: 20px;
+      }
+      button {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px 0;
+      }
+      .solution {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .interactive {
+        background: #fff3e0;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>درس المتتاليات العددية</h1>
+
+      <!-- التمرين النموذجي -->
+      <div class="exercise">
+        <h2>التمرين النموذجي</h2>
+        <p>المتتاليتان \( (U_n) \) و \( (V_n) \) مُعرفتان كالتالي:</p>
+        <p dir="ltr">
+          \[ \begin{cases} U_0 = 3 \\ U_{n+1} = 2U_n + 5 \\ V_n = U_n + 5
+          \end{cases} \]
+        </p>
+
+        <button onclick="toggleSolution('model')">عرض الحل التفصيلي</button>
+        <div id="model" class="solution">
+          <div class="steps">
+            <h3>1. حساب \( U_1 \) و \( U_2 \):</h3>
+            <p>\[ U_1 = 2U_0 + 5 = 2 \times 3 + 5 = \boxed{11} \]</p>
+            <p>\[ U_2 = 2U_1 + 5 = 2 \times 11 + 5 = \boxed{27} \]</p>
+          </div>
+
+          <div class="steps">
+            <h3>2. إثبات أن \( (V_n) \) هندسية:</h3>
+            <p>
+              \[ V_{n+1} = U_{n+1} + 5 = 2U_n + 5 + 5 = 2(U_n + 5) = 2V_n \]
+            </p>
+            <p>النسبة الثابتة: \( \frac{V_{n+1}}{V_n} = 2 \)</p>
+            <p>∴ \( (V_n) \) متتالية هندسية أساسها 2</p>
+          </div>
+
+          <div class="steps">
+            <h3>3. كتابة \( V_n \) بدلالة \( n \):</h3>
+            <p>\[ V_0 = U_0 + 5 = 3 + 5 = 8 \]</p>
+            <p>
+              الصيغة العامة: \[ V_n = V_0 \times 2^n = 8 \times 2^n = 2^{n+3} \]
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- تمارين تطبيقية -->
+      <div class="interactive">
+        <h2>تمارين تطبيقية</h2>
+
+        <!-- تمرين 1 -->
+        <div class="exercise">
+          <h3>التمرين 1</h3>
+          <p>\( W_0 = 2 \) ، \( W_{n+1} = 3W_n - 4 \)</p>
+          <p>المطلوب: احسب \( W_1 \) و \( W_2 \)</p>
+          <button onclick="toggleSolution('ex1')">عرض الحل</button>
+          <div id="ex1" class="solution">
+            <p>\[ W_1 = 3 \times 2 - 4 = 2 \]</p>
+            <p>\[ W_2 = 3 \times 2 - 4 = 2 \]</p>
+          </div>
+        </div>
+
+        <!-- تمرين 2 -->
+        <div class="exercise">
+          <h3>التمرين 2</h3>
+          <p>\( Z_n = 5Z_{n-1} \) ، \( Z_0 = 1 \)</p>
+          <p>
+            المطلوب: أثبت أنها متتالية هندسية ثم اكتب \( Z_n \) بدلالة \( n \)
+          </p>
+          <button onclick="toggleSolution('ex2')">عرض الحل</button>
+          <div id="ex2" class="solution">
+            <p>النسبة: \( \frac{Z_n}{Z_{n-1}} = 5 \) ← متتالية هندسية</p>
+            <p>\[ Z_n = 5^n \]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleSolution(id) {
+        const sol = document.getElementById(id);
+        sol.style.display = sol.style.display === "none" ? "block" : "none";
+        MathJax.typeset();
+      }
+    </script>
+  </body>
+</html>

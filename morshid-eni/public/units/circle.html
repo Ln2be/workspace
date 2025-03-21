@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TTNBJ761EC"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-TTNBJ761EC");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مقاييس الدائرة</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #2c3e50;
+      }
+      .section {
+        margin: 20px 0;
+      }
+      p {
+        line-height: 1.8;
+        color: #34495e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #2980b9;
+        color: white;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 10px;
+        background-color: #34495e;
+        color: white;
+      }
+      .exercise {
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f4f4f4;
+        border-left: 5px solid #2980b9;
+      }
+      .exercise h3 {
+        margin-top: 0;
+        color: #2980b9;
+      }
+      .solution {
+        background-color: #e8f4fc;
+        border-left: 5px solid #3498db;
+        padding: 10px;
+        margin-top: 10px;
+      }
+      .circle-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+      .circle {
+        width: 200px;
+        height: 200px;
+        /* border: 4px solid #2c3e50; */
+        border-radius: 50%;
+        background: radial-gradient(circle, #3498db 60%, transparent 60%);
+      }
+      .btn {
+        background-color: #2ecc71;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #27ae60;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>الشكل الهندسي: الدائرة</h1>
+      <div class="section">
+        <h2>رسم الدائرة</h2>
+        <div class="circle-container">
+          <div class="circle"></div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>المقاييس الأساسية</h2>
+        <p>
+          الدائرة لها عدد من المقاييس المهمة التي يمكن حسابها باستخدام الصيغ
+          التالية:
+        </p>
+        <ul>
+          <li><strong>القطر = الشعاع × 2</strong></li>
+          <li><strong>الشعاع = القطر ÷ 2</strong></li>
+          <li><strong>المحيط = القطر × π = الشعاع × 2 × π</strong></li>
+          <li><strong>القطر = المحيط ÷ π</strong></li>
+          <li><strong>المساحة = الشعاع² × π</strong></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>أمثلة محلولة</h2>
+        <div class="exercise">
+          <h3>تمرين 1</h3>
+          <p>إذا كان شعاع دائرة يساوي 7 سم، فما هو القطر والمحيط والمساحة؟</p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>القطر = الشعاع × 2 = 7 × 2 = 14 سم</p>
+            <p>المحيط = القطر × π = 14 × 3.14 ≈ 43.96 سم</p>
+            <p>المساحة = الشعاع² × π = 7² × 3.14 = 49 × 3.14 ≈ 153.86 سم²</p>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3>تمرين 2</h3>
+          <p>
+            إذا كان محيط دائرة يساوي 62.8 سم، فما هو القطر والشعاع والمساحة؟
+          </p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>القطر = المحيط ÷ π = 62.8 ÷ 3.14 ≈ 20 سم</p>
+            <p>الشعاع = القطر ÷ 2 = 20 ÷ 2 = 10 سم</p>
+            <p>المساحة = الشعاع² × π = 10² × 3.14 = 100 × 3.14 ≈ 314 سم²</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>تمارين بدون حلول</h2>
+        <div class="exercise">
+          <h3>تمرين 1</h3>
+          <p>إذا كان قطر دائرة يساوي 16 سم، فما هو المحيط والمساحة؟</p>
+        </div>
+
+        <div class="exercise">
+          <h3>تمرين 2</h3>
+          <p>إذا كان محيط دائرة يساوي 31.4 سم، فما هو الشعاع والمساحة؟</p>
+        </div>
+      </div>
+      <a href="/" class="btn">رجوع</a>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 جميع الحقوق محفوظة</p>
+    </div>
+  </body>
+</html>

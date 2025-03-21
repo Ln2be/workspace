@@ -1,0 +1,11 @@
+/educational-website
+├── index.html
+├── style.css
+├── script.js
+├── /assets
+    ├── /images
+    └── /fonts
+├── /units
+    ├── unit1.html
+    ├── unit2.html
+    └── unit3.html

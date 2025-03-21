@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>برنامج تدريبي - الصف السادس</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- تكوين MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <style>
+      :root {
+        --primary: #6c63ff;
+        --secondary: #ff6584;
+        --accent: #00bfa6;
+        --light: #f8f9ff;
+        --dark: #2f2e41;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background: linear-gradient(135deg, #f8f9ff 0%, #e6f3ff 100%);
+        margin: 0;
+        padding: 30px;
+        min-height: 100vh;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .week-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        border: none;
+        box-shadow: 0 10px 30px rgba(108, 99, 255, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .week-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary) 0%,
+          var(--accent) 100%
+        );
+      }
+
+      .week-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(108, 99, 255, 0.2);
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--dark);
+        font-size: 2.8em;
+        margin: 0 0 40px 0;
+        padding: 25px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        display: inline-block;
+        width: fit-content;
+        margin: 20px auto;
+        position: relative;
+      }
+
+      h1::after {
+        content: "📚";
+        position: absolute;
+        left: -50px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2em;
+      }
+
+      h2 {
+        color: var(--dark);
+        font-size: 1.5em;
+        margin: 15px 0;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--accent);
+        position: relative;
+      }
+
+      h2::before {
+        content: "🗓️";
+        position: absolute;
+        left: -35px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2em;
+        color: var(--primary);
+      }
+
+      .concept-badge {
+        background: linear-gradient(45deg, var(--primary), var(--accent));
+        color: white;
+        padding: 8px 20px;
+        border-radius: 25px;
+        font-size: 0.9em;
+        display: inline-block;
+        margin: 0 0 15px 0;
+        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        padding: 12px 15px;
+        margin: 8px 0;
+        font-size: 0.95em;
+        line-height: 1.5;
+        border-radius: 10px;
+        background-color: var(--light);
+        position: relative;
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+      }
+
+      li:hover {
+        transform: translateX(10px);
+        border-left-color: var(--primary);
+        background: white;
+      }
+
+      li::before {
+        content: "▹";
+        color: var(--primary);
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2em;
+      }
+
+      @media (max-width: 768px) {
+        .grid-container {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 2em;
+          padding: 20px;
+        }
+      }
+
+      @media print {
+        body {
+          padding: 15px;
+          background: white !important;
+        }
+        .week-card {
+          box-shadow: none;
+          border: 2px solid #eee;
+        }
+        h1 {
+          box-shadow: none;
+          background: transparent;
+        }
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 40px auto;
+        padding: 25px 50px;
+        background: linear-gradient(45deg, var(--primary), var(--accent));
+        color: white;
+        border-radius: 50px;
+        box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+        position: relative;
+        transform: translateY(-50%);
+        top: 50%;
+      }
+
+      /* أضف هذه الأنماط في قسم الـ CSS */
+      .contact-section {
+        text-align: center;
+        margin: 50px 0 30px;
+        padding: 25px;
+        background: linear-gradient(45deg, #25d366, #128c7e);
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(18, 140, 126, 0.3);
+        color: white;
+      }
+
+      .whatsapp-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.3em;
+        color: white;
+        text-decoration: none;
+        padding: 12px 25px;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .whatsapp-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .whatsapp-icon {
+        width: 28px;
+        height: 28px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>دورة لمدة شهرين 🎯</h1>
+
+    <div class="grid-container">
+      <!-- الأسبوع 1 -->
+      <div class="week-card">
+        <h2>الأسبوع 1: الربح، النسبة المئوية، وسعر الوحدة</h2>
+        <span class="concept-badge">المفاهيم الأساسية</span>
+        <ul>
+          <h3>الحساب حصتين</h3>
+          <li>حساب ثمن البيع، ثمن الشراء و الربح</li>
+          <li>حساب النسبة من عدد (مثال: 20% من 150)</li>
+          <li>سعر الوحدة، السعر الكلي</li>
+        </ul>
+        <ul>
+          <h3>الرياضيات حصة واحدة</h3>
+          <li>العمليات على الاعداد الصحيحة</li>
+          <li>\[-4 *-7\]</li>
+        </ul>
+      </div>
+
+      <!-- الأسبوع 2 -->
+      <div class="week-card">
+        <h2>الأسبوع 2: المقاييس</h2>
+        <span class="concept-badge">المفاهيم الأساسية</span>
+        <ul>
+          <li>التحويل بين الوحدات (كم → م، جرام → كجم)</li>
+          <li>من المتر مربع الى الآر الى الهكتار</li>
+        </ul>
+        <ul>
+          <h3>الرياضيات حصة واحدة</h3>
+          <li>معادلة من الدرجة الاولى</li>
+          <li>\[2x + 8 = 0\]</li>
+        </ul>
+      </div>
+
+      <!-- الأسبوع 3 -->
+      <div class="week-card">
+        <h2>الأسبوع 3: الهندسة</h2>
+        <span class="concept-badge">المفاهيم الأساسية</span>
+        <ul>
+          <li>محيط و مساحة (المربع، المستطيل)</li>
+          <li>حساب ابعاد المستطيل عن طريق المحيط</li>
+        </ul>
+        <ul>
+          <h3>الرياضيات حصة واحدة</h3>
+          <li>معادلة من الدرجة الثانية</li>
+          <li>\[ 2x^2 + 5x - 3 = 0 \]</li>
+        </ul>
+      </div>
+
+      <!-- الأسبوع 4 -->
+      <div class="week-card">
+        <h2>الأسبوع 4: الزمن</h2>
+        <span class="concept-badge">المفاهيم الأساسية</span>
+        <ul>
+          <li>زمن و نقطة الالتقاء لسيارتين تتجهان نحو بعضهما</li>
+          <li>زمن و نقطة اللحاق لسيارتين تتحركان بسرعتين مختلفتين</li>
+        </ul>
+        <ul>
+          <h3>الرياضيات حصة واحدة</h3>
+          <li>معادلة من الدرجة الثانية تابع</li>
+          <li>\[ x^2 -4x + 3 = 0 \]</li>
+        </ul>
+      </div>
+
+      <!-- الأسبوع 5 -->
+      <div class="week-card">
+        <h2>الأسبوع 5: مدة الرحلة و مقياس الخريطة</h2>
+        <span class="concept-badge">المفاهيم الأساسية</span>
+        <ul>
+          <li>زمن الوصول، ومن الانطلاق و مدة الرحلة</li>
+          <li>المسافة الحقيقية، المسافة على الخريطة، مقياس الخريطة</li>
+        </ul>
+        <ul>
+          <h3>الرياضيات حصة واحدة</h3>
+          <li>معادلات الاستبدال</li>
+          <li>\( e^{2x} - 4e^x + 3 = 0 \)</li>
+          <li>\( (\ln x)^2 + 2\ln x - 3 = 0 \)</li>
+        </ul>
+      </div>
+
+      <!-- الأسابيع 6-8 -->
+      <div class="week-card">
+        <h2>الأسابيع 6-8: التمارين المدمجة</h2>
+        <span class="concept-badge">المفاهيم الأساسية</span>
+        <ul>
+          <li>دمج مفاهيم الربح والنسب في تمارين عملية</li>
+          <li>حل مسائل هندسية مع تطبيقات قياسية</li>
+          <li>
+            تمارين شاملة على جميع هذه المفاهيم مع حل المواضيع السابقة للمسابقة
+          </li>
+        </ul>
+      </div>
+      <!-- أضف هذا القسم قبل نهاية body -->
+      <div class="contact-section">
+        <h3>للتواصل عبر واتساب:</h3>
+        <a href="https://wa.me/38393963" class="whatsapp-link" target="_blank">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+            class="whatsapp-icon"
+            alt="واتساب"
+          />
+          38393963
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

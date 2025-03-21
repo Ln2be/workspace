@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projectile Classifier</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Will the Projectile Exceed 30m? 🚀</h1>
+      <div class="input-group">
+        <input
+          type="number"
+          id="velocity"
+          placeholder="Velocity (m/s)"
+          step="0.1"
+        />
+        <input
+          type="number"
+          id="angle"
+          placeholder="Angle (degrees)"
+          step="0.1"
+        />
+        <input
+          type="number"
+          id="range"
+          placeholder="Desired Range (m)"
+          step="0.1"
+        />
+        <button onclick="predict()">Predict</button>
+      </div>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      async function predict() {
+        const velocity = parseFloat(document.getElementById("velocity").value);
+        const angle = parseFloat(document.getElementById("angle").value);
+        const range = parseFloat(document.getElementById("range").value);
+        const resultDiv = document.getElementById("result");
+
+        resultDiv.innerHTML = "<div class='loading'>Predicting... ⏳</div>";
+
+        try {
+          const response = await fetch("/predict", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              velocity: velocity,
+              angle: angle,
+              range: isNaN(range) ? undefined : range, // Only send range if it's a valid number
+            }),
+          });
+
+          const data = await response.json();
+          if (data.prediction) {
+            resultDiv.innerHTML = `<div class="prediction">Prediction: <strong>${data.prediction}</strong></div>`;
+          } else {
+            resultDiv.innerHTML =
+              "<div class='error'>Error in prediction</div>";
+          }
+        } catch (error) {
+          resultDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+        }
+      }
+    </script>
+  </body>
+</html>

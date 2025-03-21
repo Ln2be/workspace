@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercice 2 - Dépassement de véhicules</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 0.8rem;
+        border: 1px solid #dfe6e9;
+        text-align: center;
+      }
+      .final-answer {
+        background: #27ae60;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="exercise-box">
+        <h2>Exercice 2 : Dépassement avec accélération</h2>
+
+        <!-- Énoncé -->
+        <div class="solution-step">
+          <h3>📝 Énoncé</h3>
+          <p>
+            Deux automobiles A et B roulent à 72 km/h, espacées de 25 m. À t=0,
+            A accélère à 1 m/s², dépasse B et se place devant avec une distance
+            de sécurité de 30 m.
+          </p>
+          <ol>
+            <li>Établir les équations horaires</li>
+            <li>Calculer la distance parcourue par B pendant la manœuvre</li>
+          </ol>
+        </div>
+
+        <!-- Concepts clés -->
+        <div class="solution-step" style="background: #f8edeb">
+          <h3>🔑 Concepts Clés</h3>
+          <ul>
+            <li>Mouvement Rectiligne Uniformément Accéléré (MRUA)</li>
+            <li>Mouvement Rectiligne Uniforme (MRU)</li>
+            <li>Distance relative entre véhicules</li>
+          </ul>
+        </div>
+
+        <!-- Solution -->
+        <div class="solution-step">
+          <h3>🔍 Solution Détaillée</h3>
+
+          <h4>Étape 1 : Conversion des unités</h4>
+          <p class="formula">72 km/h = 20 m/s</p>
+
+          <h4>Étape 2 : Équations horaires</h4>
+          <table>
+            <tr>
+              <th>Véhicule</th>
+              <th>Équation</th>
+              <th>Explication</th>
+            </tr>
+            <tr>
+              <td>A (accélère)</td>
+              <td class="formula">x_A(t) = 20t + 0.5·1·t² - 25</td>
+              <td>Position initiale : -25m</td>
+            </tr>
+            <tr>
+              <td>B (vitesse constante)</td>
+              <td class="formula">x_B(t) = 20t</td>
+              <td>Pas d'accélération</td>
+            </tr>
+          </table>
+
+          <h4>Étape 3 : Condition de dépassement</h4>
+          <p class="formula">x_A(t) = x_B(t) + 30</p>
+          <p class="formula">20t + 0.5t² - 25 = 20t + 30</p>
+          <p class="formula">0.5t² = 55 ⇒ t = √110 ≈ 10.49s</p>
+
+          <h4>Étape 4 : Distance parcourue par B</h4>
+          <p class="formula">Distance = 20 m/s × 10.49s = 209.8m</p>
+        </div>
+
+        <!-- Vérification -->
+        <div class="solution-step" style="background: #e9f5db">
+          <h3>✅ Vérification</h3>
+          <table>
+            <tr>
+              <th>Véhicule</th>
+              <th>Position à t=10.49s</th>
+              <th>Distance</th>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td class="formula">20×10.49 + 0.5×10.49² -25 ≈ 239.8m</td>
+              <td rowspan="2">239.8m - 209.8m = 30m ✓</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td class="formula">20×10.49 ≈ 209.8m</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Résultat final -->
+        <div class="final-answer">
+          <h3>📝 Réponse Finale</h3>
+          <p>
+            Distance parcourue par B : <span class="formula">209.8 mètres</span>
+          </p>
+          <p>
+            Durée du dépassement : <span class="formula">10.5 secondes</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

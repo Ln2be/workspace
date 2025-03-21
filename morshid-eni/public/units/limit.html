@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TTNBJ761EC"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-TTNBJ761EC");
+    </script>
+
+    <!-- MathJax library -->
+    <script
+      type="text/javascript"
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>درس حساب النهايات</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #34495e;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: 2.5em;
+        margin-top: 30px;
+      }
+      h2,
+      h3 {
+        font-size: 1.8em;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        border-top: 5px solid #3498db;
+      }
+      p {
+        font-size: 1.2em;
+        line-height: 1.8em;
+        color: #2c3e50;
+      }
+      ul {
+        font-size: 1.2em;
+        color: #7f8c8d;
+      }
+      li {
+        margin: 10px 0;
+      }
+      .exercise {
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .exercise h3 {
+        color: #2980b9;
+      }
+      .exercise p {
+        margin: 8px 0;
+      }
+      .result {
+        font-weight: bold;
+        color: #e74c3c;
+        font-size: 1.4em;
+      }
+      .btn {
+        background-color: #3498db;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #2980b9;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px;
+        background-color: #34495e;
+        color: white;
+        border-top: 5px solid #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>درس حساب النهايات</h1>
+
+      <h2>مقدمة عن النهايات</h2>
+      <p>
+        النهايات هي أداة رياضية تُستخدم لتحليل سلوك الدالة عندما يقترب المتغير
+        المستقل (\(x\)) من قيمة معينة أو عندما يقترب من \(\pm \infty\).
+      </p>
+
+      <h2>دوال كسرية</h2>
+      <p>
+        سنناقش كيفية حساب النهايات لدالة كسرية، حيث يكون البسط معادلة من الدرجة
+        الثانية والمقام معادلة من الدرجة الأولى.
+      </p>
+
+      <h2>مثال توضيحي</h2>
+      <p>لنفترض الدالة:</p>
+      <p><span id="equation1">$$f(x) = \frac{x^2 - 4}{x - 2}$$</span></p>
+
+      <h2>حساب النهايات</h2>
+      <ul>
+        <li><b>عند \(x \to 2\):</b></li>
+        <p>
+          عندما نعوض \(x = 2\) نجد أن المقام يصبح صفرًا، مما يؤدي إلى وجود عدم
+          تعيين. في هذه الحالة نستخدم التحليل.
+        </p>
+        <p>بتحليل البسط: \(x^2 - 4 = (x - 2)(x + 2)\)، وبالتالي:</p>
+        <p>
+          <span id="equation2">$$f(x) = \frac{(x - 2)(x + 2)}{x - 2}$$</span>
+        </p>
+        <p>بعد الاختزال: \(f(x) = x + 2\)، وعند \(x = 2\) نحصل على:</p>
+        <p class="result">\(f(2) = 4\)</p>
+        <li><b>عند \(x \to \pm \infty\):</b></li>
+        <p>
+          عندما يقترب \(x\) من \(\pm \infty\)، نحلل نسبة الحدود الأعلى درجة في
+          البسط والمقام:
+        </p>
+        <p>
+          <span id="equation3"
+            >$$\lim_{x \to \infty} f(x) = \lim_{x \to \infty} \frac{x^2}{x} =
+            \infty$$</span
+          >
+        </p>
+        <p>
+          <span id="equation4"
+            >$$\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} \frac{x^2}{x} =
+            -\infty$$</span
+          >
+        </p>
+      </ul>
+
+      <h2>تمارين إضافية</h2>
+      <p>حاول حساب النهايات للدوال التالية:</p>
+      <ul>
+        <li>\(f(x) = \frac{x^2 + 5x + 6}{x - 3}\)</li>
+        <li>\(f(x) = \frac{x^2 - x - 6}{x + 2}\)</li>
+      </ul>
+
+      <a href="/" class="btn">رجوع</a>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 جميع الحقوق محفوظة</p>
+    </div>
+  </body>
+</html>

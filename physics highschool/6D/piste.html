@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skate Track Designer with Grid</title>
+    <style>
+      :root {
+        --primary: #2ecc71;
+        --secondary: #3498db;
+        --background: #2c3e50;
+        --surface: #34495e;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 15px;
+        background-color: var(--background);
+        color: #ecf0f1;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      h2 {
+        color: var(--primary);
+        text-align: center;
+        margin: 0 0 20px;
+      }
+
+      canvas {
+        background: var(--surface);
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        border: 2px solid var(--primary);
+      }
+
+      .controls {
+        background: var(--surface);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .control-group {
+        margin: 15px 0;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        font-size: 14px;
+        gap: 10px;
+      }
+
+      input[type="range"] {
+        flex-grow: 1;
+        height: 6px;
+        background: #7f8c8d;
+        border-radius: 3px;
+        outline: none;
+        -webkit-appearance: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background: var(--primary);
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      select {
+        width: 100%;
+        padding: 8px;
+        background: var(--surface);
+        border: 1px solid #7f8c8d;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        background: var(--secondary);
+        border: none;
+        border-radius: 25px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s, background 0.2s;
+      }
+
+      button:hover {
+        background: #2980b9;
+        transform: translateY(-1px);
+      }
+
+      .value {
+        min-width: 60px;
+        text-align: right;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 5px 10px;
+        border-radius: 4px;
+      }
+
+      .status-bar {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #bdc3c7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>🛹 Skate Track Designer with Grid</h2>
+      <canvas id="trackCanvas" width="600" height="400"></canvas>
+      <div class="controls">
+        <div class="control-group">
+          <h3>Track Elements</h3>
+          <div class="segment-controls">
+            <label>
+              <input
+                type="radio"
+                name="segmentType"
+                id="addIncline"
+                value="incline"
+              />
+              📐 Inclined Plane
+            </label>
+            <label>
+              <input type="radio" name="segmentType" id="addArc" value="arc" />
+              🌀 Circle Arc
+            </label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <h4>Incline Settings</h4>
+          <label>
+            Angle:
+            <input
+              type="range"
+              id="inclineAngle"
+              min="-90"
+              max="90"
+              value="0"
+              disabled
+            />
+            <span class="value" id="inclineAngleValue">0°</span>
+          </label>
+          <label>
+            Length:
+            <input
+              type="range"
+              id="inclineLength"
+              min="50"
+              max="200"
+              value="100"
+              disabled
+            />
+            <span class="value" id="inclineLengthValue">100px</span>
+          </label>
+        </div>
+
+        <div class="control-group">
+          <h4>Arc Settings</h4>
+          <label>
+            Center Angle:
+            <input
+              type="range"
+              id="centerAngle"
+              min="-90"
+              max="90"
+              value="0"
+              disabled
+            />
+            <span class="value" id="centerAngleValue">0°</span>
+          </label>
+          <label>
+            Radius:
+            <input
+              type="range"
+              id="arcRadius"
+              min="50"
+              max="150"
+              value="100"
+              disabled
+            />
+            <span class="value" id="arcRadiusValue">100px</span>
+          </label>
+          <label>
+            Arc Angle:
+            <input
+              type="range"
+              id="arcAngle"
+              min="30"
+              max="180"
+              value="90"
+              disabled
+            />
+            <span class="value" id="arcAngleValue">90°</span>
+          </label>
+          <label>
+            Direction:
+            <select id="arcSide" disabled>
+              <option value="above">⬆️ Above Center</option>
+              <option value="below">⬇️ Below Center</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="status-bar">
+          <span>Segments: <span id="segmentCount">0</span></span>
+          <span
+            >Position: (<span id="currentX">50</span>,
+            <span id="currentY">200</span>)</span
+          >
+          <span>Angle: <span id="currentAngle">0</span>°</span>
+        </div>
+
+        <div class="action-buttons">
+          <button onclick="addSegment()">➕ Add Segment</button>
+          <button onclick="clearTrack()">❌ Clear Track</button>
+          <button onclick="exportPNG()">📤 Export PNG</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("trackCanvas");
+      const ctx = canvas.getContext("2d");
+      const GRID_SIZE = 50;
+      const INITIAL_STATE = { x: 50, y: 200, angle: 0 };
+      let segments = [];
+      let currentEnd = { ...INITIAL_STATE };
+
+      function degreesToRadians(deg) {
+        return (deg * Math.PI) / 180;
+      }
+
+      function drawGrid() {
+        ctx.strokeStyle = "rgba(255,255,255,0.1)";
+        ctx.lineWidth = 0.5;
+        ctx.font = "10px Arial";
+        ctx.fillStyle = "rgba(255,255,255,0.3)";
+
+        // Vertical lines
+        for (let x = 0; x <= canvas.width; x += GRID_SIZE) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, canvas.height);
+          ctx.stroke();
+          ctx.fillText(x, x + 2, 10);
+        }
+
+        // Horizontal lines
+        for (let y = 0; y <= canvas.height; y += GRID_SIZE) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(canvas.width, y);
+          ctx.stroke();
+          ctx.fillText(y, 2, y - 2);
+        }
+      }
+
+      function drawArcGuides(currentState, segment) {
+        const centerAngleRad =
+          currentState.angle + degreesToRadians(segment.centerAngle);
+        const centerX =
+          currentState.x + segment.radius * Math.cos(centerAngleRad);
+        const centerY =
+          currentState.y - segment.radius * Math.sin(centerAngleRad);
+
+        // Draw construction lines
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
+        ctx.fillStyle = "#FFC107";
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+
+        return { centerX, centerY };
+      }
+
+      function drawTrack() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawGrid();
+
+        ctx.beginPath();
+        ctx.moveTo(INITIAL_STATE.x, INITIAL_STATE.y);
+        let currentState = { ...INITIAL_STATE };
+
+        segments.forEach((segment, index) => {
+          ctx.strokeStyle = `hsl(${index * 60}, 70%, 60%)`;
+          ctx.lineWidth = 3;
+          ctx.setLineDash(index % 2 === 0 ? [] : [5, 5]);
+
+          if (segment.type === "incline") {
+            const angleRad =
+              currentState.angle + degreesToRadians(segment.angle);
+            const dx = segment.length * Math.cos(angleRad);
+            const dy = -segment.length * Math.sin(angleRad);
+
+            ctx.lineTo(currentState.x + dx, currentState.y + dy);
+            currentState.x += dx;
+            currentState.y += dy;
+            currentState.angle = angleRad;
+          } else if (segment.type === "arc") {
+            const guides = drawArcGuides(currentState, segment);
+
+            // Correct angle calculation for canvas Y axis
+            const dx = currentState.x - guides.centerX;
+            const dy = currentState.y - guides.centerY;
+            const startAngle = Math.atan2(-dy, dx);
+
+            const isAbove = segment.side === "above";
+            const arcDirection = isAbove ? 1 : -1;
+            const endAngle =
+              startAngle + degreesToRadians(segment.angle) * arcDirection;
+
+            ctx.arc(
+              guides.centerX,
+              guides.centerY,
+              segment.radius,
+              startAngle,
+              endAngle,
+              !isAbove
+            );
+
+            // Update current position correctly
+            currentState.x =
+              guides.centerX + segment.radius * Math.cos(endAngle);
+            currentState.y =
+              guides.centerY - segment.radius * Math.sin(endAngle);
+            currentState.angle =
+              endAngle + (isAbove ? Math.PI / 2 : -Math.PI / 2);
+          }
+
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(currentState.x, currentState.y);
+        });
+
+        currentEnd = { ...currentState };
+        updateStatus();
+        drawStartMarker();
+      }
+
+      function addSegment() {
+        const segmentType = document.querySelector(
+          'input[name="segmentType"]:checked'
+        );
+        if (!segmentType) return alert("Select a segment type first!");
+
+        const newSegment =
+          segmentType.value === "incline"
+            ? {
+                type: "incline",
+                angle: parseInt(document.getElementById("inclineAngle").value),
+                length: parseInt(
+                  document.getElementById("inclineLength").value
+                ),
+              }
+            : {
+                type: "arc",
+                centerAngle: parseInt(
+                  document.getElementById("centerAngle").value
+                ),
+                radius: parseInt(document.getElementById("arcRadius").value),
+                angle: parseInt(document.getElementById("arcAngle").value),
+                side: document.getElementById("arcSide").value,
+              };
+
+        segments.push(newSegment);
+        drawTrack();
+      }
+
+      function clearTrack() {
+        segments = [];
+        currentEnd = { ...INITIAL_STATE };
+        drawTrack();
+      }
+
+      function exportPNG() {
+        const dataURL = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.download = "skate-track.png";
+        link.href = dataURL;
+        link.click();
+      }
+
+      function drawStartMarker() {
+        ctx.fillStyle = "#e74c3c";
+        ctx.beginPath();
+        ctx.arc(INITIAL_STATE.x, INITIAL_STATE.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function updateStatus() {
+        document.getElementById("segmentCount").textContent = segments.length;
+        document.getElementById("currentX").textContent = Math.round(
+          currentEnd.x
+        );
+        document.getElementById("currentY").textContent = Math.round(
+          currentEnd.y
+        );
+        document.getElementById("currentAngle").textContent = Math.round(
+          ((currentEnd.angle * 180) / Math.PI) % 360
+        );
+      }
+
+      // Event listeners
+      document
+        .getElementById("addIncline")
+        .addEventListener("change", updateInputs);
+      document
+        .getElementById("addArc")
+        .addEventListener("change", updateInputs);
+
+      function updateInputs() {
+        const isIncline = document.getElementById("addIncline").checked;
+        document.getElementById("inclineAngle").disabled = !isIncline;
+        document.getElementById("inclineLength").disabled = !isIncline;
+        document.getElementById("centerAngle").disabled = isIncline;
+        document.getElementById("arcRadius").disabled = isIncline;
+        document.getElementById("arcAngle").disabled = isIncline;
+        document.getElementById("arcSide").disabled = isIncline;
+      }
+
+      // Initialize slider values
+      document.querySelectorAll('input[type="range"]').forEach((input) => {
+        input.addEventListener("input", (e) => {
+          document.getElementById(e.target.id + "Value").textContent =
+            e.target.value + (e.target.id.includes("Angle") ? "°" : "px");
+        });
+        input.dispatchEvent(new Event("input"));
+      });
+
+      // Initial draw
+      drawTrack();
+    </script>
+  </body>
+</html>

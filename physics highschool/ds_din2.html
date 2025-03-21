@@ -1,0 +1,149 @@
+
+
+
+  <!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercice 1 - Ascension sur plan incliné</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 0.8rem;
+        border: 1px solid #dfe6e9;
+        text-align: center;
+      }
+      .final-answer {
+        background: #27ae60;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="exercise-box">
+            <h2>Exercice 2 : Service au volley-ball</h2>
+          
+            <!-- Énoncé -->
+            <div class="solution-step">
+              <h3>📝 Énoncé</h3>
+              <p>
+                Un joueur lance un ballon avec une vitesse initiale <em>V<sub>0</sub></em> faisant un angle <em>α = 45°</em> avec l'horizontale. 
+                Le ballon est frappé à une hauteur <em>h = 0,50 m</em> du sol et à une distance <em>D = 9 m</em> du filet. 
+                La hauteur du filet est <em>H = 2,43 m</em>. Le service est réussi si :
+              </p>
+              <ul>
+                <li>Le ballon passe au-dessus du filet (en <em>x = D</em>, <em>z = H</em>).</li>
+                <li>Il touche le sol dans le camp adverse entre le filet et la limite à <em>x = 2D</em>.</li>
+              </ul>
+              <ol>
+                <li>Caractériser le vecteur accélération du ballon.</li>
+                <li>Déterminer les équations horaires du vecteur vitesse <em>V</em>.</li>
+                <li>Déterminer les équations horaires du vecteur position <em>OG</em>.</li>
+                <li>Étudier la trajectoire :
+                  <ol type="a">
+                    <li>Équation de la trajectoire</li>
+                    <li>Nature de la trajectoire</li>
+                    <li>Type de mouvement</li>
+                  </ol>
+                </li>
+                <li>Déterminer <em>V<sub>min</sub></em> (passe juste au-dessus du filet) et <em>V<sub>max</sub></em> (tombe à <em>x = 2D</em>).</li>
+                <li>Calculer la distance entre le filet et le point de chute pour <em>V<sub>0</sub> = 12 m/s</em>.</li>
+              </ol>
+            </div>
+          
+            <!-- Solution -->
+            <div class="solution-step">
+              <h3>🔍 Solution Synthétique</h3>
+          
+              <h4>1. Accélération</h4>
+              <p>
+                <span class="formula">a<sub>x</sub> = 0</span> (mouvement horizontal uniforme)<br>
+                <span class="formula">a<sub>z</sub> = -g = -10 m/s²</span> (chute libre)
+              </p>
+          
+              <h4>2. Équations horaires de la vitesse</h4>
+              <p>
+                <span class="formula">V<sub>x</sub>(t) = V<sub>0</sub>·cosα</span><br>
+                <span class="formula">V<sub>z</sub>(t) = -g·t + V<sub>0</sub>·sinα</span>
+              </p>
+          
+              <h4>3. Équations horaires de la position</h4>
+              <p>
+                <span class="formula">x(t) = V<sub>0</sub>·cosα·t</span><br>
+                <span class="formula">z(t) = -½ g t² + V<sub>0</sub>·sinα·t + h</span>
+              </p>
+          
+              <h4>4. Trajectoire</h4>
+              <p>
+                <span class="formula">z(x) = -[g/(2V<sub>0</sub>²·cos²α)]·x² + tanα·x + h</span><br>
+                Parabole (mouvement de chute libre).
+              </p>
+          
+              <h4>5. Vitesses limites</h4>
+              <p>
+                <strong>V<sub>min</sub></strong> : Solution de <span class="formula">H = -[g·D²]/[2V<sub>min</sub>²·cos²α] + D·tanα + h</span><br>
+                <span class="formula">V<sub>min</sub> ≈ 10,6 m/s</span><br><br>
+                <strong>V<sub>max</sub></strong> : Solution de <span class="formula">0 = -[g·(2D)²]/[2V<sub>max</sub>²·cos²α] + 2D·tanα + h</span><br>
+                <span class="formula">V<sub>max</sub> ≈ 13,1 m/s</span>
+              </p>
+          
+              <h4>6. Distance de chute</h4>
+              <p>
+                Pour <span class="formula">V<sub>0</sub> = 12 m/s</span>, résoudre <span class="formula">z(x) = 0</span> :<br>
+                <span class="formula">x ≈ 15,16 m ⇒ Distance depuis le filet = 15,16 - 9 = 6,16 m</span>
+              </p>
+            </div>
+          
+
+          </div>
+
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

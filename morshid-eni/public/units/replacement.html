@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حل المعادلات الأسية واللوغاريتمية</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <style>
+      :root {
+        --primary: #2a5c82;
+        --secondary: #e76f51;
+        --accent: #2a9d8f;
+      }
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        color: var(--primary);
+        text-align: center;
+      }
+      .exercise {
+        background: #e8f5e9;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border: 2px solid var(--accent);
+      }
+      .steps {
+        margin: 15px 0;
+        padding-right: 20px;
+      }
+      button {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px 0;
+      }
+      .solution {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .interactive {
+        background: #fff3e0;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>حل المعادلات باستخدام الاستبدال</h1>
+
+      <!-- التمرين النموذجي -->
+      <div class="exercise">
+        <h2>التمرين النموذجي</h2>
+        <p>حل المعادلة: \( e^{2x} - 4e^x + 3 = 0 \)</p>
+        <button onclick="toggleSolution('model')">عرض الحل التفصيلي</button>
+        <div id="model" class="solution">
+          <div class="steps">
+            <h3>الخطوة 1: الاستبدال</h3>
+            <p>نضع \( X = e^x \) فتتحول المعادلة إلى:</p>
+            <p>\[ X^2 - 4X + 3 = 0 \]</p>
+          </div>
+          <div class="steps">
+            <h3>الخطوة 2: حل المعادلة التربيعية</h3>
+            <p>\[ (X - 1)(X - 3) = 0 \]</p>
+            <p>الحلول: \( X = 1 \) أو \( X = 3 \)</p>
+          </div>
+          <div class="steps">
+            <h3>الخطوة 3: الرجوع للمتغير الأصلي</h3>
+            <p>\[ e^x = 1 \Rightarrow x = 0 \]</p>
+            <p>\[ e^x = 3 \Rightarrow x = \ln 3 \]</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- تمارين تفاعلية -->
+      <div class="interactive">
+        <h2>تمارين تطبيقية</h2>
+
+        <!-- تمرين 1 -->
+        <div class="exercise">
+          <h3>التمرين 1</h3>
+          <p>\( (\ln x)^2 + 2\ln x - 3 = 0 \)</p>
+          <button onclick="toggleSolution('ex1')">عرض الحل</button>
+          <div id="ex1" class="solution">
+            <p>الاستبدال: \( X = \ln x \)</p>
+            <p>\[ X^2 + 2X - 3 = 0 \Rightarrow (X+3)(X-1)=0 \]</p>
+            <p>الحلول: \( X = -3 \) أو \( X = 1 \)</p>
+            <p>\[ x = e^{-3} \quad,\quad x = e \]</p>
+          </div>
+        </div>
+
+        <!-- تمرين 2 -->
+        <div class="exercise">
+          <h3>التمرين 2</h3>
+          <p>\( 2e^{2x} - 5e^x + 2 = 0 \)</p>
+          <button onclick="toggleSolution('ex2')">عرض الحل</button>
+          <div id="ex2" class="solution">
+            <p>الاستبدال: \( X = e^x \)</p>
+            <p>\[ 2X^2 - 5X + 2 = 0 \]</p>
+            <p>\[ X = 2 \quad,\quad X = \frac{1}{2} \]</p>
+            <p>\[ x = \ln 2 \quad,\quad x = -\ln 2 \]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleSolution(id) {
+        const sol = document.getElementById(id);
+        sol.style.display = sol.style.display === "none" ? "block" : "none";
+        MathJax.typeset();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Aide-Mémoire : Physique (Lycée)</title>
+    <style>
+        /* Styles précédents... */
+        .exercise-box {
+            background-color: #fff;
+            border: 2px solid #2ecc71;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .difficulty-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            color: white;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .beginner { background-color: #27ae60; }
+        .intermediate { background-color: #2980b9; }
+        .advanced { background-color: #f39c12; }
+        .expert { background-color: #e74c3c; }
+        .guide {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 10px 0;
+        }
+        .pro-tip {
+            background-color: #fde3a7;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sections précédentes... -->
+
+    <div class="section">
+        <h2>🎯 Exercices Pratiques</h2>
+
+        <!-- Exercice 1 -->
+        <div class="exercise-box">
+            <div class="difficulty-badge beginner">Niveau Débutant</div>
+            <h3>🚗 Dépassement de véhicules</h3>
+            <p><strong>Énoncé:</strong> Une voiture (90 km/h) dépasse un camion (72 km/h). Le dépassement commence quand l'avant de la voiture est à 20 m du camion et se termine quand l'arrière de la voiture est à 30 m devant.</p>
+            
+            <div class="guide">
+                <strong>📚 Connaissances requises:</strong>
+                <ul>
+                    <li>Conversion km/h → m/s</li>
+                    <li>Mouvement rectiligne uniforme (MRU)</li>
+                </ul>
+                
+                <strong>🔍 Étapes de résolution:</strong>
+                <ol>
+                    <li>Convertir les vitesses : 
+                        <code>v_voiture = 90/3.6 = 25 m/s</code>, 
+                        <code>v_camion = 72/3.6 = 20 m/s</code>
+                    </li>
+                    <li>Calculer la vitesse relative : <code>25 - 20 = 5 m/s</code></li>
+                    <li>Distance totale : <code>5 + 10 + 20 + 30 = 65 m</code></li>
+                    <li>Durée : <code>t = 65/5 = 13 s</code></li>
+                </ol>
+            </div>
+
+            <div class="pro-tip">
+                💡 Astuce : Dessinez les véhicules avec des flèches pour les vitesses !
+            </div>
+        </div>
+
+        <!-- Exercice 2 -->
+        <div class="exercise-box">
+            <div class="difficulty-badge intermediate">Niveau Intermédiaire</div>
+            <h3>🚦 Deux voitures accélérant</h3>
+            <p><strong>Énoncé:</strong> Deux voitures A et B roulent à 72 km/h, espacées de 25 m. À t=0, A accélère à 1 m/s².</p>
+            
+            <div class="guide">
+                <strong>📚 Connaissances requises:</strong>
+                <ul>
+                    <li>Équations du MRUV</li>
+                    <li>Résolution d'équations du second degré</li>
+                </ul>
+                
+                <strong>🔍 Étapes de résolution:</strong>
+                <ol>
+                    <li>Équation de A : <code>x_A(t) = 0.5·1·t² + 20t</code></li>
+                    <li>Équation de B : <code>x_B(t) = 20t + 25</code></li>
+                    <li>Résoudre <code>0.5t² + 20t = 20t + 25</code></li>
+                </ol>
+            </div>
+        </div>
+
+          <!-- Exercice 3 -->
+          <div class="exercise-box">
+            <div class="difficulty-badge advanced">Niveau Avancé</div>
+            <h3>⚠️ Collision avec freinage retardé</h3>
+            <p><strong>Énoncé:</strong> Deux voitures (108 km/h) espacées de <em>d</em>. M₁ freine à -6 m/s², M₂ freine 1s après à -5 m/s².</p>
+            
+            <div class="guide">
+                <strong>📚 Connaissances requises:</strong>
+                <ul>
+                    <li>Mouvement en deux phases</li>
+                    <li>Analyse temporelle</li>
+                </ul>
+                
+                <strong>🔍 Étapes de résolution:</strong>
+                <ol>
+                    <li>Convertir 108 km/h = 30 m/s</li>
+                    <li>Équation M₁ : <code>x₁(t) = 30t - 3t²</code></li>
+                    <li>Équation M₂ : <code>x₂(t) = 30(t-1) - 2.5(t-1)² + d</code></li>
+                    <li>Résoudre <code>x₁(t) = x₂(t)</code></li>
+                </ol>
+            </div>
+
+            <div class="pro-tip">
+                💡 Clé : Analysez séparément la phase avant/après freinage de M₂ !
+            </div>
+        </div>
+
+        <!-- Exercice 4 -->
+        <div class="exercise-box">
+            <div class="difficulty-badge expert">Niveau Expert</div>
+            <h3>🚆 Rattraper un train qui démarre</h3>
+            <p><strong>Énoncé:</strong> Un voyageur court à 24 km/h vers un train qui démarre (a = 1.2 m/s²) depuis 25 m.</p>
+            
+            <div class="guide">
+                <strong>📚 Connaissances requises:</strong>
+                <ul>
+                    <li>Optimisation mathématique</li>
+                    <li>MRU vs MRUV</li>
+                </ul>
+                
+                <strong>🔍 Étapes de résolution:</strong>
+                <ol>
+                    <li>Équation voyageur : <code>xᵥ(t) = 6.67t - 25</code></li>
+                    <li>Équation train : <code>xₜ(t) = 0.6t²</code></li>
+                    <li>Résoudre <code>6.67t - 25 = 0.6t²</code></li>
+                    <li>Si Δ < 0 → Distance minimale avec <code>D'(t) = 0</code></li>
+                </ol>
+            </div>
+
+            <div class="pro-tip">
+                💡 Astuce : Utilisez un graphique temps-distance pour visualiser !
+            </div>
+        </div>
+
+    </div>
+
+
+    </div>
+
+    <!-- Footer... -->
+</body>
+</html>

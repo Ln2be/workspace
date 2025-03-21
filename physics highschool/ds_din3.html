@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Exercice 1 - Ascension sur plan incliné</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 0.8rem;
+        border: 1px solid #dfe6e9;
+        text-align: center;
+      }
+      .final-answer {
+        background: #27ae60;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="exercise-box">
+            <h2>Exercice 3 : Exploitation d'un enregistrement</h2>
+          
+            <!-- Énoncé strict du document -->
+            <div class="solution-step">
+              <h3>📝 Énoncé original</h3>
+              <p>
+                Un mobile de masse <em>m = 0,8 kg</em> se déplace sur une table horizontale. Les positions successives sont relevées toutes les <em>60 ms</em> :
+              </p>
+              <table>
+                <tr>
+                  <th>Point</th>
+                  <th>A0</th>
+                  <th>A1</th>
+                  <th>A2</th>
+                  <th>A3</th>
+                  <th>A4</th>
+                  <th>A5</th>
+                  <th>A6</th>
+                </tr>
+                <tr>
+                  <td>Position (mm)</td>
+                  <td>0</td>
+                  <td>9</td>
+                  <td>21,6</td>
+                  <td>37,8</td>
+                  <td>57,6</td>
+                  <td>81</td>
+                  <td>108</td>
+                </tr>
+              </table>
+              <ol>
+                <li>Déterminer la vitesse du mobile aux points A1, A2, A3.</li>
+                <li>Représenter graphiquement la vitesse en fonction du temps.</li>
+                <li>Déterminer la valeur de la force de frottement <em>f</em> en utilisant la relation fondamentale de la dynamique.</li>
+                <li>Déterminer la valeur de cette force <em>f</em> en utilisant le théorème de l’énergie mécanique entre les points A1 et A4.</li>
+              </ol>
+            </div>
+          
+            <!-- Solution -->
+            <div class="solution-step">
+              <h3>🔍 Solution</h3>
+          
+              <h4>1. Calcul des vitesses (Page 8)</h4>
+              <p>
+                Formule utilisée : 
+                \[ V_n = \frac{A_{n+1} - A_{n-1}}{2\theta} \quad \text{avec} \quad \theta = 0,06 \, \text{s} \]
+              </p>
+              <table>
+                <tr>
+                  <th>Point</th>
+                  <th>Calcul</th>
+                  <th>Vitesse (mm/s)</th>
+                  <th>Vitesse (m/s)</th>
+                </tr>
+                <tr>
+                  <td>A1</td>
+                  <td>\( V_1 = \frac{21,6 - 0}{2 \times 0,06} \)</td>
+                  <td>180</td>
+                  <td>\(\boxed{0,18}\)</td>
+                </tr>
+                <tr>
+                  <td>A2</td>
+                  <td>\( V_2 = \frac{37,8 - 9}{2 \times 0,06} \)</td>
+                  <td>240</td>
+                  <td>\(\boxed{0,24}\)</td>
+                </tr>
+                <tr>
+                  <td>A3</td>
+                  <td>\( V_3 = \frac{57,6 - 21,6}{2 \times 0,06} \)</td>
+                  <td>300</td>
+                  <td>\(\boxed{0,3}\)</td>
+                </tr>
+              </table>
+          
+              <h4>2. Graphique vitesse-temps</h4>
+              <p>
+                <strong>Observations</strong> :  
+                - \( t_1 = 0,06 \, \text{s} \rightarrow 0,18 \, \text{m/s} \)  
+                - \( t_2 = 0,12 \, \text{s} \rightarrow 0,24 \, \text{m/s} \)  
+                - \( t_3 = 0,18 \, \text{s} \rightarrow 0,3 \, \text{m/s} \)  
+                La relation est linéaire, indiquant un <strong>mouvement uniformément accéléré</strong>.
+              </p>
+          
+              <h4>3. Calcul de <em>f</em> par la RFD (Page 9)</h4>
+              <p>
+                Hypothèse : \( F = 1 \, \text{N} \) (force motrice implicite).  
+                \[
+                a = \frac{\Delta v}{\Delta t} = \frac{0,3 - 0,18}{0,12} = 1 \, \text{m/s}^2 \\
+                f = F - ma = 1 - (0,8 \times 1) = \boxed{0,2 \, \text{N}}
+                \]
+              </p>
+          
+              <h4>4. Calcul de <em>f</em> par l’énergie (Page 12)</h4>
+              <p>
+                \[
+                d = 57,6 - 9 = 48,6 \, \text{mm} = 0,0486 \, \text{m} \\
+                \Delta E_c = \frac{1}{2}m(v_4^2 - v_1^2) = 0,5 \times 0,8 \times (0,3^2 - 0,18^2) = 0,01728 \, \text{J} \\
+                f = \frac{F \cdot d - \Delta E_c}{d} = \frac{1 \times 0,0486 - 0,01728}{0,0486} = \boxed{0,2 \, \text{N}}
+                \]
+              </p>
+            </div>
+          
+            <!-- Résultats -->
+            <div class="final-answer">
+              <h3>📝 Conclusion</h3>
+              <ul>
+                <li>Vitesses : \( V_{A1} = 0,18 \, \text{m/s}, \, V_{A2} = 0,24 \, \text{m/s}, \, V_{A3} = 0,36 \, \text{m/s} \).</li>
+                <li>Force de frottement : \( f = 0,2 \, \text{N} \) (cohérent entre les deux méthodes).</li>
+              </ul>
+            </div>
+          </div>
+          
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+          <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          
+
+      </div>
+    </div>
+  </body>
+</html>

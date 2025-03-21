@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حساب نقطة التلاقي</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #34495e;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: 2.5em;
+        margin-top: 30px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        border-top: 5px solid #3498db;
+      }
+      .exercise {
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+      .interactive-exercise {
+        background: #f8f9fa;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        border: 2px solid #3498db;
+      }
+      .input-group {
+        margin: 10px 0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .math-input {
+        padding: 8px;
+        border: 2px solid #3498db;
+        border-radius: 6px;
+        width: 120px;
+        font-size: 1.1em;
+        text-align: center;
+      }
+      .check-btn {
+        background: #2ecc71;
+        color: white;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .feedback {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 6px;
+        display: none;
+      }
+      .correct {
+        background: #d4edda;
+        border: 2px solid #28a745;
+      }
+      .wrong {
+        background: #f8d7da;
+        border: 2px solid #dc3545;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>زمن ونقطة الالتقاء بين المركبات</h1>
+
+      <!-- القواعد الأساسية -->
+      <div class="exercise">
+        <h2>المبادئ الأساسية</h2>
+        <ul>
+          <li>السرعة المشتركة = سرعة أ + سرعة ب</li>
+          <li>زمن الالتقاء = المسافة الكلية ÷ السرعة المشتركة</li>
+          <li>المسافة من نقطة البداية = السرعة × الزمن</li>
+        </ul>
+      </div>
+
+      <!-- التمرين 1 -->
+      <div class="exercise">
+        <h3>التمرين 1: الالتقاء في منتصف الطريق</h3>
+        <p>
+          انطلقت سيارة من المدينة أ بسرعة 100 كم/س، وأخرى من المدينة ب بسرعة 80
+          كم/س في نفس الوقت. المسافة بين المدينتين 540 كم.
+        </p>
+        <div class="solution">
+          <p>السرعة المشتركة = 100 + 80 = 180 كم/س</p>
+          <p>زمن الالتقاء = 540 ÷ 180 = 3 ساعات</p>
+          <p>المسافة من أ = 100 × 3 = 300 كم</p>
+          <p class="result">النتيجة: الالتقاء بعد 3 ساعات عند 300 كم من أ</p>
+        </div>
+      </div>
+
+      <!-- التمرين 2 -->
+      <div class="exercise">
+        <h3>التمرين 2: شاحنات البضائع</h3>
+        <p>
+          انطلقت شاحنة من أ بسرعة 60 كم/س، وشاحنة أخرى من ب بسرعة 90 كم/س.
+          المسافة بين النقطتين 300 كم.
+        </p>
+        <div class="solution">
+          <p>السرعة المشتركة = 60 + 90 = 150 كم/س</p>
+          <p>زمن الالتقاء = 300 ÷ 150 = 2 ساعة</p>
+          <p>المسافة من أ = 60 × 2 = 120 كم</p>
+          <p class="result">النتيجة: الالتقاء بعد ساعتين عند 120 كم من أ</p>
+        </div>
+      </div>
+
+      <!-- التمرين 3 -->
+      <div class="exercise">
+        <h3>التمرين 3: انطلاق متأخر</h3>
+        <p>
+          انطلقت سيارة من أ الساعة 7:00 صباحًا بسرعة 80 كم/س، بينما انطلقت سيارة
+          من ب الساعة 8:00 صباحًا بسرعة 90 كم/س. المسافة بينهما 420 كم.
+        </p>
+        <div class="solution">
+          <p>1. مسافة التقدم: 80 كم/س × 1 ساعة = 80 كم</p>
+          <p>2. المسافة المتبقية: 420 - 80 = 340 كم</p>
+          <p>3. السرعة المشتركة: 80 + 90 = 170 كم/س</p>
+          <p>4. زمن الالتقاء: 340 ÷ 170 = 2 ساعة</p>
+          <p>5. المسافة من أ: 80 × 3 = 240 كم</p>
+          <p>6. المسافة من ب: 90 × 2 = 180 كم</p>
+          <p class="result">النتيجة: الالتقاء الساعة 10:00 صباحًا</p>
+        </div>
+      </div>
+
+      <!-- تمارين تفاعلية -->
+      <div class="interactive-exercise">
+        <h3>التمرين التفاعلي 1</h3>
+        <p>
+          انطلقت مركبة من أ بسرعة 75 كم/س، وأخرى من ب بسرعة 85 كم/س بعد ساعة.
+          المسافة بينهما 560 كم.
+        </p>
+        <div class="input-group">
+          <input
+            type="number"
+            class="math-input"
+            id="t1"
+            placeholder="الزمن (ساعات)"
+          />
+          <input
+            type="number"
+            class="math-input"
+            id="d1a"
+            placeholder="المسافة من أ"
+          />
+          <input
+            type="number"
+            class="math-input"
+            id="d1b"
+            placeholder="المسافة من ب"
+          />
+          <button class="check-btn" onclick="check(1)">تحقق</button>
+        </div>
+        <div id="res1" class="feedback"></div>
+      </div>
+
+      <div class="interactive-exercise">
+        <h3>التمرين التفاعلي 2</h3>
+        <p>
+          مركبة من أ بسرعة 110 كم/س، وأخرى من ب بسرعة 130 كم/س بعد 30 دقيقة.
+          المسافة بينهما 450 كم.
+        </p>
+        <div class="input-group">
+          <input
+            type="number"
+            class="math-input"
+            id="t2"
+            placeholder="الزمن (ساعات)"
+          />
+          <input
+            type="number"
+            class="math-input"
+            id="d2a"
+            placeholder="المسافة من أ"
+          />
+          <input
+            type="number"
+            class="math-input"
+            id="d2b"
+            placeholder="المسافة من ب"
+          />
+          <button class="check-btn" onclick="check(2)">تحقق</button>
+        </div>
+        <div id="res2" class="feedback"></div>
+      </div>
+    </div>
+
+    <script>
+      function check(exNum) {
+        let t, da, db, ct, cda, cdb;
+        const resDiv = document.getElementById(`res${exNum}`);
+
+        if (exNum === 1) {
+          t = parseFloat(document.getElementById("t1").value);
+          da = parseFloat(document.getElementById("d1a").value);
+          db = parseFloat(document.getElementById("d1b").value);
+          ct = 4.5;
+          cda = 412.5;
+          cdb = 382.5;
+        } else {
+          t = parseFloat(document.getElementById("t2").value);
+          da = parseFloat(document.getElementById("d2a").value);
+          db = parseFloat(document.getElementById("d2b").value);
+          ct = 3;
+          cda = 385;
+          cdb = 390;
+        }
+
+        const timeCheck = Math.abs(t - ct) < 0.1;
+        const distACheck = Math.abs(da - cda) < 1;
+        const distBCheck = Math.abs(db - cdb) < 1;
+
+        if (timeCheck && distACheck && distBCheck) {
+          resDiv.innerHTML = "🎉 إجابة صحيحة! تَقْدِيرُكَ دَقِيقٌ!";
+          resDiv.className = "feedback correct";
+        } else {
+          resDiv.innerHTML =
+            "💡 أَعِدِ الْمُحَاوَلَةَ، تَأَكَّدْ مِنَ الْحِسَابَاتِ!";
+          resDiv.className = "feedback wrong";
+        }
+        resDiv.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

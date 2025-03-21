@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercice 4 - Feu tricolore et dépassements</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 0.8rem;
+        border: 1px solid #dfe6e9;
+        text-align: center;
+      }
+      .phase {
+        color: #fff;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+      }
+      .phase1 {
+        background: #e74c3c;
+      }
+      .phase2 {
+        background: #27ae60;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="exercise-box">
+        <h2>Exercice 4 : Course entre une voiture et un camion</h2>
+
+        <!-- Énoncé -->
+        <div class="solution-step">
+          <h3>📝 Énoncé</h3>
+          <p>
+            Une voiture démarre au feu vert avec une accélération de 2.5 m/s²
+            pendant 6s, puis maintient sa vitesse. Un camion (45 km/h) est à 20m
+            derrière le feu. Déterminez :
+          </p>
+          <ol>
+            <li>Les instants des dépassements</li>
+            <li>Les positions des dépassements</li>
+            <li>Les vitesses de la voiture lors des dépassements</li>
+          </ol>
+        </div>
+
+        <!-- Données -->
+        <div class="solution-step" style="background: #f8edeb">
+          <h3>🔢 Données</h3>
+          <table>
+            <tr>
+              <th>Véhicule</th>
+              <th>Vitesse</th>
+              <th>Accélération</th>
+              <th>Position initiale</th>
+            </tr>
+            <tr>
+              <td>Voiture</td>
+              <td>0 → 15 m/s</td>
+              <td>2.5 m/s² (0-6s)</td>
+              <td>0m</td>
+            </tr>
+            <tr>
+              <td>Camion</td>
+              <td>45 km/h = 12.5 m/s</td>
+              <td>0 m/s²</td>
+              <td>-20m</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Solution -->
+        <div class="solution-step">
+          <h3>🔍 Solution Détaillée</h3>
+
+          <div class="phase phase1">
+            Phase 1 : Voiture en accélération (0 ≤ t ≤ 6s)
+          </div>
+          <p class="formula">Position voiture : x₁(t) = 0.5×2.5×t² = 1.25t²</p>
+          <p class="formula">Position camion : x₂(t) = -20 + 12.5t</p>
+
+          <h4>Premier dépassement (camion dépasse voiture)</h4>
+          <p class="formula">1.25t² = -20 + 12.5t → 1.25t² - 12.5t + 20 = 0</p>
+          <p class="formula">Δ = 156.25 - 100 = 56.25 → t = [12.5 ± 7.5]/2.5</p>
+          <p class="formula">Solution physique : t = 2s</p>
+
+          <div class="phase phase2">
+            Phase 2 : Voiture à vitesse constante (t > 6s)
+          </div>
+          <p class="formula">Vitesse voiture : v = 2.5×6 = 15 m/s</p>
+          <p class="formula">Position voiture : x₁(t) = 45 + 15(t-6)</p>
+
+          <h4>Second dépassement (voiture dépasse camion)</h4>
+          <p class="formula">45 + 15(t-6) = -20 + 12.5t</p>
+          <p class="formula">15t - 45 = 12.5t - 20 → t = 10s</p>
+        </div>
+
+        <!-- Résultats -->
+        <div class="solution-step" style="background: #e9f5db">
+          <h3>📊 Résultats Finaux</h3>
+          <table>
+            <tr>
+              <th>Événement</th>
+              <th>Instant</th>
+              <th>Position</th>
+              <th>Vitesse voiture</th>
+            </tr>
+            <tr>
+              <td>Camion dépasse voiture</td>
+              <td>2s</td>
+              <td>1.25×2² = 5m</td>
+              <td>2.5×2 = 5 m/s</td>
+            </tr>
+            <tr>
+              <td>Voiture dépasse camion</td>
+              <td>10s</td>
+              <td>45 + 15×4 = 105m</td>
+              <td>15 m/s</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Vérification -->
+        <div class="solution-step">
+          <h3>✅ Vérification des Positions</h3>
+          <table>
+            <tr>
+              <th>Véhicule</th>
+              <th>Position à t=2s</th>
+              <th>Position à t=10s</th>
+            </tr>
+            <tr>
+              <td>Voiture</td>
+              <td>1.25×4 = 5m ✓</td>
+              <td>45 + 15×4 = 105m ✓</td>
+            </tr>
+            <tr>
+              <td>Camion</td>
+              <td>-20 + 12.5×2 = 5m ✓</td>
+              <td>-20 + 12.5×10 = 105m ✓</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

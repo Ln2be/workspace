@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>زمن ونقطة اللحاق</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+      h1,
+      h2 {
+        color: #34495e;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: 2.5em;
+        margin-top: 30px;
+      }
+      h2 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        border-right: 4px solid #3498db;
+        padding-right: 15px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+      .lesson-card {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 20px 0;
+        transition: transform 0.3s;
+        border-left: 5px solid #3498db;
+      }
+      .lesson-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+      }
+      .concept-badge {
+        background: #3498db;
+        color: white;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        display: inline-block;
+        margin: 5px;
+      }
+      ul {
+        list-style-type: none;
+        padding-right: 20px;
+      }
+      li {
+        margin: 15px 0;
+        font-size: 1.1em;
+        color: #2c3e50;
+      }
+      .example {
+        background: #e8f5e9;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+      }
+      .interactive-exercise {
+        background: #fff3e0;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+      .math-input {
+        padding: 8px;
+        border: 2px solid #3498db;
+        border-radius: 6px;
+        width: 120px;
+        margin: 5px;
+        text-align: center;
+      }
+      .check-btn {
+        background: #2ecc71;
+        color: white;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .check-btn:hover {
+        background: #27ae60;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="حاوية">
+      <h1>زمن ونقطة اللحاق - شرح مفصل</h1>
+
+      <!-- القواعد الأساسية -->
+      <div class="بطاقة-درس">
+        <h2>القواعد الأساسية 🧮</h2>
+        <span class="شارة-مفهوم">الصيغ الرياضية</span>
+        <ul>
+          <li>السرعة النسبية = سرعة المطارِدة - سرعة المطارَدة</li>
+          <li>زمن اللحاق = المسافة الابتدائية ÷ السرعة النسبية</li>
+          <li>نقطة اللحاق = سرعة المطارِدة × زمن اللحاق</li>
+          <li>الشرط: سرعة المطارِدة > سرعة المطارَدة</li>
+        </ul>
+      </div>
+
+      <!-- المثال الأول -->
+      <div class="بطاقة-درس">
+        <h2>المثال الأول: سباق السيارات 🚗</h2>
+        <div class="مثال">
+          <p>
+            سيارة (أ) تسير بسرعة 80 كم/س، تبدأ سيارة (ب) المطارَدة بعد 30 دقيقة
+            بسرعة 120 كم/س.
+          </p>
+          <p><strong>الحل:</strong></p>
+          <ol>
+            <li>المسافة الابتدائية = 80 × 0.5 = 40 كم</li>
+            <li>السرعة النسبية = 120 - 80 = 40 كم/س</li>
+            <li>زمن اللحاق = 40 ÷ 40 = 1 ساعة</li>
+            <li>نقطة اللحاق = 120 × 1 = 120 كم</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- المثال الثاني -->
+      <div class="بطاقة-درس">
+        <h2>المثال الثاني: دراجة نارية vs سيارة 🏍️</h2>
+        <div class="مثال">
+          <p>
+            دراجة تتحرك بسرعة 25 م/ث، تبدأ سيارة المطارَدة بعد 20 ثانية بسرعة 40
+            م/س.
+          </p>
+          <p><strong>الحل:</strong></p>
+          <ol>
+            <li>المسافة الابتدائية = 25 × 20 = 500 متر</li>
+            <li>السرعة النسبية = 40 - 25 = 15 م/ث</li>
+            <li>زمن اللحاق = 500 ÷ 15 ≈ 33.33 ثانية</li>
+            <li>نقطة اللحاق = 40 × 33.33 ≈ 1333.33 متر</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- التمرين التفاعلي الأول -->
+      <div class="بطاقة-درس">
+        <h2>التمرين التفاعلي الأول 🧩</h2>
+        <div class="تمرين-تفاعلي">
+          <p>
+            شاحنة تسير بسرعة 70 كم/س، تبدأ سيارة المطارَدة بعد 45 دقيقة بسرعة
+            100 كم/س
+          </p>
+          <div>
+            <input
+              type="number"
+              class="إدخال-رياضي"
+              id="الزمن"
+              placeholder="الزمن (ساعة)"
+            />
+            <input
+              type="number"
+              class="إدخال-رياضي"
+              id="المسافة"
+              placeholder="المسافة (كم)"
+            />
+            <button class="زر-تحقق" onclick="التحقق1()">تحقق</button>
+          </div>
+          <p id="تغذية-مرتدة1" style="display: none; margin-top: 10px"></p>
+        </div>
+      </div>
+
+      <!-- التمرين التفاعلي الثاني -->
+      <div class="بطاقة-درس">
+        <h2>التمرين التفاعلي الثاني 🎯</h2>
+        <div class="تمرين-تفاعلي">
+          <p>
+            قطار يتحرك بسرعة 90 كم/س، يبدأ قطار سريع المطارَدة بعد 1.5 ساعة
+            بسرعة 140 كم/س
+          </p>
+          <div>
+            <input
+              type="number"
+              class="إدخال-رياضي"
+              id="الزمن2"
+              placeholder="الزمن (ساعة)"
+            />
+            <input
+              type="number"
+              class="إدخال-رياضي"
+              id="المسافة2"
+              placeholder="المسافة (كم)"
+            />
+            <button class="زر-تحقق" onclick="التحقق2()">تحقق</button>
+          </div>
+          <p id="تغذية-مرتدة2" style="display: none; margin-top: 10px"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // حل التمرين الأول
+      function التحقق1() {
+        const زمن = parseInt(document.getElementById("الزمن").value);
+        const مسافة = parseInt(document.getElementById("المسافة").value);
+        const تغذية = document.getElementById("تغذية-مرتدة1");
+
+        // الحل الصحيح
+        const المسافة_الابتدائية = 70 * 0.75; // 52.5 كم
+        const السرعة_النسبية = 100 - 70; // 30 كم/س
+        const الزمن_الصحيح = 52.5 / 30; // 1.75 ساعة
+        const المسافة_الصحيحة = 100 * 1.75; // 175 كم
+
+        if (زمن === 1.75 && مسافة === 175) {
+          تغذية.textContent = "🎉 إجابة صحيحة! أحسنت!";
+          تغذية.style.color = "green";
+        } else {
+          تغذية.textContent = `❌ حاول مرة أخرى! الحل الصحيح: الزمن = 1.75 ساعة، المسافة = 175 كم`;
+          تغذية.style.color = "red";
+        }
+        تغذية.style.display = "block";
+      }
+
+      // حل التمرين الثاني
+      function التحقق2() {
+        const زمن = parseInt(document.getElementById("الزمن2").value);
+        const مسافة = parseInt(document.getElementById("المسافة2").value);
+        const تغذية = document.getElementById("تغذية-مرتدة2");
+
+        // الحل الصحيح
+        const المسافة_الابتدائية = 90 * 1.5; // 135 كم
+        const السرعة_النسبية = 140 - 90; // 50 كم/س
+        const الزمن_الصحيح = 135 / 50; // 2.7 ساعة
+        const المسافة_الصحيحة = 140 * 2.7; // 378 كم
+
+        if (زمن === 2.7 && مسافة === 378) {
+          تغذية.textContent = "🎉 إجابة صحيحة! برافو!";
+          تغذية.style.color = "green";
+        } else {
+          تغذية.textContent = `❌ حاول مرة أخرى! الحل الصحيح: الزمن = 2.7 ساعة، المسافة = 378 كم`;
+          تغذية.style.color = "red";
+        }
+        تغذية.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

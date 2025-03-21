@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TTNBJ761EC"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-TTNBJ761EC");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مقاييس المساحة والزمن</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #2c3e50;
+      }
+      .section {
+        margin: 20px 0;
+      }
+      p {
+        line-height: 1.8;
+        color: #34495e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #27ae60;
+        color: white;
+      }
+      .exercise {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #ecf0f1;
+      }
+      .solution {
+        margin-top: 10px;
+        padding: 10px;
+        border-left: 4px solid #27ae60;
+        background-color: #eafaf1;
+      }
+      .no-solution {
+        font-weight: bold;
+        color: #e74c3c;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 10px;
+        background-color: #34495e;
+        color: white;
+      }
+      .btn {
+        background-color: #2ecc71;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #27ae60;
+      }
+      .result {
+        color: #27ae60;
+        font-weight: bold;
+        background-color: #e8f5e9;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+
+      .answer-input {
+        padding: 8px;
+        border: 2px solid #27ae60;
+        border-radius: 5px;
+        margin: 5px 0;
+        width: 200px;
+      }
+      .check-btn {
+        background-color: #3498db;
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .check-btn:hover {
+        background-color: #2980b9;
+      }
+      .feedback {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+      }
+      .correct {
+        background-color: #d4edda;
+        border: 2px solid #28a745;
+        color: #155724;
+      }
+      .incorrect {
+        background-color: #f8d7da;
+        border: 2px solid #dc3545;
+        color: #721c24;
+      }
+      .show-solution {
+        color: #27ae60;
+        cursor: pointer;
+        text-decoration: underline;
+        margin-top: 10px;
+        display: block;
+      }
+      .answer-input {
+            padding: 8px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 250px;
+            font-size: 1.1em;
+        }
+    
+        .check-btn {
+            background: #2ecc71;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+    
+        .check-btn:hover {
+            background: #27ae60;
+        }
+    
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+    
+        .correct {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+    
+        .incorrect {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>مقاييس الزمن</h1>
+
+      <div class="section">
+        <p>الوحدة الأساسية لقياس الزمن هي <strong>الساعة</strong>.</p>
+        <ul>
+          <li>اليوم = 24 ساعة</li>
+          <li>الأسبوع = 7 أيام</li>
+          <li>الشهر = 30 يوماً</li>
+          <li>السنة العادية = 365 يوماً</li>
+          <li>
+            السنة الكبيسة = 366 يوماً (حيث يكون شهر فبراير 29 يوماً وتتكرر كل 4
+            سنوات)
+          </li>
+        </ul>
+        <h3>التحويلات الزمنية</h3>
+     
+      </div>
+
+      <div class="section">
+        <h2>تمارين مع الحلول</h2>
+        <div class="exercise">
+          <h3>تمرين 1</h3>
+          <p>حوّل 3 أيام إلى الساعات.</p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>1 يوم = 24 ساعة</p>
+            <p>3 أيام = 3 × 24 = 72 ساعة</p>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3>تمرين 2</h3>
+          <p>حوّل 120 دقيقة إلى الساعات.</p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>1 ساعة = 60 دقيقة</p>
+            <p>120 دقيقة = 120 ÷ 60 = 2 ساعات</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section">
+          <h2>تمارين تفاعلية</h2>
+      
+          <!-- تمرين 1 -->
+          <div class="exercise">
+              <h3>تمرين 1</h3>
+              <p>حوّل 48 ساعة إلى الأيام</p>
+              <input type="number" id="timeEx1" class="answer-input" placeholder="أدخل عدد الأيام">
+              <button onclick="checkTimeAnswer(1)" class="check-btn">تحقق</button>
+              <div id="timeResult1" class="feedback"></div>
+          </div>
+      
+          <!-- تمرين 2 -->
+          <div class="exercise">
+              <h3>تمرين 2</h3>
+              <p>حوّل 15 يومًا إلى الساعات</p>
+              <input type="number" id="timeEx2" class="answer-input" placeholder="أدخل عدد الساعات">
+              <button onclick="checkTimeAnswer(2)" class="check-btn">تحقق</button>
+              <div id="timeResult2" class="feedback"></div>
+          </div>
+      
+          <!-- تمرين 3 -->
+          <div class="exercise">
+              <h3>تمرين 3</h3>
+              <p>حوّل 300 ثانية إلى الدقائق</p>
+              <input type="number" id="timeEx3" class="answer-input" placeholder="أدخل عدد الدقائق">
+              <button onclick="checkTimeAnswer(3)" class="check-btn">تحقق</button>
+              <div id="timeResult3" class="feedback"></div>
+          </div>
+      </div>
+      
+
+      <a href="/" class="btn">رجوع</a>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 جميع الحقوق محفوظة</p>
+    </div>
+
+    <script>
+      const timeAnswers = {
+          1: 2,      // 48 ساعة = 2 يوم
+          2: 360,    // 15 يوم = 360 ساعة
+          3: 5       // 300 ثانية = 5 دقائق
+      };
+  
+      function checkTimeAnswer(exNum) {
+          const userAnswer = parseFloat(document.getElementById(`timeEx${exNum}`).value);
+          const resultDiv = document.getElementById(`timeResult${exNum}`);
+          
+          if(userAnswer === timeAnswers[exNum]) {
+              resultDiv.innerHTML = "إجابة صحيحة! 🎉";
+              resultDiv.className = "feedback correct-answer";
+          } else {
+              resultDiv.innerHTML = `إجابة خاطئة! 💡 (تلميح: ${getTimeHint(exNum)})`;
+              resultDiv.className = "feedback wrong-answer";
+          }
+          resultDiv.style.display = "block";
+      }
+  
+      function getTimeHint(exNum) {
+          const hints = {
+              1: "1 يوم = 24 ساعة",
+              2: "1 يوم = 24 ساعة",
+              3: "1 دقيقة = 60 ثانية"
+          };
+          return hints[exNum];
+      }
+  </script>
+  </body>
+</html>

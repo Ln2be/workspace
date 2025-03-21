@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TTNBJ761EC"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-TTNBJ761EC");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مقاييس المعين</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #2c3e50;
+      }
+      .section {
+        margin: 20px 0;
+      }
+      p {
+        line-height: 1.8;
+        color: #34495e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #27ae60;
+        color: white;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 10px;
+        background-color: #34495e;
+        color: white;
+      }
+      .exercise {
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f4f4f4;
+        border-left: 5px solid #27ae60;
+      }
+      .exercise h3 {
+        margin-top: 0;
+        color: #27ae60;
+      }
+      .solution {
+        background-color: #e8f8e8;
+        border-left: 5px solid #2ecc71;
+        padding: 10px;
+        margin-top: 10px;
+      }
+      .rhombus-container {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin: 20px 0;
+      }
+      .rhombus {
+        width: 150px;
+        height: 150px;
+        background-color: #3498db;
+        position: relative;
+        transform: rotate(45deg);
+        border: 2px solid #2c3e50;
+      }
+      .label {
+        position: absolute;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+      }
+      .diagonal1 {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 2px;
+        background-color: #2c3e50;
+      }
+      .diagonal2 {
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 100%;
+        background-color: #2c3e50;
+      }
+      .btn {
+        background-color: #2ecc71;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #27ae60;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>الشكل الهندسي: المعين</h1>
+      <div class="section">
+        <h2>رسم المعين</h2>
+        <div class="rhombus-container">
+          <div class="rhombus">
+            <div class="diagonal1"></div>
+            <div class="diagonal2"></div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>المحيط</h2>
+        <p>المحيط هو مجموع أطراف المعين الأربعة، ويتم حسابه باستخدام الصيغة:</p>
+        <p>
+          <strong>المحيط = الضلع × 4</strong>
+        </p>
+        <p>حيث <strong>الضلع</strong> يمثل طول أحد أضلاع المعين المتساوية.</p>
+        <p>لإيجاد طول الضلع عند معرفة المحيط:</p>
+        <p>
+          <strong>الضلع = المحيط ÷ 4</strong>
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>المساحة</h2>
+        <p>
+          المساحة هي مقدار الفضاء داخل المعين، ويتم حسابها باستخدام أطوال
+          القطرين:
+        </p>
+        <p>
+          <strong>المساحة = (القطر الكبير × القطر الصغير) ÷ 2</strong>
+        </p>
+        <p>لإيجاد القطر الكبير أو الصغير عند معرفة المساحة:</p>
+        <ul>
+          <li><strong>القطر الكبير = (المساحة × 2) ÷ القطر الصغير</strong></li>
+          <li><strong>القطر الصغير = (المساحة × 2) ÷ القطر الكبير</strong></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>تمارين مع الحلول</h2>
+        <div class="exercise">
+          <h3>تمرين 1</h3>
+          <p>إذا كان محيط المعين 32 سم، فما هو طول الضلع؟</p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>المحيط = الضلع × 4</p>
+            <p>الضلع = المحيط ÷ 4</p>
+            <p>الضلع = 32 ÷ 4 = 8 سم</p>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3>تمرين 2</h3>
+          <p>
+            إذا كانت مساحة المعين 50 سم² وكان القطر الكبير 10 سم، فما هو القطر
+            الصغير؟
+          </p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>المساحة = (القطر الكبير × القطر الصغير) ÷ 2</p>
+            <p>القطر الصغير = (المساحة × 2) ÷ القطر الكبير</p>
+            <p>القطر الصغير = (50 × 2) ÷ 10 = 10 سم</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>تمارين بدون حلول</h2>
+        <div class="exercise">
+          <h3>تمرين 1</h3>
+          <p>إذا كان المحيط 40 سم، فما هو طول الضلع؟</p>
+        </div>
+
+        <div class="exercise">
+          <h3>تمرين 2</h3>
+          <p>
+            إذا كانت المساحة 72 سم² وكان القطر الصغير 8 سم، فما هو القطر الكبير؟
+          </p>
+        </div>
+      </div>
+      <a href="/" class="btn">رجوع</a>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 جميع الحقوق محفوظة</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercice 1 - Ascension sur plan incliné</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 0.8rem;
+        border: 1px solid #dfe6e9;
+        text-align: center;
+      }
+      .final-answer {
+        background: #27ae60;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="exercise-box">
+            <h2>Exercice 1 : Ascension sur plan incliné</h2>
+          
+            <!-- Énoncé original -->
+            <div class="solution-step">
+              <h3>📝 Énoncé</h3>
+              <p>
+                Un solide <em>S</em> de masse <em>m = 400 g</em> est lancé <strong>vers le haut</strong> d'un plan incliné <em>AB</em> 
+                (angle <em>α = 30°</em>) avec une vitesse initiale <em>V<sub>A</sub> = 4 m/s</em>. 
+                On donne <em>g = 10 m/s²</em> et <em>AB = 0,7 m</em>.
+              </p>
+              <ol>
+                <li><strong>Sans frottement</strong> :
+                  <ol type="a">
+                    <li>Donner l'expression de l'accélération et calculer sa valeur.</li>
+                    <li>Calculer la vitesse au point <em>B</em>.</li>
+                    <li>Calculer le temps mis pour atteindre <em>B</em>.</li>
+                  </ol>
+                </li>
+                <li><strong>Avec frottement</strong> (<em>V<sub>B</sub> = 2 m/s</em>) :
+                  <ol type="a">
+                    <li>Déterminer la valeur de la force de frottement <em>f</em>.</li>
+                    <li>Déterminer la réaction normale <em>R</em>.</li>
+                  </ol>
+                </li>
+                <li><strong>Mouvement aérien</strong> :
+                  <ol type="a">
+                    <li>Écrire l'équation de la trajectoire après <em>B</em>.</li>
+                    <li>Déterminer les coordonnées du sommet.</li>
+                    <li>Calculer la distance <em>BC</em>.</li>
+                  </ol>
+                </li>
+              </ol>
+            </div>
+          
+            <!-- Solution -->
+            <div class="solution-step">
+              <h3>🔍 Solution</h3>
+          
+              <h4>1. Sans frottement</h4>
+              <p><strong>a) Accélération :</strong><br>
+                <span class="formula">a = −g·sinα = −10 × sin(30°) = −5 m/s²</span> (décélération)
+              </p>
+          
+              <p><strong>b) Vitesse en B :</strong><br>
+                <span class="formula">V<sub>B</sub>² = V<sub>A</sub>² + 2a·AB</span><br>
+                <span class="formula">V<sub>B</sub> = √(4² + 2×(−5)×0,7) = √(16 − 7) = 3 m/s</span>
+              </p>
+          
+              <p><strong>c) Temps :</strong><br>
+                <span class="formula">V<sub>B</sub> = V<sub>A</sub> + a·t ⇒ t = (3 − 4)/(−5) = 0,2 s</span>
+              </p>
+          
+              <h4>2. Avec frottement</h4>
+              <p><strong>a) Force f :</strong><br>
+                <span class="formula">ΔE<sub>c</sub> = W<sub>P</sub> + W<sub>f</sub></span><br>
+                <span class="formula">0,5×0,4×(2²−4²) = −0,4×10×0,7×sin(30°) − f×0,7</span><br>
+                <span class="formula">f ≈ 1,43 N</span>
+              </p>
+          
+              <p><strong>b) Réaction R :</strong><br>
+                <span class="formula">R = m·g·cosα = 0,4×10×cos(30°) ≈ 3,46 N</span>
+              </p>
+          
+              <h4>3. Mouvement aérien</h4>
+              <p><strong>a) Équation :</strong><br>
+                <span class="formula">y = tan(α)·x − (g/(2V<sub>B</sub>²·cos²α))·x²</span><br>
+                <span class="formula">y = 0,58x − 1,67x²</span>
+              </p>
+          
+              <p><strong>b) Sommet :</strong><br>
+                <span class="formula">x<sub>S</sub> = (V<sub>B</sub>²·sin(2α))/(2g) ≈ 0,17 m</span><br>
+                <span class="formula">y<sub>S</sub> = (V<sub>B</sub>²·sin²α)/(2g) ≈ 0,05 m</span>
+              </p>
+          
+              <p><strong>c) Distance BC :</strong><br>
+                <span class="formula">x<sub>C</sub> = (V<sub>B</sub>²·sin(2α))/g ≈ 0,35 m</span>
+              </p>
+            </div>
+          
+    
+          </div>
+
+        <!-- Concepts clés -->
+        <div class="solution-step" style="background: #f8edeb">
+          <h3>🔑 Concepts Clés</h3>
+          <ul>
+            <li>Forces : Poids, Réaction normale, Frottement</li>
+            <li>Théorème de l'énergie cinétique</li>
+            <li>Mouvement parabolique</li>
+            <li>Projection vectorielle</li>
+          </ul>
+        </div>
+
+
+      </div>
+    </div>
+  </body>
+</html>

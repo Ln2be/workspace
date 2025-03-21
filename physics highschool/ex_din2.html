@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 1 - Service au Volley-ball</title>
+    <script
+      type="text/javascript"
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+        color: #2c3e50;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+        border-radius: 5px;
+      }
+      h2,
+      h3 {
+        color: #3498db;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+      }
+      .final-answer {
+        background: #27ae60;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="exercise-box">
+        <h2>Exercice 1 : Étude du mouvement d’un projectile</h2>
+        <div class="solution-step">
+          <h3>📝 Énoncé</h3>
+          <p>
+            Un joueur de volley-ball est au service d'un ballon qu'il lance avec
+            une vitesse initiale \( V_0 \) faisant un angle \( \alpha = 45^\circ
+            \) avec le plan horizontal.
+          </p>
+          <ul>
+            <li>
+              Le ballon est frappé avec la main à la hauteur \( h = 0,50m \) du
+              sol et à la distance \( D = 9m \) du filet.
+            </li>
+            <li>La hauteur du filet est \( H = 2,43m \).</li>
+            <li>
+              La limite du camp adverse est à la distance \( 2D \) du filet.
+            </li>
+          </ul>
+          <ol>
+            <li>
+              Caractériser le vecteur accélération \( \mathbf{a} \) du centre
+              d'inertie \( G \) du ballon.
+            </li>
+            <li>
+              Déterminer les composantes de l'équation horaire du vecteur
+              vitesse \( \mathbf{V} \) du ballon.
+            </li>
+            <li>
+              Déterminer les composantes de l'équation horaire du vecteur
+              position \( \mathbf{OG} \) du ballon.
+            </li>
+            <li>
+              <ol type="a">
+                <li>Déterminer l'équation de la trajectoire du ballon.</li>
+                <li>Quelle est la trajectoire du ballon ?</li>
+                <li>Comment appelle-t-on ce type de mouvement ? Pourquoi ?</li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+
+        <div class="solution-step">
+          <h3>🔍 Solution</h3>
+          <h4>1️⃣ Accélération du ballon</h4>
+          <p>Le ballon est soumis uniquement à son poids :</p>
+          <p class="formula">\( \mathbf{a} = (0, -9.8) \) m/s²</p>
+
+          <h4>2️⃣ Équations de vitesse</h4>
+          <p>Décomposition de \( V_0 \) :</p>
+          <p class="formula">\( V_x = V_0 \cos(45^\circ) \)</p>
+          <p class="formula">\( V_y = V_0 \sin(45^\circ) - 9,8t \)</p>
+
+          <h4>3️⃣ Équations de position</h4>
+          <p>Par intégration :</p>
+          <p class="formula">\( x(t) = V_0 \cos(45^\circ) t \)</p>
+          <p class="formula">
+            \( y(t) = 0,5 + V_0 \sin(45^\circ) t - 4,9t^2 \)
+          </p>
+
+          <h4>4️⃣ Équation de la trajectoire</h4>
+          <p>On élimine \( t \) :</p>
+          <p class="formula">
+            \( y = 0,5 + x - \frac{4,9 x^2}{V_0^2 \cos^2(45^\circ)} \)
+          </p>
+
+          <h4>5️⃣ Vérification du passage du filet</h4>
+          <p>À \( x = 9m \) :</p>
+          <p class="formula">
+            \( y(9) = 0,5 + 9 - \frac{4,9 \times 9^2}{V_0^2 \cos^2(45^\circ)} \)
+          </p>
+          <p>Si \( y(9) > 2,43m \), le ballon passe au-dessus du filet.</p>
+        </div>
+
+        <div class="final-answer">
+          Conclusion : La trajectoire est parabolique, et le passage du filet
+          dépend de \( V_0 \).
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

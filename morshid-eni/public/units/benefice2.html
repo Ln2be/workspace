@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>درس حساب الربح والخسارة</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        border-top: 5px solid #2ecc71;
+      }
+      h1, h2 {
+        text-align: center;
+        color: #34495e;
+      }
+      .exercise {
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .exercise label {
+        font-size: 1.2em;
+        display: block;
+        margin-bottom: 10px;
+      }
+      .exercise input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .btn {
+        background-color: #2ecc71;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+      }
+      .btn:hover {
+        background-color: #27ae60;
+      }
+      .result {
+        font-weight: bold;
+        font-size: 1.3em;
+        margin-top: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>حساب الربح والخسارة في المعاملات التجارية</h1>
+      
+      <div class="exercise">
+        <h2>تمرين 1: حساب الربح</h2>
+        <p>إذا كان ثمن البيع 500 أوقية وثمن الشراء 300 أوقية، فما هو الربح؟</p>
+        <input type="number" id="answer1" placeholder="أدخل الإجابة هنا" />
+        <button class="btn" onclick="checkAnswer(1, 200)">تحقق</button>
+        <p class="result" id="feedback1"></p>
+      </div>
+      
+      <div class="exercise">
+        <h2>تمرين 2: حساب ثمن الشراء</h2>
+        <p>إذا كان ثمن البيع 700 أوقية وكان الربح 150 أوقية، فما هو ثمن الشراء؟</p>
+        <input type="number" id="answer2" placeholder="أدخل الإجابة هنا" />
+        <button class="btn" onclick="checkAnswer(2, 550)">تحقق</button>
+        <p class="result" id="feedback2"></p>
+      </div>
+    </div>
+    
+    <script>
+      function checkAnswer(exerciseNumber, correctAnswer) {
+        let userAnswer = document.getElementById("answer" + exerciseNumber).value;
+        let feedback = document.getElementById("feedback" + exerciseNumber);
+        
+        if (userAnswer == correctAnswer) {
+          feedback.textContent = "إجابة صحيحة! ✅";
+          feedback.style.color = "green";
+        } else {
+          feedback.textContent = "إجابة خاطئة ❌ حاول مرة أخرى.";
+          feedback.style.color = "red";
+        }
+      }
+    </script>
+  </body>
+</html>

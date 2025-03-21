@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Chapitre Dynamique</title>
+    <script
+      type="text/javascript"
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <h1>Cinétique Chimique</h1>
+    </header>
+
+
+    <!-- Cinetique Chimique 6 subsections -->
+    <div class="navigation" id="lessons">
+      <h2>Leçons</h2>
+      <ul>
+        <li>
+          <a href="#rfd" onclick="toggleSection('rfd')">Rappel</a>
+        </li>
+        <li>
+          <a href="#chute-libre" onclick="toggleSection('chute-libre')"
+            >La Vitesse de la Réaction</a
+          >
+        </li>
+        <li>
+          <a
+            href="#mouvement-plan-incline"
+            onclick="toggleSection('mouvement-plan-incline')"
+            >Les Facteurs Cinetiques</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Senction Rappel 4 subsections-->
+    <section id="rfd" class="hidden">
+      <h1>Rappel</h1>
+      <div>
+        <!-- Section Generalite -->
+        <div class="subsection">
+          <h2>Généralité</h2>
+          <h3>1 - Concentration molaire et massique</h3>
+          <h4>La concentration molaire</h4>
+          <p>
+            La concentration molaire d'une espèce en solution notée
+            <strong>C</strong>, et la quantité de matière
+            <strong>(n)</strong> dans un litre de solution. L'unité de
+            concentration molaire est mol/L. La formule de la concentration
+            molaire est la suivante:
+          </p>
+          \[ C = \frac{n}{V_{\text{solution}}} \]
+          <ul>
+            <li>n : la quantité de matière en mole</li>
+            <li>C: la concentration molaire en mol/L</li>
+            <li>V<sub>solution</sub>: volume de la solution en L.</li>
+          </ul>
+          <p>
+            A partir de la concentration molaire, il est possible de déterminer
+            la quantité de matière:
+          </p>
+          \[ n = C \cdot V_{\text{solution}} \]
+
+          <h4>La concentration massique</h4>
+          <p>La quantité de masse dans un litre de solution</p>
+          \[ C_m = \frac{m}{V_{\text{solution}}} \]
+          <p>m : masse en g</p>
+
+          <h4>Lien entre les deux concentrations</h4>
+          \[ C = \frac{C_m}{M} \]
+          <p>M : masse molaire g/mol</p>
+
+          <h3>2 La masse volumique et la densité</h3>
+          <h4>La masse volumique</h4>
+          <p>
+            La masse volumique est la masse (en grammes) occupée par 1 litre
+            d'une espèce chimique étudiée. Elle se note ρ et est donnée par le
+            rapport de la masse m d'un échantillon de cette espèce et le volume
+            V qu'il occupe:
+          </p>
+          \[ \rho = \frac{m}{V} \]
+          <p>
+            La masse volumique peut être exprimée en : kg/m<sup>3</sup>, g/L,
+            g/cm<sup>3</sup>, g/ml. Eau = 1g/ml = 1g/cm<sup>3</sup> = 1000g/L =
+            1000kg/m<sup>3</sup>
+          </p>
+
+          <h4>La densité</h4>
+          <p>
+            Pour des solides ou des liquides, c'est le rapport entre la masse
+            volumique de l'espèce chimique considérée et celle de l'eau.
+          </p>
+          \[ d = \frac{\rho}{\rho_{\text{eau}}} \]
+          <p>Example : Densité de l'eau = 1.0. Densité de l'éthanol = 0.79</p>
+          <p>
+            La densité d'un gaz correspond au rapport de la masse molaire de gaz
+            par la masse molaire de l'air \(M_{\text{air}} = 28.96 \,
+            \text{g/mol}\).
+          </p>
+          \[ d_{\text{gaz}} = \frac{M_{\text{gaz}}}{M_{\text{air}}} \]
+          <p>
+            A partir de la masse volumique ou de la densité d'une espèce
+            chimique, il est facile de déterminer la masse d'un échantillon
+            connaissant le volume utilisé.
+          </p>
+          \[ m = \text{espèce chimique} \times V \]
+          <p></p>
+          \[ m = \rho_{\text{espèce}} \times V \] \[ m = d_{\text{espèce}}
+          \times \rho_{\text{eau}} \times V \]
+        </div>
+
+        <!-- preparation d'une solution -->
+        <div class="subsection">
+          <h2>2 Préparation d'une solution</h2>
+          <h4>Préparation d'une solution par dissolution</h4>
+          <p>
+            Dans une dissolution, il faut prendre le soluté et le dissoudre dans
+            le solvant pour obtenir la solution désirée. Afin de préparer la
+            solution à la concentration demandée, il faut connaître le volume de
+            la solution à préparer et la quantité de soluté nécessaire pour la
+            faire.
+          </p>
+          <p></p>
+
+          <h4>Par dilution</h4>
+          <p>
+            Dans une dilution, il faut prendre la solution et y ajouter du
+            solvant afin d'en réduire la concentration. Pour préparer une
+            solution diluée, il faut tout d'abord déterminer quelle quantité de
+            la solution initiale sera utilisée pour préparer la nouvelle
+            solution diluée. Pour ce faire, il faut connaître les concentrations
+            initiales et finales des solutions ainsi que le volume final de la
+            nouvelle solution.
+          </p>
+          <p></p>
+          <p>Loi de dilution</p>
+          \[ n_i = n_f \] \[ C_iV_i = C_fV_f \]
+
+          <h4>A partir d'une solution commerciale</h4>
+          <p>
+            Préparer un volume V de solution d'un composé X à la concentration C
+            par dilution d'un volume V<sub>0</sub> d'une solution commerciale de
+            X. Les indications apparaissant sur l'étiquette du bidon contenant
+            la solution commerciale sont la densité d de la solution, et le
+            pourcentage en masse p du produit X.
+          </p>
+          <p>La concentration d'une solution commerciale</p>
+          \[ C_0 = \frac{pd\rho_{\text{eau}}}{100M_x} \]
+          <ul>
+            <li>C<sub>0</sub> = p*d*eau/100*M<sub>x</sub></li>
+            <li>P : pourcentage en masse de X</li>
+            <li>d : densité de X</li>
+            <li>M<sub>x</sub> : masse molaire de X</li>
+          </ul>
+          <p>
+            Le volume V<sub>0</sub> à prélever de la solution commerciale suit
+            la loi de dilution
+          </p>
+          \[ C_0V_0 = CV \]
+        </div>
+
+        <!-- Evolution d'une transformation chimique -->
+        <div class="subsection">
+          <h2>3 - évolution d'une transformation chimique</h2>
+          <h4>1 - Evolution des quantités des matières</h4>
+          <p>Au cours d'une transformation chimique :</p>
+          <p>
+            <strong>Des réactifs</strong> sont consommés. Leur quantité de
+            matière diminue au cours de la réaction.
+            <strong>Des produits</strong> sont formés. Leur quantité de matière
+            augmente au cours de la réaction.
+          </p>
+
+          <h4>2 - Les nombres stœchiométriques</h4>
+          <p>
+            Une <strong>équation bilan</strong> rend compte des proportions dans
+            lesquelles les réactifs réagissent et les produits se forment.
+          </p>
+          <p>
+            Les <strong>nombres stœchiométriques</strong> sont les coefficients
+            qui permettent d'ajuster l'équation bilan de manière à ce que le
+            nombre de chaque élément chimique soit identique de part et d'autre
+            de l'équation.
+          </p>
+
+          <h4>3 - L'avancement d'une réaction</h4>
+          <p>
+            <strong>L'avancement</strong> est une grandeur notée <em>x</em> qui
+            permet de suivre la réaction ; il s'exprime en mole (mol).
+          </p>
+          <p>
+            L'avancement est la
+            <strong>quantité de matière consommée</strong> pour un réactif dont
+            le nombre stœchiométrique vaut 1.
+          </p>
+          <p>
+            À l'état initial, l'avancement est nul et il atteint sa valeur
+            finale quand la réaction est terminée.
+          </p>
+
+          <h4>4 - Le tableau d'avancement</h4>
+          <p>
+            Le <strong>tableau d'avancement</strong> permet de comprendre
+            l'évolution d'un système chimique.
+          </p>
+          <p>Un tableau d'avancement est toujours de la forme suivante :</p>
+          <p>
+            \[ \alpha A + \beta B \hspace{1cm} \rightarrow \hspace{1cm} \sigma C
+            + \gamma D \] &alpha;, &beta;, &sigma;, &gamma; : coefficients
+            stœchiométriques.
+          </p>
+          <p>
+            L'avancement x: \[ x = \frac {n_0(A) - n_r(A)}{\alpha} = \frac
+            {n_0(B) - n_r(B)}{\beta} = \frac {n(C)}{\sigma} = \frac
+            {n(D)}{\gamma} \]
+          </p>
+          <img
+            src="images/cinetique-chimique/cinet2.png"
+            alt="Your Name"
+            width="641"
+            height="182"
+          />
+          <p>Détermination de la composition finale du système</p>
+          <p>
+            Le réactif limitant est celui des réactifs qui s'épuise le premier.
+            Pour l'identifier, on résout donc pour les deux réactifs (A, B):
+          </p>
+          <p>\[n_0(A) - \alpha X_{max} = 0 \]</p>
+          <p>\[n_0(B) - \beta X_{max} = 0 \]</p>
+          <p>
+            On ne retient que la plus petite de ces deux valeurs pour compléter
+            la dernière ligne de tableau.
+          </p>
+
+          <h4>5 - Les proportions stœchiométriques</h4>
+          <p>
+            Une réaction dans les
+            <strong>proportions stœchiométriques</strong> est une réaction au
+            cours de laquelle les réactifs s'épuisent tous en même temps, il n'y
+            a donc <strong>pas de réactif limitant</strong> particulier. Ces
+            proportions dépendent des nombres stœchiométriques dans l'équation
+            bilan.
+          </p>
+
+          <h4>6 - Les réactions limitées</h4>
+          <h5>Définition</h5>
+          <p>
+            Une <strong>réaction limitée</strong> (ou équilibrée) est une
+            <strong>réaction qui n'est pas totale</strong>.
+          </p>
+          <p>
+            L'avancement final X<sub>f</sub> n'atteint alors pas la valeur de
+            l'avancement maximal X<sub>max</sub> déterminée grâce au tableau
+            d'avancement.
+          </p>
+          <h5>Constant d'équilibre</h5>
+          <p>
+            \[ \alpha A + \beta B \hspace{1cm} \rightarrow \hspace{1cm} \sigma C
+            + \gamma D \]
+          </p>
+          \[ K = \frac {n_{A}^{\alpha}n_{B}^{\beta}}{n_C^{\sigma}n_D^{\gamma}}
+          \]
+        </div>
+
+        <!-- Oxydoreduction -->
+        <div class="subsection">
+          <h2>4 Oxydoréduction</h2>
+          <h4>Les oxydants et Les réducteurs</h4>
+          <p>
+            Les oxydants sont des espèces chimiques pouvant capter des électrons
+            et les réducteurs sont des espèces chimiques pouvant en céder. Le
+            cuivre (II) Cu<sup>2+</sup> est un oxydant car il peut se
+            transformer en cuivre métallique Cu par gain de deux électrons. Le
+            zinc est réducteur car il peut se transformer en Zn<sup>2+</sup> par
+            perte de deux électrons.
+          </p>
+
+          <h4>Les couples redox</h4>
+          <p>
+            Un couple redox est composé d'un oxydant et un réducteur liés par un
+            transfert d'électrons, illustré par un demi-équation électronique.
+            Le couple est noté:
+          </p>
+          \[ \text{Oxidant/Reducteur} \]
+          <p>Example Cu<sup>2+</sup>/Cu Demi-équation</p>
+          \[ Cu^{2+} + 2e^- \longrightarrow Cu \]
+
+          <h4>L'équation bilan</h4>
+          <p>
+            La réaction d'oxydoréduction (l'équation bilan) est une réaction au
+            cours de laquelle il y a échange d'électrons entre l'oxydant d'un
+            couple et le réducteur d'un autre couple.
+          </p>
+          <p>Pour deux couples: \( Ox_1 / Red_1 \) et \( Ox_2/Red_2 \)</p>
+          <p>
+            <img
+              src="images/cinetique-chimique/cinet1.png"
+              alt="Your Name"
+              width="129"
+              height="196"
+            />
+          </p>
+          <p>
+            On utilise la règle gamma pour obtenir l'équation bilan. Supposons
+            le couple \( \text{ox1/red1} \) avec le plus fort potentiel
+          </p>
+          \[ Ox_1 + Red_2 \longrightarrow Ox_2 + Red_1 \]
+          <h4>Les dosages d'oxydoréduction</h4>
+          <p>
+            Les dosages d'oxydoréduction, également appelés dosages rédox, sont
+            utilisés pour déterminer la concentration, dans une solution, d'une
+            espèce ayant des propriétés oxydantes ou réductrices. Comme dans
+            tous les dosages, il faut déterminer le passage à l'équivalence (à
+            l'équivalence, les réactifs ont été mélangés dans les proportions
+            stœchiométriques).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Vitesse de reaction 1 subsection-->
+    <section id="chute-libre" class="hidden">
+      <!-- vitesse de la reaction -->
+      <div class="subsection">
+        <h2>La vitesse de réaction et temps de demi réaction</h2>
+
+        <h3>1 - Caractérisation quantitative de la durée d'une réaction</h3>
+        <p>
+          Qualitativement, une réaction est rapide si elle se produit trop
+          rapidement pour être suivie à l'œil nu. À l'inverse, une réaction est
+          lente si elle peut être suivie à l'œil nu ou avec des instruments de
+          mesure.
+        </p>
+        <p>
+          Notons qu'il existe des réactions infiniment lentes, appelées
+          cinétiquement inertes.
+        </p>
+
+        <h3>2 - Vitesse moyenne et vitesse instantanée de la réaction</h3>
+        <p>
+          La vitesse moyenne est la variation de la quantité d'une substance en
+          fonction d'un intervalle de temps donné.
+        </p>
+        <p>Vitesse moyenne : \(v = \frac{\Delta n}{\Delta t}\)</p>
+
+        <p>
+          La vitesse instantanée est la vitesse à un temps précis de la
+          réaction.
+        </p>
+        <p>Vitesse instantanée : \(v = \frac{dn}{dt}\)</p>
+        <img
+          src="images/cinetique-chimique/cinet3.png"
+          alt="Your Name"
+          width="500"
+          height="378"
+        />
+
+        <h3>3 - Vitesse volumique</h3>
+        <p>
+          Vitesse volumique \(v(t)\) d'une réaction chimique : \(v =
+          \frac{dx}{Vdt}\)
+        </p>
+        <p>Avec \(V\) le volume du milieu réactionnel en L</p>
+        <p>
+          Avec \(\frac{dx}{dt}\) la dérivée de l'avancement \(x\) par rapport au
+          temps \(t\) en mol.s\(^{-1}\)
+        </p>
+        <p>Remarque : \(v_i = \pm \frac{1}{s}v\)</p>
+        <ul>
+          <li>
+            \(v_i\): vitesse du produit ou réactif (positif pour les produits,
+            négatif pour les réactifs)
+          </li>
+          <li>\(s\): coefficient stœchiométrique</li>
+          <li>\(v\): vitesse de la réaction</li>
+        </ul>
+
+        <h3>4 - Temps de demi-réaction</h3>
+        <p>
+          Temps de demi-réaction (\(t_{\frac{1}{2}}\)) : durée où l'avancement
+          \(x\) est égal à la moitié de l'avancement maximal \(X_{\text{max}}\).
+          En secondes (s).
+        </p>
+      </div>
+    </section>
+
+    <!-- Section Facteurs Cinetiques 1 subsection -->
+    <section id="mouvement-plan-incline" class="hidden">
+      <div class="subsection">
+        <h2>Facteurs cinétiques</h2>
+
+        <h3>1 - Influence de la concentration</h3>
+        <p>
+          Le déclenchement d'une transformation chimique nécessite que les
+          réactifs présents dans le milieu entrent en contact. Plus la
+          concentration des réactifs est élevée, plus la vitesse de réaction est
+          élevée.
+        </p>
+
+        <h3>2 - Influence de la température</h3>
+        <p>
+          La température reflète l'agitation thermique. Une température plus
+          élevée augmente la fréquence des rencontres entre les réactifs et leur
+          énergie cinétique, accélérant ainsi les réactions chimiques.
+        </p>
+
+        <h3>3 - Catalyse</h3>
+        <h4>Définitions</h4>
+        <p>
+          La catalyse est l'action d'un catalyseur sur une transformation
+          chimique. Le catalyseur augmente la vitesse de réaction sans figurer
+          dans l'équation de réaction ni modifier la composition finale du
+          système.
+        </p>
+
+        <h4>Différents types de catalyse</h4>
+
+        <h5>Catalyse homogène</h5>
+        <p>
+          Catalyse homogène si le catalyseur et les réactifs forment une seule
+          phase.
+        </p>
+        <p>
+          Exemple: La décomposition de l'eau oxygénée
+          (H<sub>2</sub>O<sub>2</sub>) catalysée par les ions fer (III) en
+          solution aqueuse : \(2H_2O_2 \longrightarrow 2H_2O + O_2\)
+        </p>
+
+        <h5>Catalyse hétérogène</h5>
+        <p>
+          Catalyse hétérogène si le catalyseur et les réactifs forment plusieurs
+          phases.
+        </p>
+        <p>
+          Exemple: Synthèse de l'eau à partir de dihydrogène et dioxygène
+          catalysée par le platine solide : \(2H_2 + O_2 \longrightarrow 2H_2O\)
+        </p>
+
+        <h5>Catalyse enzymatique</h5>
+        <p>
+          Catalyseur : une enzyme, protéine élaborée par un organisme vivant.
+          Catalyse semblable à une catalyse homogène et hétérogène.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <button onclick="scrollToTop()" class="scroll-button">
+        Retour en haut de page
+      </button>
+      <!-- <p>&copy; 2024 Votre Nom</p> -->
+      <a href="index.html" class="home-button">Retour à la page d'accueil</a>
+    </footer>
+
+    <script>
+      function toggleSection(sectionId) {
+        var sections = document.querySelectorAll("section");
+
+        sections.forEach(function (section) {
+          if (section.id === sectionId) {
+            section.classList.toggle("hidden");
+          } else {
+            section.classList.add("hidden");
+          }
+        });
+      }
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>

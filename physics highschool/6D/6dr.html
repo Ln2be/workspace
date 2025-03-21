@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Physique - Plan Incliné</title>
+    <style>
+      /* Le CSS reste identique */
+      body {
+        font-family: "Segoe UI", sans-serif;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #f0f7ff;
+      }
+      .card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 15px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 8px;
+      }
+      .formula {
+        background: #f8f9fa;
+        padding: 15px;
+        border-left: 4px solid #3498db;
+        margin: 15px 0;
+        font-family: monospace;
+      }
+      .visual {
+        text-align: center;
+        color: #3498db;
+        font-size: 24px;
+        margin: 20px 0;
+      }
+      .key-term {
+        color: #e74c3c;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Nouvelle section ajoutée -->
+    <div class="card">
+      <h2>📏 Unités de Base en Physique</h2>
+      <div class="formula">
+        <strong>Système International (SI)</strong><br />
+        • Masse : <span class="key-term">kilogramme (kg)</span><br />
+        • Temps : <span class="key-term">seconde (s)</span><br />
+        • Longueur : <span class="key-term">mètre (m)</span>
+      </div>
+      <p>Exemple : Une masse de 2 kg, un temps de 5 s, une distance de 10 m.</p>
+    </div>
+
+    <!-- Sections existantes -->
+    <div class="card">
+      <h2>🔷 Représentation des Forces</h2>
+      <div class="formula">
+        <strong>Poids (P)</strong><br />
+        ↓ Vertical dirigé vers le bas<br />
+        P = m·g → <span class="key-term">Décomposition </span> ( θ avec
+        l'horizontale ):<br />
+        P<sub>∥</sub> = P·sinθ (parallèle)<br />
+        P<sub>⊥</sub> = P·cosθ (perpendiculaire)
+      </div>
+      <div class="formula">
+        <strong>Réaction normale (N)</strong><br />
+        ⟂ Au plan → N = P<sub>⊥</sub>
+      </div>
+      <div class="formula">
+        <strong>Frottement (f)</strong><br />
+        ↑ Opposé au mouvement
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📐 Calcul du Travail</h2>
+      <div class="formula">
+        W<sub>P</sub> = +mgh<br />
+        <em>(Descente : Travail moteur)</em>
+      </div>
+      <div class="formula">
+        W<sub>P</sub> = -mgh<br />
+        <em>(Montée : Travail résistant)</em>
+      </div>
+      <div class="formula">
+        W<sub>f</sub> = -f·d<br />
+        <em>(Travail résistant)</em>
+      </div>
+    </div>
+  </body>
+</html>

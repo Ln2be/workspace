@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>برنامج تدريبي - حساب ورياضيات</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: #f0f4f8;
+        color: #2c3e50;
+      }
+
+      .header {
+        background: #2ecc71;
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      .week-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+
+      .week-card:hover {
+        transform: translateY(-3px);
+      }
+
+      .week-title {
+        color: #27ae60;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .session-box {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+
+      .session-title {
+        color: #2980b9;
+        margin-bottom: 0.5rem;
+      }
+
+      .activity-list {
+        list-style: none;
+        padding-right: 1rem;
+      }
+
+      .activity-item {
+        padding: 0.5rem 0;
+        border-bottom: 1px dashed #ddd;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 1.5rem;
+        background: #34495e;
+        color: white;
+        margin-top: 2rem;
+      }
+
+      .badge {
+        background: #3498db;
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9em;
+        display: inline-block;
+        margin-left: 0.5rem;
+      }
+      .emoji-icon {
+        font-size: 24px;
+        margin-left: 10px;
+      }
+      .week-card:nth-child(odd) {
+        border-right: 4px solid #2ecc71;
+      }
+      .week-card:nth-child(even) {
+        border-right: 4px solid #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>📚 دورة لمدة شهرين - حساب ورياضيات</h1>
+      <p>⏳ مدة البرنامج: 8 أسابيع - 🗓️ 16 حصة تعليمية</p>
+    </header>
+
+    <div class="container">
+      <!-- الأسبوع 1 -->
+      <div class="week-card">
+        <h2 class="week-title">
+          الأسبوع 1: المقاييس الأساسية <span class="badge">حصتين</span>
+        </h2>
+
+        <div class="session-box">
+          <h3 class="session-title">📏 الحصة 1: تحويلات الطول</h3>
+          <ul class="activity-list">
+            <li class="activity-item">تمرين: تحويل 3.5 كم إلى متر</li>
+            <li class="activity-item">أداة محوسبة للتحويلات</li>
+          </ul>
+        </div>
+
+        <div class="session-box">
+          <h3 class="session-title">⚖️ الحصة 2: مقاييس الوزن</h3>
+          <ul class="activity-list">
+            <li class="activity-item">تحويل الكيلوجرام إلى جرام</li>
+            <li class="activity-item">تمارين على الميزان الرقمي</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- الأسبوع 2 -->
+      <div class="week-card">
+        <h2 class="week-title">
+          الأسبوع 2: القياسات المتقدمة <span class="badge">حصتين</span>
+        </h2>
+
+        <div class="session-box">
+          <h3 class="session-title">🧮 الحصة 3: مقاييس السعة</h3>
+          <ul class="activity-list">
+            <li class="activity-item">تحويل اللتر إلى ملليلتر</li>
+            <li class="activity-item">تجربة افتراضية مع الأوعية</li>
+          </ul>
+        </div>
+
+        <div class="session-box">
+          <h3 class="session-title">⏰ الحصة 4: قياس الزمن</h3>
+          <ul class="activity-list">
+            <li class="activity-item">تحويل الساعات إلى دقائق</li>
+            <li class="activity-item">تطبيق: جدولة المهام اليومية</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- الأسبوع 3 -->
+      <div class="week-card">
+        <h2 class="week-title">
+          الأسبوع 3: العمليات الحسابية <span class="badge">حصتين</span>
+        </h2>
+
+        <div class="session-box">
+          <h3 class="session-title">💰 الحصة 5: الربح والخسارة</h3>
+          <ul class="activity-list">
+            <li class="activity-item">حساب أرباح متجر إلكتروني</li>
+            <li class="activity-item">محاكاة سيناريوهات تجارية</li>
+          </ul>
+        </div>
+
+        <div class="session-box">
+          <h3 class="session-title">📐 الحصة 6: ثمن الوحدة</h3>
+          <ul class="activity-list">
+            <li class="activity-item">مقارنة عروض السوبرماركت</li>
+            <li class="activity-item">حساب تكاليف البناء</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- الأسبوع 4 -->
+      <div class="week-card">
+        <h2 class="week-title">
+          الأسبوع 4: النسب والتطبيقات <span class="badge">حصتين</span>
+        </h2>
+
+        <div class="session-box">
+          <h3 class="session-title">% الحصة 7: النسبة المئوية</h3>
+          <ul class="activity-list">
+            <li class="activity-item">حساب خصومات المتاجر</li>
+            <li class="activity-item">تطبيقات على الإحصائيات</li>
+          </ul>
+        </div>
+
+        <div class="session-box">
+          <h3 class="session-title">🗺️ الحصة 8: مقياس الخريطة</h3>
+          <ul class="activity-list">
+            <li class="activity-item">تحليل خرائط جوجل</li>
+            <li class="activity-item">تصميم خريطة افتراضية</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- الأسبوع 5 -->
+      <div class="week-card">
+        <h2 class="week-title">
+          الأسبوع 5: الهندسة الأساسية <span class="badge">حصتين</span>
+        </h2>
+
+        <div class="session-box">
+          <h3 class="session-title">🔷 الحصة 9: الأشكال الرباعية</h3>
+          <ul class="activity-list">
+            <li class="activity-item">خصائص المربع والمستطيل</li>
+            <li class="activity-item">حساب المحيط والمساحة</li>
+          </ul>
+        </div>
+
+        <div class="session-box">
+          <h3 class="session-title">🔺 الحصة 10: المثلثات</h3>
+          <ul class="activity-list">
+            <li class="activity-item">أنواع المثلثات</li>
+            <li class="activity-item">حساب مساحة المثلث</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- الأسبوع 6 -->
+      <div class="week-card">
+        <h2 class="week-title">
+          الأسبوع 6: الأشكال المتقدمة <span class="badge">حصتين</span>
+        </h2>
+
+        <div class="session-box">
+          <h3 class="session-title">⏹️ الحصة 11: متوازي الأضلاع</h3>
+          <ul class="activity-list">
+            <li class="activity-item">الفرق بينه وبين المستطيل</li>
+            <li class="activity-item">تمارين عملية</li>
+          </ul>
+        </div>
+
+        <div class="session-box">
+          <h3 class="session-title">🔵 الحصة 12: الدوائر</h3>
+          <ul class="activity-list">
+            <li class="activity-item">حساب المحيط والمساحة</li>
+            <li class="activity-item">تطبيقات على العجلات</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- الأسبوع 7 -->
+      <div class="week-card">
+        <h2 class="week-title">
+          الأسبوع 7: التطبيقات العملية <span class="badge">حصتين</span>
+        </h2>
+
+        <div class="session-box">
+          <h3 class="session-title">🏠 الحصة 13: مشروع المنزل</h3>
+          <ul class="activity-list">
+            <li class="activity-item">حساب مساحة الأرضيات</li>
+            <li class="activity-item">تخطيط ديكور الغرف</li>
+          </ul>
+        </div>
+
+        <div class="session-box">
+          <h3 class="session-title">🚗 الحصة 14: تخطيط الرحلة</h3>
+          <ul class="activity-list">
+            <li class="activity-item">حساب مسافة الرحلة</li>
+            <li class="activity-item">توزيع التكاليف</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- الأسبوع 8 -->
+      <div class="week-card">
+        <h2 class="week-title">
+          الأسبوع 8: المراجعة النهائية <span class="badge">حصتين</span>
+        </h2>
+
+        <div class="session-box">
+          <h3 class="session-title">📝 الحصة 15: مراجعة شاملة</h3>
+          <ul class="activity-list">
+            <li class="activity-item">بطاقات تعليمية تفاعلية</li>
+            <li class="activity-item">ألعاب رياضية</li>
+          </ul>
+        </div>
+
+        <div class="session-box">
+          <h3 class="session-title">🎯 الحصة 16: اختبار نهائي</h3>
+          <ul class="activity-list">
+            <li class="activity-item">اختبار كتابي (60 دقيقة)</li>
+            <li class="activity-item">تحليل النتائج</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>✅ تم تصميم البرنامج حسب المعايير التعليمية الحديثة</p>
+      <p>📞 للاستفسارات: 123456789</p>
+    </footer>
+  </body>
+</html>

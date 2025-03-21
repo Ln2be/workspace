@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TTNBJ761EC"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-TTNBJ761EC");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مقاييس المستطيل</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #2c3e50;
+      }
+      .section {
+        margin: 20px 0;
+      }
+      p {
+        line-height: 1.8;
+        color: #34495e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #27ae60;
+        color: white;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 10px;
+        background-color: #34495e;
+        color: white;
+      }
+      .exercise {
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f4f4f4;
+        border-left: 5px solid #27ae60;
+      }
+      .exercise h3 {
+        margin-top: 0;
+        color: #27ae60;
+      }
+      .solution {
+        background-color: #e8f8e8;
+        border-left: 5px solid #2ecc71;
+        padding: 10px;
+        margin-top: 10px;
+      }
+      .rectangle-container {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin: 20px 0;
+      }
+      .rectangle {
+        width: 300px;
+        height: 150px;
+        background-color: #3498db;
+        position: relative;
+        border: 2px solid #2c3e50;
+      }
+      .label {
+        position: absolute;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .top {
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .bottom {
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .left {
+        top: 50%;
+        left: -20px;
+        transform: translateY(-50%);
+      }
+      .right {
+        top: 50%;
+        right: -20px;
+        transform: translateY(-50%);
+      }
+      .center {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 18px;
+      }
+      .btn {
+        background-color: #2ecc71;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #27ae60;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>الشكل الهندسي المستطيل</h1>
+      <div class="section">
+        <h2>رسم المستطيل</h2>
+        <div class="rectangle-container">
+          <div class="rectangle">
+            <div class="label top">الطول</div>
+            <div class="label bottom">الطول</div>
+            <div class="label left">العرض</div>
+            <div class="label right">العرض</div>
+            <div class="label center">المستطيل</div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>المحيط</h2>
+        <p>
+          المحيط هو مجموع أطراف المستطيل، ويتم حسابه باستخدام الصيغة التالية:
+        </p>
+        <p>
+          <strong>المحيط = (الطول + العرض) × 2</strong>
+        </p>
+        <p>
+          حيث <strong>الطول</strong> هو أحد الجوانب الطويلة و<strong
+            >العرض</strong
+          >
+          هو أحد الجوانب القصيرة.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>الطول والعرض</h2>
+        <p>يمكن حساب الطول أو العرض عند معرفة المحيط باستخدام الصيغ التالية:</p>
+        <ul>
+          <li><strong>الطول = نصف المحيط - العرض</strong></li>
+          <li><strong>العرض = نصف المحيط - الطول</strong></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>المساحة</h2>
+        <p>
+          المساحة هي مقدار الفضاء الذي يشغله المستطيل، ويتم حسابها باستخدام
+          الصيغة التالية:
+        </p>
+        <p><strong>المساحة = الطول × العرض</strong></p>
+        <p>كما يمكن حساب الطول أو العرض عند معرفة المساحة باستخدام الصيغ:</p>
+        <ul>
+          <li><strong>الطول = المساحة ÷ العرض</strong></li>
+          <li><strong>العرض = المساحة ÷ الطول</strong></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>حساب الأبعاد باستخدام الفرق</h2>
+        <p>
+          إذا كان الفرق بين الطول والعرض معلومًا مع المحيط، يمكن حساب الطول
+          والعرض كالتالي:
+        </p>
+        <ul>
+          <li><strong>الطول = (نصف المحيط + الفرق) ÷ 2</strong></li>
+          <li><strong>العرض = (نصف المحيط - الفرق) ÷ 2</strong></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>تمارين مع الحلول</h2>
+        <div class="exercise">
+          <h3>تمرين 1</h3>
+          <p>إذا كان محيط المستطيل 24 سم، وطوله 8 سم، فما هو العرض؟</p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>المحيط = (الطول + العرض) × 2</p>
+            <p>العرض = المحيط ÷ 2 - الطول</p>
+            <p>العرض = 24 ÷ 2 - 8 = 4 سم</p>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3>تمرين 2</h3>
+          <p>إذا كانت المساحة 48 سم² وطوله 8 سم، فما هو العرض؟</p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>المساحة = الطول × العرض</p>
+            <p>العرض = المساحة ÷ الطول</p>
+            <p>العرض = 48 ÷ 8 = 6 سم</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>تمارين بدون حلول</h2>
+        <div class="exercise">
+          <h3>تمرين 1</h3>
+          <p>
+            إذا كان المحيط 30 سم والفرق بين الطول والعرض 5 سم، فما هما الطول
+            والعرض؟
+          </p>
+        </div>
+
+        <div class="exercise">
+          <h3>تمرين 2</h3>
+          <p>إذا كانت المساحة 72 سم² والعرض 6 سم، فما هو الطول؟</p>
+        </div>
+      </div>
+      <a href="/" class="btn">رجوع</a>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 جميع الحقوق محفوظة</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices - Projectile et Piste</title>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2rem;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .exercise-box {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3498db;
+            border-radius: 5px;
+        }
+        h2, h3 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        .solution-step {
+            background: #e8f4f8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .formula {
+            font-family: "Courier New", monospace;
+            background: #2c3e50;
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+        }
+        .final-answer {
+            background: #27ae60;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Exercice 2 -->
+        <div class="exercise-box">
+            <h2>Exercice 2 : Étude d’un mobile sur une piste inclinée</h2>
+            <div class="solution-step">
+                <h3>📝 Énoncé</h3>
+                <p>Un solide \( S \) de centre d'inertie \( G \) et de masse \( m \) peut se déplacer sur un plan incliné faisant un angle \( \alpha \) avec l'horizontale. Un dispositif d'enregistrement relié à un ordinateur permet de repérer les positions du centre d’inertie \( G \) et de mesurer sa vitesse instantanée à chaque instant.</p>
+                <p>Le solide est lâché sans vitesse initiale d’un point \( O \) du plan et son mouvement suit la ligne de plus grande pente. L’action des forces de frottement peut être assimilée à celle d’une force constante \( f \), de même direction mais de sens contraire au vecteur vitesse.</p>
+                <h4>Données :</h4>
+                <table>
+                    <tr>
+                        <th>Point</th>
+                        <th>Temps (s)</th>
+                        <th>Position \( x \) (m)</th>
+                        <th>Vitesse \( v \) (m/s)</th>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>0.3</td>
+                        <td>0.18</td>
+                        <td>0.57</td>
+                    </tr>
+                    <tr>
+                        <td>B</td>
+                        <td>0.7</td>
+                        <td>0.48</td>
+                        <td>0.929</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="solution-step">
+                <h3>🔍 Solution</h3>
+                <h4>1️⃣ Forces appliquées sur \( S \)</h4>
+                <p>Les forces appliquées sont :</p>
+                <ul>
+                    <li>Le poids \( \mathbf{P} = mg \)</li>
+                    <li>La réaction normale du support \( \mathbf{R} \)</li>
+                    <li>La force de frottement \( \mathbf{f} \)</li>
+                </ul>
+                
+                <h4>2️⃣ Intensité de la force de frottement</h4>
+                <p>En appliquant le théorème de l’énergie cinétique entre \( A \) et \( B \) :</p>
+                <p class="formula">\( \frac{1}{2} m v_B^2 - \frac{1}{2} m v_A^2 = mg (x_B - x_A) \sin \alpha - f (x_B - x_A) \)</p>
+                <p>On exprime \( f \) :</p>
+                <p class="formula">\( f = \frac{mg \sin \alpha - \frac{1}{2} m (v_B^2 - v_A^2)}{x_B - x_A} \)</p>
+                
+                <h4>Calcul numérique de \( f \)</h4>
+                <p>En remplaçant les valeurs numériques :</p>
+                <p>Avec :</p>
+                <ul>
+                    <li>\( m = 0.2 \, \text{kg} \)</li>
+                    <li>\( g = 9.81 \, \text{m/s}^2 \)</li>
+                    <li>\( \alpha = 30^\circ \)</li>
+                    <li>\( v_A = 0.57 \, \text{m/s} \)</li>
+                    <li>\( v_B = 0.929 \, \text{m/s} \)</li>
+                    <li>\( x_A = 0.18 \, \text{m} \)</li>
+                    <li>\( x_B = 0.48 \, \text{m} \)</li>
+                </ul>
+                
+                <p>Calculons \( f \) :</p>
+                <p class="formula">\( f = \frac{0.2 \times 9.81 \times \sin(30^\circ) - \frac{1}{2} \times 0.2 \times (0.929^2 - 0.57^2)}{0.48 - 0.18} \)</p>
+                <p>En simplifiant :</p>
+                <p class="formula">\( f = \frac{0.2 \times 9.81 \times 0.5 - \frac{1}{2} \times 0.2 \times (0.863041 - 0.3249)}{0.3} \)</p>
+                <p class="formula">\( f = \frac{0.981 - 0.2 \times 0.538141}{0.3} \)</p>
+                <p class="formula">\( f = \frac{0.981 - 0.1076282}{0.3} \)</p>
+                <p class="formula">\( f = \frac{0.8733718}{0.3} \)</p>
+                <p class="final-answer">\( f = 2.91 \, \text{N} \)</p>
+                
+                <h4>3️⃣ Travail de la force de frottement</h4>
+                <p>Le travail de \( f \) entre \( A \) et \( B \) est :</p>
+                <p class="formula">\( W_f = - f (x_B - x_A) \)</p>
+                <p>En remplaçant par la valeur de \( f \) calculée :</p>
+                <p class="formula">\( W_f = - 2.91 \times (0.48 - 0.18) = - 2.91 \times 0.3 = - 0.873 \, \text{J} \)</p>
+                
+                <h4>4️⃣ Accélération du mobile</h4>
+                <p>L’accélération du mobile est donnée par :</p>
+                <p class="formula">\( a = \frac{v_B - v_A}{t_B - t_A} \)</p>
+                <p>En remplaçant les valeurs :</p>
+                <p class="formula">\( a = \frac{0.929 - 0.57}{0.7 - 0.3} = \frac{0.359}{0.4} = 0.8975 \text{ m/s}^2 \)</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

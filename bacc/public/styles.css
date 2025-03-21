@@ -1,0 +1,231 @@
+/* Mobile-first CSS */
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #3498db;
+  color: #fff;
+  padding: 1em 0;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav li {
+  margin-bottom: 0.5em;
+}
+
+a {
+  text-decoration: none;
+  color: #2980b9;
+  display: block;
+  padding: 0.5em;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a:hover {
+  background-color: #2980b9;
+  color: #fff;
+}
+
+section {
+  margin: 1em 0;
+  padding: 1em;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  margin-bottom: 0.5em;
+  color: #3498db;
+}
+
+footer {
+  background-color: #3498db;
+  color: #fff;
+  padding: 1em 0;
+}
+
+.motimportant {
+  color: #2980b9;
+  font-weight: bold;
+}
+
+.motr {
+  color: #e74c3c;
+  font-style: italic;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.nomenc {
+  font-weight: bold;
+  color: #27ae60;
+}
+
+/* Media query for tablets and larger screens */
+@media (min-width: 768px) {
+  /* Adjust styles for larger screens here */
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Mobile-first CSS */
+/* Add mobile-first styles here */
+
+/* Adjustments for smaller screens */
+@media only screen and (max-width: 600px) {
+  header {
+    padding: 0.5em;
+  }
+  h1 {
+    font-size: 1.2em;
+  }
+  .navigation ul {
+    padding-left: 0;
+  }
+  .navigation li {
+    margin-bottom: 0.3em;
+  }
+  .subsection {
+    padding: 0.5em;
+  }
+  .subsection h2 {
+    font-size: 1.1em;
+  }
+  .subsection p {
+    font-size: 0.9em;
+  }
+  .subsection img {
+    width: 100%;
+    height: auto;
+  }
+  footer {
+    padding: 0.5em;
+    text-align: center;
+  }
+  .scroll-button,
+  .home-button {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+}
+
+/* Add a navigation toward the exercises link */
+.navbar {
+  background-color: #3498db;
+  color: #fff;
+  padding: 0.5em 0;
+  text-align: center;
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navbar li {
+  display: inline;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  background-color: #2980b9;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: #fff;
+  color: #2980b9;
+}
+
+/* Mobile-first CSS */
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #3498db;
+  color: #fff;
+  padding: 1em 0;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.teacher-channels {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.teacher-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1em;
+  margin: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.teacher-card h2 {
+  color: #3498db;
+}
+
+.teacher-info {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.channel-link {
+  display: inline-block;
+  background-color: #2980b9;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.channel-link:hover {
+  background-color: #0073e6;
+}
+
+footer {
+  background-color: #3498db;
+  color: #fff;
+  padding: 1em 0;
+  text-align: center;
+}

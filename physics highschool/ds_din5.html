@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <title>Exercice 1 - Ascension sur plan incliné</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 0.8rem;
+        border: 1px solid #dfe6e9;
+        text-align: center;
+      }
+      .final-answer {
+        background: #27ae60;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="exercise-box">
+            <h2>Exercice 5 : Mouvement d’un projectile</h2>
+          
+            <div class="solution-step">
+              <h3>📝 Énoncé original</h3>
+              <p>
+                Un projectile est lancé avec une vitesse initiale \( v_0 = 20 \, \text{m/s} \) faisant un angle \( \theta = 30^\circ \) avec l’horizontale. Déterminer :  
+                <ol>
+                  <li><strong>a)</strong> La durée du vol.</li>
+                  <li><strong>b)</strong> La hauteur maximale atteinte.</li>
+                  <li><strong>c)</strong> La portée horizontale.</li>
+                </ol>
+              </p>
+              <p><em>Schéma décrit : Trajectoire parabolique avec \( v_0 \) inclinée à \( 30^\circ \), hauteur \( H \), portée \( R \).</em></p>
+            </div>
+          
+            <div class="solution-step">
+              <h3>🔍 Résolution détaillée</h3>
+          
+              <!-- Partie a) -->
+              <h4>a) Durée du vol</h4>
+              <p>
+                <strong>Expression du temps de vol</strong> :  
+                \[
+                \boxed{T = \frac{2v_0 \sin\theta}{g}}.
+                \]
+                <strong>Substitution numérique</strong> :  
+                \( v_0 = 20 \, \text{m/s}, \, \theta = 30^\circ, \, g = 9,81 \, \text{m/s}^2 \)  
+                \[
+                T = \frac{2 \times 20 \times \sin(30^\circ)}{9,81} = \frac{20}{9,81} = \boxed{2,04 \, \text{s}}.
+                \]
+              </p>
+          
+              <!-- Partie b) -->
+              <h4>b) Hauteur maximale</h4>
+              <p>
+                <strong>Expression de la hauteur maximale</strong> :  
+                \[
+                \boxed{H = \frac{v_0^2 \sin^2\theta}{2g}}.
+                \]
+                <strong>Substitution numérique</strong> :  
+                \[
+                H = \frac{20^2 \times \sin^2(30^\circ)}{2 \times 9,81} = \frac{400 \times 0,25}{19,62} = \boxed{5,10 \, \text{m}}.
+                \]
+              </p>
+          
+              <!-- Partie c) -->
+              <h4>c) Portée horizontale</h4>
+              <p>
+                <strong>Expression de la portée</strong> :  
+                \[
+                \boxed{R = \frac{v_0^2 \sin(2\theta)}{g}}.
+                \]
+                <strong>Substitution numérique</strong> :  
+                \( \sin(60^\circ) = \frac{\sqrt{3}}{2} \approx 0,866 \)  
+                \[
+                R = \frac{20^2 \times 0,866}{9,81} = \frac{346,4}{9,81} = \boxed{35,3 \, \text{m}}.
+                \]
+              </p>
+            </div>
+          
+            <!-- Résultats -->
+            <div class="final-answer">
+              <h3>📝 Réponses finales</h3>
+              <ul>
+                <li><strong>a)</strong> Durée du vol : \( \boxed{2,04 \, \text{s}} \).</li>
+                <li><strong>b)</strong> Hauteur maximale : \( \boxed{5,10 \, \text{m}} \).</li>
+                <li><strong>c)</strong> Portée horizontale : \( \boxed{35,3 \, \text{m}} \).</li>
+              </ul>
+            </div>
+          </div>
+          
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+          <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      ></script>
+    </div>
+  </body>
+</html>

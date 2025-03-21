@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TTNBJ761EC"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-TTNBJ761EC");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مقاييس شبه المنحرف</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #2c3e50;
+      }
+      .section {
+        margin: 20px 0;
+      }
+      p {
+        line-height: 1.8;
+        color: #34495e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #2980b9;
+        color: white;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 10px;
+        background-color: #34495e;
+        color: white;
+      }
+      .exercise {
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f4f4f4;
+        border-left: 5px solid #2980b9;
+      }
+      .exercise h3 {
+        margin-top: 0;
+        color: #2980b9;
+      }
+      .solution {
+        background-color: #e8f4fc;
+        border-left: 5px solid #3498db;
+        padding: 10px;
+        margin-top: 10px;
+      }
+      .trapezoid-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+      .trapezoid {
+        width: 200px;
+        height: 100px;
+        background: linear-gradient(135deg, #2980b9 50%, transparent 50%);
+        position: relative;
+        margin: 0 auto;
+        clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+        border: 2px solid #2c3e50;
+      }
+      .btn {
+        background-color: #2ecc71;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #27ae60;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>الشكل الهندسي: شبه المنحرف</h1>
+      <div class="section">
+        <h2>رسم شبه المنحرف</h2>
+        <div class="trapezoid-container">
+          <div class="trapezoid"></div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>المحيط</h2>
+        <p>
+          المحيط هو مجموع أطوال أضلاع شبه المنحرف الأربعة، ويتم حسابه باستخدام
+          الصيغة:
+        </p>
+        <p>
+          <strong>المحيط = مجموع الأضلاع</strong>
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>المساحة</h2>
+        <p>
+          المساحة هي مقدار الفضاء داخل شبه المنحرف، ويتم حسابها باستخدام القاعدة
+          المتوسطة والارتفاع:
+        </p>
+        <p>
+          <strong>المساحة = القاعدة المتوسطة × الارتفاع</strong>
+        </p>
+        <p>لإيجاد القاعدة المتوسطة:</p>
+        <ul>
+          <li>
+            <strong
+              >القاعدة المتوسطة = (القاعدة الكبرى + القاعدة الصغرى) ÷ 2</strong
+            >
+          </li>
+        </ul>
+        <p>لإيجاد الارتفاع أو أي من القواعد عند معرفة المساحة:</p>
+        <ul>
+          <li><strong>الارتفاع = (المساحة × 2) ÷ القاعدة المتوسطة</strong></li>
+          <li>
+            <strong
+              >القاعدة الكبرى = [(المساحة × 2) ÷ الارتفاع] - القاعدة
+              الصغرى</strong
+            >
+          </li>
+          <li>
+            <strong
+              >القاعدة الصغرى = [(المساحة × 2) ÷ الارتفاع] - القاعدة
+              الكبرى</strong
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>تمارين مع الحلول</h2>
+        <div class="exercise">
+          <h3>تمرين 1</h3>
+          <p>
+            إذا كان محيط شبه المنحرف 48 سم، وأطوال ثلاثة أضلاع هي: 10 سم، 12 سم،
+            و14 سم، فما هو طول الضلع الرابع؟
+          </p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>المحيط = مجموع الأضلاع</p>
+            <p>48 = 10 + 12 + 14 + الضلع الرابع</p>
+            <p>الضلع الرابع = 48 - (10 + 12 + 14) = 12 سم</p>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3>تمرين 2</h3>
+          <p>
+            إذا كانت مساحة شبه المنحرف 80 سم²، وكان ارتفاعه 8 سم، والقاعدة
+            الكبرى 14 سم، فما هو طول القاعدة الصغرى؟
+          </p>
+          <div class="solution">
+            <strong>الحل:</strong>
+            <p>المساحة = (الارتفاع × (القاعدة الكبرى + القاعدة الصغرى)) ÷ 2</p>
+            <p>80 = (8 × (14 + القاعدة الصغرى)) ÷ 2</p>
+            <p>160 = 8 × (14 + القاعدة الصغرى)</p>
+            <p>160 ÷ 8 = 14 + القاعدة الصغرى</p>
+            <p>20 = 14 + القاعدة الصغرى</p>
+            <p>القاعدة الصغرى = 20 - 14 = 6 سم</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>تمارين بدون حلول</h2>
+        <div class="exercise">
+          <h3>تمرين 1</h3>
+          <p>
+            إذا كان محيط شبه المنحرف 60 سم، وأطوال الأضلاع الثلاثة هي: 15 سم، 18
+            سم، و12 سم، فما هو طول الضلع الرابع؟
+          </p>
+        </div>
+
+        <div class="exercise">
+          <h3>تمرين 2</h3>
+          <p>
+            إذا كانت مساحة شبه المنحرف 96 سم²، وكان ارتفاعه 12 سم، والقاعدة
+            الصغرى 10 سم، فما هو طول القاعدة الكبرى؟
+          </p>
+        </div>
+      </div>
+      <a href="/" class="btn">رجوع</a>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 جميع الحقوق محفوظة</p>
+    </div>
+  </body>
+</html>

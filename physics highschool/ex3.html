@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercice 3 - Sécurité routière</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #e74c3c;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        display: inline-block;
+      }
+      table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 0.8rem;
+        border: 1px solid #dfe6e9;
+        text-align: center;
+      }
+      .final-answer {
+        background: #1abc9c;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #e74c3c;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        display: inline-block;
+      }
+      table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 0.8rem;
+        border: 1px solid #dfe6e9;
+        text-align: center;
+      }
+      .final-answer {
+        background: #1abc9c;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="exercise-box">
+        <h2>Exercice 3 : Distance de sécurité entre deux véhicules</h2>
+
+        <!-- Énoncé -->
+        <div class="solution-step">
+          <h3>📝 Énoncé original</h3>
+          <p>
+            Deux voitures M₁ et M₂ se suivent à une distance d à la même vitesse
+            constante v₀ = 108 km/h. À t = 0s, M₁ freine avec a₁ = -6 m/s². M₂
+            freine 1 seconde plus tard avec a₂ = -5 m/s².
+          </p>
+          <ol>
+            <li>Quelle distance minimale d pour éviter la collision ?</li>
+            <li>Si d = 30 m, trouver l'instant du choc</li>
+            <li>Si d = 55 m, trouver la distance finale</li>
+          </ol>
+        </div>
+
+        <!-- Solution détaillée -->
+        <div class="solution-step">
+          <h3>🔍 Solution détaillée</h3>
+
+          <h4>Phase 1 : Mouvements initiaux (0 ≤ t < 1s)</h4>
+          <p class="formula">M₁ : x₁(t) = 30t - 3t²</p>
+          <p class="formula">M₂ : x₂(t) = -d + 30t</p>
+
+          <h4>Phase 2 : Freinage simultané (1 ≤ t ≤ 5s)</h4>
+          <p class="formula">M₂ : x₂(t) = -d + 30 + 30(t-1) - 2.5(t-1)²</p>
+
+          <h4>Phase 3 : M₁ arrêtée (t > 5s)</h4>
+          <p class="formula">x₁ = 75 m (position finale de M₁)</p>
+          <p class="formula">x₂(7) = -d + 120 m (position finale de M₂)</p>
+
+          <h4>Condition critique à t = 7s</h4>
+          <p class="formula">
+            Distance minimale : 75 - (-d + 120) = d - 45 > 0
+          </p>
+        </div>
+
+        <!-- Résultat final -->
+        <div class="final-answer">
+          <h3>✅ Résultat final</h3>
+          <p class="formula">d<sub>min</sub> = 45 mètres</p>
+          <p>Pour une marge de sécurité : d ≥ 50 m</p>
+        </div>
+
+        <!-- Visualisation -->
+        <div class="solution-step">
+          <h3>📊 Positions clés (d = 45m)</h3>
+          <table>
+            <tr>
+              <th>Temps</th>
+              <th>M₁</th>
+              <th>M₂</th>
+            </tr>
+            <tr>
+              <td>t = 0s</td>
+              <td>0 m</td>
+              <td>-45 m</td>
+            </tr>
+            <tr>
+              <td>t = 1s</td>
+              <td>27 m</td>
+              <td>-15 m</td>
+            </tr>
+            <tr>
+              <td>t = 5s</td>
+              <td>75 m</td>
+              <td>30 m</td>
+            </tr>
+            <tr>
+              <td>t = 7s</td>
+              <td>75 m</td>
+              <td>75 m</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Question 2 : Collision avec d = 30m -->
+        <div class="solution-step">
+          <h3>🚦 Réponse à la question 2 (d = 30m)</h3>
+
+          <h4>Étape 1 : Équation de collision</h4>
+          <p class="formula">30t - 3t² = -30 + 30 + 30(t-1) - 2.5(t-1)²</p>
+          <p class="formula">Simplification : 0.5t² - 5t + 2.5 = 0</p>
+
+          <h4>Étape 2 : Résolution de l'équation</h4>
+          <p class="formula">
+            Δ = 25 - 5 = 20 → t = [5 ± √20]/1 ≈ 3.2s (seule solution physique)
+          </p>
+
+          <h4>Étape 3 : Vitesses au moment du choc</h4>
+          <table>
+            <tr>
+              <th>Véhicule</th>
+              <th>Formule</th>
+              <th>Valeur</th>
+            </tr>
+            <tr>
+              <td>M₁</td>
+              <td>v₁ = 30 - 6t</td>
+              <td>30 - 6×3.2 ≈ 10.8 m/s</td>
+            </tr>
+            <tr>
+              <td>M₂</td>
+              <td>v₂ = 30 - 5(t-1)</td>
+              <td>30 - 5×2.2 ≈ 19.0 m/s</td>
+            </tr>
+          </table>
+
+          <div
+            class="final-answer"
+            style="background: #e74c3c; margin-top: 1rem"
+          >
+            <p>Collision à t ≈ 3.2 secondes</p>
+            <p>Vitesses : M₁ ≈ 38.9 km/h • M₂ ≈ 68.4 km/h</p>
+          </div>
+        </div>
+
+        <!-- Question 3 : Distance finale avec d = 55m -->
+        <div class="solution-step">
+          <h3>📏 Réponse à la question 3 (d = 55m)</h3>
+
+          <h4>Étape 1 : Positions finales</h4>
+          <p class="formula">M₁ arrêtée : x₁ = 75m (à t = 5s)</p>
+          <p class="formula">
+            M₂ arrêtée : x₂ = -55 + 30×7 - 2.5×6² = -55 + 210 - 90 = 65m
+          </p>
+
+          <h4>Étape 2 : Calcul de l'écart</h4>
+          <p class="formula">D = x₁ - x₂ = 75 - 65 = 10m</p>
+
+          <div class="final-answer" style="background: #27ae60">
+            <p>Distance finale entre les véhicules :</p>
+            <p class="formula">D = 10 mètres</p>
+          </div>
+
+          <div class="pro-tip" style="margin-top: 1rem">
+            <p>
+              💡 Les voitures gardent une distance de sécurité de 10m malgré
+              leur freinage différencié
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

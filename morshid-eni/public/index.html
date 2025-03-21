@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TTNBJ761EC"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-TTNBJ761EC");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="/manifest.json" />
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>مسابقة مدارس تكوين المعلمين</title>
+      <link rel="stylesheet" href="style.css" />
+      <!-- Font Awesome CDN -->
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      />
+      <style>
+               /* أنماط CSS الجديدة */
+               .course-promo {
+          padding: 40px 20px;
+          background: linear-gradient(135deg, #6c63ff 0%, #00bfa6 100%);
+          margin: 50px 0;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+        }
+
+        .course-header {
+          text-align: center;
+          color: white;
+          margin-bottom: 30px;
+        }
+
+        .course-header h2 {
+          font-size: 2.2em;
+          margin-bottom: 15px;
+        }
+
+        .gradient-border {
+          width: 120px;
+          height: 4px;
+          background: linear-gradient(90deg, #ff6584 0%, #ffd700 100%);
+          margin: 0 auto;
+          border-radius: 2px;
+        }
+
+        .course-card {
+          background: white;
+          border-radius: 15px;
+          padding: 30px;
+          position: relative;
+          max-width: 800px;
+          margin: 0 auto;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-badge {
+          position: absolute;
+          top: -15px;
+          left: 20px;
+          background: #ff6584;
+          color: white;
+          padding: 8px 20px;
+          border-radius: 25px;
+          font-weight: bold;
+          font-size: 0.9em;
+        }
+
+        .course-card h3 {
+          color: #2f2e41;
+          font-size: 1.8em;
+          margin-bottom: 20px;
+        }
+
+        .course-features {
+          list-style: none;
+          padding: 0;
+          margin: 25px 0;
+        }
+
+        .course-features li {
+          padding: 12px 20px;
+          margin: 10px 0;
+          background: #f8f9ff;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          font-size: 1.1em;
+        }
+
+        .course-features i {
+          color: #6c63ff;
+          font-size: 1.2em;
+        }
+
+        .enroll-button {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background: linear-gradient(90deg, #6c63ff 0%, #00bfa6 100%);
+          color: white !important;
+          padding: 15px 35px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 1.1em;
+          transition: all 0.3s ease;
+          margin-top: 20px;
+        }
+
+        .enroll-button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+          .course-header h2 {
+            font-size: 1.8em;
+          }
+
+          .course-card {
+            padding: 20px;
+          }
+        }
+      </style>
+  </head>
+  <body>
+    <header>
+      <h1>مسابقة مدارس تكوين المعلمين</h1>
+      <button id="install-btn" class="install-btn" style="display: none">
+        <span class="install-icon"></span> تنزيل التطبيق
+      </button>
+
+      <nav>
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+          ☰
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="about">
+        <h2>نبذة عن المسابقة</h2>
+        <div class="exam-guide">
+          <h3>مادة الرياضيات</h3>
+          <h4>هيكل الامتحان</h4>
+          <p><strong>المحتوى:</strong></p>
+          <ul>
+            <li>60% من برنامج الصف السادس الابتدائي.</li>
+            <li>
+              40% من برنامج الصف السابع الأدبي (الدوال العددية والمعادلات).
+            </li>
+          </ul>
+          <p><strong>المدة:</strong> ساعتان (× 2).</p>
+          <h4>التمارين:</h4>
+          <ul>
+            <li>تمرين من الصف السابع الأدبي (8 نقاط).</li>
+            <li>3 تمارين من الحساب، الهندسة، والمقاييس (2 نقطة لكل تمرين).</li>
+            <li>وضعية دامجة مرتبطة بالحياة اليومية (6 نقاط).</li>
+          </ul>
+          <h4>تعليمات عامة</h4>
+          <ul>
+            <li>العمليات الحسابية بسيطة، والحاسبة غير مسموحة.</li>
+            <li>الموضوع مصمم ليلائم الوقت المحدد.</li>
+          </ul>
+          <h4>نصائح للمترشحين</h4>
+          <ul>
+            <li>
+              ركز على مراجعة أساسيات الصف السادس والدوال والمعادلات من الصف
+              السابع.
+            </li>
+            <li>تدرب على المواضيع المحلولة وغير المحلولة لتحسين الأداء.</li>
+            <li>
+              استعد للوضعيات الدامجة بفهم العلاقة بين الرياضيات والحياة اليومية.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6th Grade Program -->
+      <section id="grade-6">
+        <h2>برنامج الصف السادس ابتدائي</h2>
+        <div class="subject">
+          <h3>1 - الحساب</h3>
+          <ul>
+            <li><a href="units/benefice.html">الربح</a></li>
+            <li><a href="units/unit_price.html">ثمن الوحدة</a></li>
+            <li><a href="units/percentage.html">النسبة المئوية</a></li>
+            <li><a href="units/arrival.html">مدة الرحلة</a></li>
+            <li><a href="units/map.html">المقياس على الخريطة</a></li>
+          </ul>
+        </div>
+        <div class="subject">
+          <h3>2 - الزمن</h3>
+          <ul>
+            <!-- العناوين الجديدة في الحساب -->
+            <li><a href="units/meeting_point.html">زمن و نقطة التلاقي</a></li>
+            <li><a href="units/catch_point.html">زمن و نقطة اللحاق</a></li>
+          </ul>
+        </div>
+
+        <div class="subject">
+          <h3>3 - المقاييس</h3>
+          <ul>
+            <li><a href="units/length.html">مقاييس الطول</a></li>
+            <li><a href="units/capacity.html">مقاييس السعة</a></li>
+            <li><a href="units/weight.html">مقاييس الوزن</a></li>
+            <li><a href="units/surface.html">مقاييس المساحة</a></li>
+            <li><a href="units/time.html">مقاييس الزمن</a></li>
+          </ul>
+        </div>
+
+        <div class="subject">
+          <h3>4 - الهندسة</h3>
+          <ul>
+            <li><a href="units/square.html">المربع</a></li>
+            <li><a href="units/rectangle.html">المستطيل</a></li>
+            <li><a href="units/triangle.html">المثلث</a></li>
+            <li><a href="units/circle.html">الدائرة</a></li>
+            <li><a href="units/shobh.html">شبه المنحرف</a></li>
+            <li><a href="units/parallelogram.html">متوازي الأضلاع</a></li>
+            <li><a href="units/losange.html">المعين</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7th Grade Program -->
+      <section id="grade-7">
+        <h2>برنامج السابع أدبي</h2>
+        <div class="subject">
+          <h3>1 - المعادلات</h3>
+          <ul>
+            <li><a href="units/reel.html">الأعداد الصحيحة</a></li>
+            <li><a href="units/equation1.html">معادلة من الدرجة الأولى</a></li>
+            <li><a href="units/equation2.html">معادلة من الدرجة الثانية</a></li>
+            <li>
+              <a href="units/replacement.html"
+                >حل المعادلات باستخدام الاستبدال</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="subject">
+          <h3>2 - المتتاليات</h3>
+          <ul>
+            <li><a href="units/suites.html">المتتاليات</a></li>
+          </ul>
+        </div>
+        <div class="subject">
+          <h3>3 - الدوال العددية</h3>
+          <ul>
+            <li><a href="units/fonctions.html">الدوال العددية</a></li>
+            <li><a href="units/df.html">ميدان التعريف</a></li>
+            <li><a href="units/limit.html">النهايات</a></li>
+            <li><a href="units/derivation.html">المشتقة</a></li>
+            <li><a href="units/variation.html">دراسة جدول التغيرات</a></li>
+          </ul>
+        </div>
+      </section>
+      <!-- أضف هذا القسم قبل قسم "مواضيع سابقة" -->
+      <section id="training-course" class="course-promo">
+        <div class="course-header">
+          <h2>🎓 دورة  مكثفة لمدة شهرين</h2>
+          <div class="gradient-border"></div>
+        </div>
+
+        <div class="course-content">
+          <div class="course-card">
+            <div class="course-badge">🔥 الأكثر طلبًا</div>
+            <h3>برنامج الإعداد الشامل للمسابقة</h3>
+            <ul class="course-features">
+              <li><i class="fas fa-clock"></i> 8 أسابيع تدريبية</li>
+              <li><i class="fas fa-video"></i> 32 حصة تفاعلية</li>
+              <li><i class="fas fa-file-alt"></i> نماذج امتحانات حصرية</li>
+              <li>
+         
+            </ul>
+            <a href="units/planImage.html" class="enroll-button">
+              شاهد البرنامج المفصل للدورة
+              <i class="fas fa-arrow-left"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <style>
+ 
+      </style>
+      <section id="previous-topics">
+        <h2>مواضيع سابقة</h2>
+        <p>
+          هنا يمكنك العثور على المواضيع السابقة للمسابقة، والتي تشمل أسئلة من
+          سنوات ماضية.
+        </p>
+        <ul class="topic-list">
+          <li><a href="#"></a></li>
+          <!-- <li><a href="#">السنة 2022</a></li>
+          <li><a href="#">السنة 2021</a></li> -->
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-left">
+          <!-- <img
+            src="icons/icon-512x512.png"
+            alt="Company Logo"
+            class="company-logo"
+          /> -->
+          <p class="company-description">
+            مرشد المسابقات متخصصة في التعليم عن بعد والمحتوى الرقمي عالي الجودة.
+          </p>
+        </div>
+
+        <div class="footer-right">
+          <h3>اتصل بنا</h3>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-icon"><i class="fas fa-phone"></i></span>
+              <a href="tel:38393963">38393963</a>
+            </li>
+
+            <li>
+              <span class="contact-icon"><i class="fab fa-whatsapp"></i></span>
+              <a href="https://wa.me/+22238393963" target="_blank"
+                >الذهاب الى واتساب</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document
+        .querySelector(".mobile-nav-toggle")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-list").classList.toggle("show");
+        });
+    </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log(
+                "Service Worker registered with scope:",
+                registration.scope
+              );
+            })
+            .catch((error) => {
+              console.log("Service Worker registration failed:", error);
+            });
+        });
+      }
+    </script>
+    <script>
+      let deferredPrompt;
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        // Prevent the mini-infobar from appearing on mobile
+        e.preventDefault();
+        // Stash the event so it can be triggered later
+        deferredPrompt = e;
+        // Optionally show the install button
+        document.getElementById("install-btn").style.display = "block";
+      });
+
+      // Install the PWA when the user clicks the "Install" button
+      document.getElementById("install-btn").addEventListener("click", () => {
+        // Show the prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === "accepted") {
+            console.log("User accepted the A2HS prompt");
+          } else {
+            console.log("User dismissed the A2HS prompt");
+          }
+          deferredPrompt = null;
+        });
+      });
+    </script>
+  </body>
+</html>

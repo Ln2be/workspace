@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Exercice de cinématique</title>
+    <script
+      type="text/javascript"
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-E8DNQYYQ37"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-E8DNQYYQ37");
+    </script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      }
+
+      .subsection {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 600px;
+        padding: 20px;
+      }
+
+      /* h1 {
+        color: #333;
+        text-align: center;
+      } */
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      p {
+        color: #555;
+        margin-bottom: 10px;
+      }
+
+      input[type="radio"] {
+        margin-right: 10px;
+      }
+
+      button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      #score {
+        font-weight: bold;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      #score span {
+        color: #4caf50;
+      }
+
+      .feedback {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Magnetisme</h1>
+      <!-- <h1>Bienvenue à L'espace de Physique et Chimie</h1> -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="magnetisme.html">Suite Applications</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="subsection">
+      <h1>Exercice en magnetisme</h1>
+      <form id="kinematics-exercise">
+        <!-- Questions will be dynamically added here -->
+        <button type="button" onclick="calculateScore()">
+          Vérifier les réponses
+        </button>
+      </form>
+      <div id="score"></div>
+    </div>
+
+    <script>
+      var questions = [
+        {
+          question: "Quels sont les deux types de pôles qu'un aimant possède ?",
+          options: [
+            "Nord et Sud",
+            "Est et Ouest",
+            "Haut et Bas",
+            "Gauche et Droite",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Que se passe-t-il si un aimant est cassé en deux ?",
+          options: [
+            "Chaque partie obtient ses propres pôles nord et sud.",
+            "L'aimant perd ses propriétés magnétiques.",
+            "Les pôles nord et sud fusionnent en un seul pôle.",
+            "La force magnétique de l'aimant diminue.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est la nature de l'interaction entre les pôles de noms contraires ?",
+          options: [
+            "Ils s'attirent.",
+            "Ils se repoussent.",
+            "Ils se neutralisent.",
+            "Ils s'annulent.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Quelle est l'interaction entre les pôles de même nom ?",
+          options: [
+            "Ils s'attirent.",
+            "Ils se repoussent.",
+            "Ils se neutralisent.",
+            "Ils s'annulent.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: "Que se passe-t-il si un aimant est cassé en deux ?",
+          options: [
+            "Chaque partie obtient ses propres pôles nord et sud.",
+            "L'aimant perd ses propriétés magnétiques.",
+            "Les pôles nord et sud fusionnent en un seul pôle.",
+            "La force magnétique de l'aimant diminue.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est la nature de l'interaction entre les pôles de noms contraires ?",
+          options: [
+            "Ils s'attirent.",
+            "Ils se repoussent.",
+            "Ils se neutralisent.",
+            "Ils s'annulent.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Quelle est l'interaction entre les pôles de même nom ?",
+          options: [
+            "Ils s'attirent.",
+            "Ils se repoussent.",
+            "Ils se neutralisent.",
+            "Ils s'annulent.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Qu'est-ce que l'aimant modifie dans son environnement lorsqu'il est placé à proximité d'une aiguille aimantée ?",
+          options: [
+            "La température",
+            "La couleur",
+            "Les propriétés de l'espace, influençant le mouvement des particules chargées et de l'aiguille aimantée",
+            "La pression atmosphérique",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "Quelle est l'unité de mesure de la norme du champ magnétique ?",
+          options: ["Hertz (Hz)", "Tesla (T)", "Watt (W)", "Volt (V)"],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Comment est indiquée la direction du champ magnétique près de l'aimant ?",
+          options: [
+            "Par l'axe NS ",
+            "Par l'axe EW ",
+            "Par l'axe UD",
+            "Par l'axe SN",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question:
+            "Quelle est la relation entre les champs magnétiques créés par deux aimants ?",
+          options: [
+            "Ils se divisent",
+            "Ils se multiplient",
+            "Ils se soustraient",
+            "Ils se superposent",
+          ],
+          correctAnswer: 3,
+        },
+        {
+          question: "Qu'est-ce qu'un solénoïde 'infini' ?",
+          options: [
+            "Une bobine plate",
+            "Une bobine avec un grand nombre de spires",
+            "Une bobine avec une seule spire",
+            "Une bobine avec des spires espacées",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Que signifie l'orientation d'une aiguille aimantée mobile loin de toute autre source magnétique, circuit électrique ou masse ferreuse ?",
+          options: [
+            "Elle s'aligne horizontalement",
+            "Elle s'aligne verticalement",
+            "Elle s'aligne dans la direction Nord-Sud",
+            "Elle oscille dans toutes les directions",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "Qu'est-ce qui dicte l'orientation de l'aiguille aimantée mobile dans la direction Nord-Sud ?",
+          options: [
+            "La pression atmosphérique",
+            "La présence d'un champ magnétique appelé le champ magnétique terrestre",
+            "La température ambiante",
+            "L'altitude",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelles sont les composantes du champ magnétique terrestre ?",
+          options: [
+            "B<sub>N</sub> et B<sub>E</sub>",
+            "B<sub>H</sub> et B<sub>V</sub>",
+            "B<sub>A</sub> et B<sub>Z</sub>",
+            "B<sub>S</sub> et B<sub>W</sub>",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Que se passe-t-il lorsque aucun courant ne circule dans un circuit électrique ?",
+          options: [
+            "L'aiguille aimantée suit la direction du champ magnétique terrestre",
+            "Le champ magnétique terrestre est annulé",
+            "Le champ magnétique terrestre est renforcé",
+            "L'aiguille aimantée reste immobile",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Comment agit un fil parcouru par un courant électrique ?",
+          options: [
+            "Il annule le champ magnétique terrestre",
+            "Il ne modifie pas le champ magnétique terrestre",
+            "Il génère un champ magnétique propre au courant",
+            "Il renforce le champ magnétique terrestre",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question: "Qu'est-ce que le spectre magnétique ?",
+          options: [
+            "Les lignes de champ magnétique formées autour d'une source de champ magnetique",
+            "Les différentes couleurs observées lorsqu'un aimant est chauffé",
+            "La variation de l'intensité magnétique avec la distance par rapport à un aimant",
+            "La répartition de la limaille de fer autour d'un aimant",
+          ],
+          correctAnswer: 0,
+        },
+
+        {
+          question:
+            "Quelle est la direction du champ magnétique à l'intérieur d'un solénoïde ?",
+          options: [
+            "Parallèle à l'axe du solénoïde",
+            "Perpendiculaire à l'axe du solénoïde",
+            "Tangentielle à la surface du solénoïde",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est l'intensité du champ magnétique à l'intérieur d'un solénoïde en fonction des paramètres donnés ?",
+          options: ["B = μ₀ N/L", "B = N/L", "B = μ₀nl", "B = N/μ₀L"],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "Comment peut-on déterminer le sens du champ magnétique à l'intérieur d'un solénoïde ?",
+          options: [
+            "En utilisant la règle de la main droite",
+            "En utilisant la règle de la main gauche",
+            "En utilisant la règle de la main droite inversée",
+            "En utilisant la règle de la main gauche inversée",
+          ],
+          correctAnswer: 0,
+        },
+
+        {
+          question:
+            "Quelle est la valeur du champ magnétique à l'intérieur d'un solénoïde ayant 200 spires, une longueur de 0.5 mètre et une perméabilité magnétique du vide μ₀ égale à 4π × 10^(-7). Le solenoide est parcouru par un courant de 2 A?",
+          options: [
+            "B = 5.0 × 10^(-4) T",
+            "B = 2.0 × 10^(-4) T",
+            "B = 3.0 × 10^(-4) T",
+            "B = 4.0 × 10^(-4) T",
+          ],
+          correctAnswer: 0,
+        },
+
+        {
+          question:
+            "Quelle est la valeur du champ magnétique à l'intérieur d'un solénoïde de 250 spires et de 1 mètre de longueur, si la perméabilité magnétique du vide μ₀ est 4π × 10^(-7) et le courant 0.5A ?",
+          options: [
+            "B = 15.7 × 10^(-3) T",
+            "B = 30.3 × 10^(-3) T",
+            "B = 4.0 × 10^(-3) T",
+            "B = 2.52 × 10^(-3) T",
+          ],
+          correctAnswer: 0,
+        },
+      ];
+
+      var form = document.getElementById("kinematics-exercise");
+
+      questions.forEach(function (question, index) {
+        var questionElement = document.createElement("p");
+        questionElement.textContent = index + 1 + ". " + question.question;
+        form.insertBefore(questionElement, form.lastElementChild);
+
+        question.options.forEach(function (option, optionIndex) {
+          var input = document.createElement("input");
+          input.type = "radio";
+          input.id = "q" + (index + 1) + "option" + optionIndex;
+          input.name = "q" + (index + 1);
+          input.value = optionIndex;
+          form.insertBefore(input, form.lastElementChild);
+
+          var label = document.createElement("label");
+          label.htmlFor = "q" + (index + 1) + "option" + optionIndex;
+          label.textContent = option;
+          form.insertBefore(label, form.lastElementChild);
+
+          form.insertBefore(
+            document.createElement("br"),
+            form.lastElementChild
+          );
+        });
+
+        var feedback = document.createElement("span");
+        feedback.id = "q" + (index + 1) + "-feedback";
+        form.insertBefore(feedback, form.lastElementChild);
+        form.insertBefore(document.createElement("br"), form.lastElementChild);
+      });
+
+      function calculateScore() {
+        var score = 0;
+
+        questions.forEach(function (question, index) {
+          var selectedOption = parseInt(form.elements["q" + (index + 1)].value);
+
+          if (selectedOption === question.correctAnswer) {
+            document.getElementById(
+              "q" + (index + 1) + "-feedback"
+            ).textContent = "Correct!";
+            score++;
+          } else {
+            document.getElementById(
+              "q" + (index + 1) + "-feedback"
+            ).textContent = "Incorrect!";
+          }
+        });
+
+        document.getElementById("score").innerHTML =
+          "Votre score est : <span>" +
+          score +
+          " / " +
+          questions.length +
+          "</span>";
+      }
+    </script>
+  </body>
+</html>

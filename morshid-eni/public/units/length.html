@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TTNBJ761EC"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-TTNBJ761EC");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>درس مقاييس الطول</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        direction: rtl;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #2c3e50;
+      }
+      .section {
+        margin: 20px 0;
+      }
+      p {
+        line-height: 1.8;
+        color: #34495e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #27ae60;
+        color: white;
+      }
+      .exercise {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #ecf0f1;
+      }
+      .solution {
+        margin-top: 10px;
+        padding: 10px;
+        border-left: 4px solid #27ae60;
+        background-color: #eafaf1;
+      }
+      .no-solution {
+        font-weight: bold;
+        color: #e74c3c;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 10px;
+        background-color: #34495e;
+        color: white;
+      }
+      .btn {
+        background-color: #2ecc71;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #27ae60;
+      }
+      .result {
+        color: #27ae60;
+        font-weight: bold;
+        background-color: #e8f5e9;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+
+      .answer-input {
+        padding: 8px;
+        border: 2px solid #27ae60;
+        border-radius: 5px;
+        margin: 5px 0;
+        width: 200px;
+      }
+      .check-btn {
+        background-color: #3498db;
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .check-btn:hover {
+        background-color: #2980b9;
+      }
+      .feedback {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+      }
+      .correct {
+        background-color: #d4edda;
+        border: 2px solid #28a745;
+        color: #155724;
+      }
+      .incorrect {
+        background-color: #f8d7da;
+        border: 2px solid #dc3545;
+        color: #721c24;
+      }
+      .show-solution {
+        color: #27ae60;
+        cursor: pointer;
+        text-decoration: underline;
+        margin-top: 10px;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>درس مقاييس الطول</h1>
+
+      <h2>قواعد التحويل بين الوحدات</h2>
+      <p>من أجل التحويل من وحدة إلى الوحدة الموالية، نقوم بما يلي:</p>
+      <ul>
+        <li>من الاكبر الى الاصغر نضرب</li>
+        <li>من الاصغرالى الاكبر نقسم</li>
+        <li>
+          نستخدم جدول التحويلات لمعرفة العدد الذي سنستخدمه : خانة واحدة 10
+          خانتان 100 الى اخره
+        </li>
+      </ul>
+
+      <h2>جدول التحويلات</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>الوحدة</th>
+            <th>قيمة الخانة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>الكيلومتر (كم)</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>الهكتومتر (هكم)</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>الدكامتر (دكم)</td>
+            <td>10</td>
+          </tr>
+
+          <tr>
+            <td>المتر (م)</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>الديسيمتر (دسم)</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>السنتيمتر (سم)</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>المليمتر (مم)</td>
+            <td>10</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="exercises">
+        <h3>تمارين محلولة</h3>
+        <div class="exercise">
+          <h4>تمرين 1</h4>
+          <p>حول 5.6 متر إلى سنتيمتر:</p>
+          <div class="solution">
+            <p>
+              <strong>الشرح:</strong> للتحويل من متر إلى سنتيمتر، نضرب في 100
+              (لأن 1 م = 100 سم).
+            </p>
+            <p><strong>الحل:</strong> 5.6 م × 100 = 560 سم</p>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h4>تمرين 2</h4>
+          <p>حول 3.5 كم إلى متر:</p>
+          <div class="solution">
+            <p>
+              <strong>الشرح:</strong> للتحويل من الكيلومتر إلى متر، نضرب في 1000
+              (لأن 1 كم = 1000 م).
+            </p>
+            <p><strong>الحل:</strong> 3.5 كم × 1000 = 3500 م</p>
+          </div>
+        </div>
+        <div class="exercise">
+          <h4>تمرين 3</h4>
+          <p>حول 250 سم إلى متر:</p>
+          <div class="solution">
+            <p>
+              <strong>الشرح:</strong> للتحويل من سنتيمتر إلى متر، نقسم على 100
+              (لأن 1 م = 100 سم).
+            </p>
+            <p><strong>الحل:</strong> 250 سم ÷ 100 = 2.5 م</p>
+          </div>
+        </div>
+      </div>
+      <div class="solutions">
+        <h4>تمارين تفاعلية</h4>
+
+        <div class="interactive-exercise">
+          <p>تمرين 1: حول 8.5 متر إلى ديسيمتر</p>
+          <input
+            type="number"
+            class="answer-input"
+            id="lengthAnswer1"
+            placeholder="أدخل الإجابة هنا"
+          />
+          <button class="check-btn" onclick="checkLengthAnswer(1, 85)">
+            تحقق من الإجابة
+          </button>
+          <div class="feedback" id="lengthFeedback1"></div>
+          <!-- <span class="show-solution" onclick="showLengthSolution(1, '85 دسم')"
+            >اظهر الحل</span
+          > -->
+        </div>
+
+        <div class="interactive-exercise">
+          <p>تمرين 2: حول 500 متر إلى كيلومتر</p>
+          <input
+            type="number"
+            step="0.01"
+            class="answer-input"
+            id="lengthAnswer2"
+            placeholder="أدخل الإجابة هنا"
+          />
+          <button class="check-btn" onclick="checkLengthAnswer(2, 0.5)">
+            تحقق من الإجابة
+          </button>
+          <div class="feedback" id="lengthFeedback2"></div>
+          <!-- <span class="show-solution" onclick="showLengthSolution(2, '0.5 كم')"
+            >اظهر الحل</span
+          > -->
+        </div>
+
+        <div class="interactive-exercise">
+          <p>تمرين 3: حول 1200 سم إلى مليمتر</p>
+          <input
+            type="number"
+            class="answer-input"
+            id="lengthAnswer3"
+            placeholder="أدخل الإجابة هنا"
+          />
+          <button class="check-btn" onclick="checkLengthAnswer(3, 12000)">
+            تحقق من الإجابة
+          </button>
+          <div class="feedback" id="lengthFeedback3"></div>
+          <!-- <span class="show-solution" onclick="showLengthSolution(3, '12000 مم')"
+            >اظهر الحل</span -->
+          >
+        </div>
+      </div>
+      <a href="/" class="btn">رجوع</a>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 جميع الحقوق محفوظة</p>
+    </div>
+    <script>
+      function checkLengthAnswer(exNum, correct) {
+        const userAnswer = parseFloat(
+          document.getElementById(`lengthAnswer${exNum}`).value
+        );
+        const feedback = document.getElementById(`lengthFeedback${exNum}`);
+
+        if (userAnswer === correct) {
+          feedback.innerHTML = "إجابة صحيحة! أحسنت! 🎉";
+          feedback.className = "feedback correct";
+        } else {
+          feedback.innerHTML = "إجابة خاطئة، حاول مرة أخرى! 💡";
+          feedback.className = "feedback incorrect";
+        }
+        feedback.style.display = "block";
+      }
+
+      function showLengthSolution(exNum, solution) {
+        const feedback = document.getElementById(`lengthFeedback${exNum}`);
+        feedback.innerHTML = `الحل الصحيح: ${solution}`;
+        feedback.className = "feedback correct";
+        feedback.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

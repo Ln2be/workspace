@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <title>Exercice 1 - Ascension sur plan incliné</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 2rem;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .exercise-box {
+        background: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #3498db;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+      .solution-step {
+        background: #e8f4f8;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 6px;
+      }
+      .formula {
+        font-family: "Courier New", monospace;
+        background: #2c3e50;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        margin: 1rem 0;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 0.8rem;
+        border: 1px solid #dfe6e9;
+        text-align: center;
+      }
+      .final-answer {
+        background: #27ae60;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="exercise-box">
+        <h2>Exercice 4 : Mouvement sur une piste ABC</h2>
+       <!-- Énoncé strict du document -->
+  <div class="solution-step">
+    <h3>📝 Énoncé </h3>
+    <p>
+      Un solide \( S \) de masse \( m = 200 \, \text{g} \) se déplace sur une piste ABC, constituée d’une partie rectiligne horizontale \( AB = 1,6 \, \text{m} \) et d’une partie curviligne BC de centre \( O \) et de rayon \( r = 0,7 \, \text{m} \). Le solide quitte le point \( A \) sans vitesse initiale sous l’action d’une force constante \( \vec{F} \) qui ne s’exerce qu’entre \( A \) et \( B \). On enregistre les positions successives du mobile toutes les \( \tau = 60 \, \text{ms} \) :
+    </p>
+    <table>
+      <tr>
+        <th>Point</th>
+        <th>A₀</th>
+        <th>A₁</th>
+        <th>A₂</th>
+        <th>A₃</th>
+        <th>A₄</th>
+      </tr>
+      <tr>
+        <td>Position (mm)</td>
+        <td>0</td>
+        <td>2</td>
+        <td>5</td>
+        <td>9</td>
+        <td>14</td>
+      </tr>
+    </table>
+    <ul>
+      <li><strong>1.1</strong> - Déterminer la nature du mouvement et calculer la valeur expérimentale de son accélération.</li>
+      <li><strong>1.2</strong> - Sachant que \( F = 2 \, \text{N} \), dire si le mouvement se fait sans frottement ou avec frottement. Déterminer la valeur de la réaction exercée par la piste sur le solide.</li>
+      <li><strong>1.3</strong> - Calculer la valeur de la vitesse au point \( B \).</li>
+      <li><strong>2.1</strong> - Déterminer les caractéristiques de la vitesse au point \( C \).</li>
+      <li><strong>2.2</strong> - Calculer la valeur de la réaction \( \vec{R_C} \) au point \( C \).</li>
+      <li><strong>3.1</strong> - Déterminer l’équation de la trajectoire dans le repère \( (O, \vec{i}, \vec{j}) \).</li>
+      <li><strong>3.2</strong> - Déterminer les coordonnées des points le plus haut et le plus bas de la trajectoire.</li>
+    </ul>
+  </div>
+        <div class="solution-step">
+          <h3>🔍 Résolution détaillée</h3>
+      
+          <!-- Question 1.1 -->
+          <h4>1.1 - Nature du mouvement et accélération</h4>
+          <p>
+            <strong>Expression de l’accélération</strong> :  
+            \[
+            \boxed{a = \frac{2r}{\tau^2}}.
+            \]
+            <strong>Substitution numérique</strong> :  
+            \( r = 1 \, \text{mm} = 0,001 \, \text{m}, \, \tau = 60 \, \text{ms} = 0,06 \, \text{s} \)  
+            \[
+            a = \frac{2 \times 0,001}{(0,06)^2} = \boxed{0,556 \, \text{m/s}^2}.
+            \]
+          </p>
+      
+          <!-- Question 1.2 -->
+          <h4>1.2 - Frottement et réaction</h4>
+          <p>
+            <strong>Expression de la force de frottement</strong> :  
+            \[
+            \boxed{f = F - ma}.
+            \]
+            <strong>Substitution numérique</strong> :  
+            \( F = 2 \, \text{N}, \, m = 0,2 \, \text{kg}, \, a = 0,556 \, \text{m/s}^2 \)  
+            \[
+            f = 2 - (0,2 \times 0,556) = \boxed{1,89 \, \text{N}}.
+            \]
+            <strong>Réaction normale</strong> :  
+            \[
+            \boxed{R = mg} = 0,2 \times 9,81 = \boxed{1,96 \, \text{N}}.
+            \]
+          </p>
+      
+          <!-- Question 1.3 -->
+          <h4>1.3 - Vitesse au point B</h4>
+          <p>
+            <strong>Expression de la vitesse</strong> :  
+            \[
+            \boxed{v_B = \sqrt{2a \cdot AB}}.
+            \]
+            <strong>Substitution numérique</strong> :  
+            \( a = 0,556 \, \text{m/s}^2, \, AB = 1,6 \, \text{m} \)  
+            \[
+            v_B = \sqrt{2 \times 0,556 \times 1,6} = \boxed{1,33 \, \text{m/s}}.
+            \]
+          </p>
+      
+          <!-- Question 2.1 -->
+          <h4>2.1 - Caractéristiques de la vitesse au point C</h4>
+          <p>
+            <strong>Expression de la vitesse</strong> :  
+            \[
+            \boxed{v_C = \sqrt{v_B^2 + 2gh}}.
+            \]
+            <strong>Substitution numérique</strong> :  
+            \( h = r(1 - \cos60^\circ) = 0,7 \times 0,5 = 0,35 \, \text{m}, \, g = 9,81 \, \text{m/s}^2 \)  
+            \[
+            v_C = \sqrt{1,33^2 + 2 \times 9,81 \times 0,35} = \boxed{2,94 \, \text{m/s}}.
+            \]
+            <strong>Direction</strong> : Tangente à la piste circulaire en \( C \), inclinée à \( 60^\circ \).
+          </p>
+      
+          <!-- Question 2.2 -->
+          <h4>2.2 - Réaction au point C</h4>
+          <p>
+            <strong>Expression de la réaction</strong> :  
+            \[
+            \boxed{R_C = \frac{mv_C^2}{r} - mg \cos60^\circ}.
+            \]
+            <strong>Substitution numérique</strong> :  
+            \( m = 0,2 \, \text{kg}, \, v_C = 2,94 \, \text{m/s}, \, r = 0,7 \, \text{m}, \, g = 9,81 \, \text{m/s}^2 \)  
+            \[
+            R_C = \frac{0,2 \times 2,94^2}{0,7} - 1,96 \times 0,5 = \boxed{1,85 \, \text{N}}.
+            \]
+          </p>
+      
+          <!-- Question 3.1 -->
+          <h4>3.1 - Équation de la trajectoire</h4>
+          <p>
+            <strong>Composantes de \( \vec{v_C} \)** :  
+            \[
+            \boxed{v_{Cx} = v_C \cos60^\circ}, \quad \boxed{v_{Cy} = v_C \sin60^\circ}.
+            \]
+            <strong>Substitution numérique</strong> :  
+            \( v_C = 2,94 \, \text{m/s} \)  
+            \[
+            v_{Cx} = 2,94 \times 0,5 = \boxed{1,47 \, \text{m/s}}, \quad v_{Cy} = 2,94 \times \frac{\sqrt{3}}{2} = \boxed{2,55 \, \text{m/s}}.
+            \]
+            <strong>Équation cartésienne</strong> :  
+            \[
+            \boxed{y = \frac{v_{Cy}}{v_{Cx}}x - \frac{g}{2v_{Cx}^2}x^2 + h}.
+            \]
+            <strong>Substitution numérique</strong> :  
+            \( h = 0,35 \, \text{m}, \, g = 9,81 \, \text{m/s}^2 \)  
+            \[
+            y = \frac{2,55}{1,47}x - \frac{9,81}{2 \times 1,47^2}x^2 + 0,35 = \boxed{y = 1,73x - 2,27x^2 + 0,35}.
+            \]
+          </p>
+      
+          <!-- Question 3.2 -->
+          <h4>3.2 - Points extrêmes</h4>
+          <p>
+            <strong>Sommet de la trajectoire</strong> :  
+            \[
+            \boxed{\frac{dy}{dx} = 0 \quad \Rightarrow \quad x = \frac{v_{Cy}}{g} \cdot v_{Cx}}.
+            \]
+            <strong>Substitution numérique</strong> :  
+            \( v_{Cy} = 2,55 \, \text{m/s}, \, v_{Cx} = 1,47 \, \text{m/s} \)  
+            \[
+            x = \frac{2,55}{9,81} \times 1,47 \approx \boxed{0,38 \, \text{m}}, \quad y_{\text{max}} = 0,68 \, \text{m}.
+            \]
+            <strong>Point de chute</strong> :  
+            \[
+            \boxed{-2,27x^2 + 1,73x + 0,35 = 0}.
+            \]
+            <strong>Solution</strong> :  
+            \[
+            x \approx \boxed{0,93 \, \text{m}}.
+            \]
+          </p>
+        </div>
+      </div>
+      
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script
+        id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      ></script>
+    </div>
+  </body>
+</html>

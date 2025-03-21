@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice de cinématique</title>
+    <script
+      type="text/javascript"
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      } */
+
+      .subsection {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 600px;
+        padding: 20px;
+      }
+
+      /* h1 {
+        color: #333;
+        text-align: center;
+      } */
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      p {
+        color: #555;
+        margin-bottom: 10px;
+      }
+
+      input[type="radio"] {
+        margin-right: 10px;
+      }
+
+      button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      #score {
+        font-weight: bold;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      #score span {
+        color: #4caf50;
+      }
+
+      .feedback {
+        font-style: italic;
+      }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-E8DNQYYQ37"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-E8DNQYYQ37");
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Cinématique</h1>
+      <!-- <h1>Bienvenue à L'espace de Physique et Chimie</h1> -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="cinematique.html">Cours</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="subsection">
+      <h1>Exercice en cinématique</h1>
+      <form id="kinematics-exercise">
+        <!-- Questions will be dynamically added here -->
+        <button type="button" onclick="calculateScore()">
+          Vérifier les réponses
+        </button>
+      </form>
+      <div id="score"></div>
+    </div>
+
+    <script>
+      var questions = [
+        {
+          question: "Qu'est-ce que la cinématique ?",
+          options: [
+            "L'étude du mouvement d'un objet au cours du temps.",
+            "L'étude de la lumière.",
+            "L'étude des forces.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Que représente la dérivée temporelle du vecteur position ?",
+          options: [
+            "Le vecteur vitesse.",
+            "Le vecteur accélération.",
+            "La trajectoire.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Comment est déterminée la direction du vecteur vitesse ?",
+          options: [
+            "Par la variation de la direction du vecteur accélération.",
+            "Par la tangente à la trajectoire au point M.",
+            "Par la variation de la norme du vecteur vitesse.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: "Comment est calculée la vitesse (\\( V_i \\)) ?",
+          options: [
+            "\\( V_i=\\frac{M_{i-1}M_{i+1}}{2T} \\)",
+            "\\( V_i=\\frac{M_{i+1}-M_{i-1}}{2T} \\)",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Comment est calculée l'accélération (\\( a_i \\)) ?",
+          options: [
+            "\\( a_i=\\frac{M_{i-1}M_{i+1}}{2T} \\)",
+            "\\( a_i=\\frac{V_{i+1}-V_{i-1}}{2T} \\)",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: "Qu'est-ce qu'un mouvement rectiligne ?",
+          options: [
+            "Un mouvement dont la trajectoire est une droite.",
+            "Un mouvement dont la trajectoire est un cercle.",
+            "Un mouvement dont la trajectoire est une parabole.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est la particularité du vecteur accélération dans un mouvement rectiligne uniforme ?",
+          options: [
+            "Il est nul.",
+            "Il est dirigé vers l'intérieur de la trajectoire.",
+            "Il est constant.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est la particularité du vecteur accélération dans un mouvement circulaire uniforme ?",
+          options: [
+            "Il est dirigé vers l'extérieur de la trajectoire.",
+            "Il est dirigé vers l'intérieur de la trajectoire.",
+            "Il est constant.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: "Qu'est-ce qu'un Mouvement Rectiligne Uniforme (MRU) ?",
+          options: [
+            "Un mouvement où un objet se déplace en ligne droite avec une vitesse constante.",
+            "Un mouvement où un objet se déplace en ligne courbe avec une vitesse variable.",
+            "Un mouvement où un objet se déplace en zigzag avec une vitesse constante.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est la caractéristique principale d'un MRU en termes de vitesse ?",
+          options: [
+            "La vitesse de l'objet reste constante au fil du temps.",
+            "La vitesse de l'objet varie de manière aléatoire.",
+            "La vitesse de l'objet augmente constamment.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Quelle est l'accélération dans un MRU ?",
+          options: [
+            "Elle est nulle.",
+            "Elle est constante.",
+            "Elle varie de manière aléatoire.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Quelle est l'équation horaire pour un MRU ?",
+          options: [
+            "\\( x = V_0 \\cdot t + x_0 \\)",
+            "\\( V_0 = x \\cdot t + x_0 \\)",
+            "\\( x = V_0 \\cdot t - x_0 \\)",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Qu'est-ce qu'un mouvement rectiligne uniformément varié (MRUV) ?",
+          options: [
+            "Un mouvement où l'accélération est constante en valeur, en direction et en sens.",
+            "Un mouvement où la vitesse est constante au fil du temps.",
+            "Un mouvement où la trajectoire est une ligne courbe.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est l'équation horaire de la vitesse dans un MRUV ?",
+          options: [
+            "\\( v = at + v_0 \\)",
+            "\\( x = \\frac{1}{2}at^2 + v_0t + x_0 \\)",
+            "\\( v^2 - v_0^2 = 2a(x - x_0) \\)",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Que représente \\( x_0 \\) dans l'équation de position d'un MRUV ?",
+          options: [
+            "La vitesse initiale.",
+            "La position initiale.",
+            "L'accélération constante.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelles sont les caractéristiques de la vitesse dans un MRUV lorsque l'accélération est positive (\\( a > 0 \\)) ?",
+          options: [
+            "La vitesse diminue au cours du temps.",
+            "La vitesse reste constante.",
+            "La vitesse augmente au cours du temps.",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question: "Qu'est-ce qu'un mouvement circulaire uniforme ?",
+          options: [
+            "Un mouvement où la vitesse varie de manière aléatoire au fil du temps.",
+            "Un mouvement où la trajectoire est un cercle et la vitesse reste constante en norme.",
+            "Un mouvement où la trajectoire est une ligne droite et la vitesse augmente constamment.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est la caractéristique principale du vecteur vitesse dans un mouvement circulaire uniforme ?",
+          options: [
+            "Il change de direction constamment.",
+            "Il est constant en norme, tangent à la trajectoire et orienté dans le sens du mouvement.",
+            "Il reste nul tout au long du mouvement.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est la direction du vecteur accélération dans un mouvement circulaire uniforme ?",
+          options: [
+            "Vers l'extérieur de la trajectoire.",
+            "Tangentielle à la trajectoire.",
+            "Vers le centre du cercle de la trajectoire (accélération centripète).",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "Comment peut-on exprimer la valeur de l'accélération dans un mouvement circulaire uniforme en fonction de la vitesse et du rayon de la trajectoire ?",
+          options: [
+            "\\( a = \\frac{v}{r} \\)",
+            "\\( a = \\frac{v^2}{r} \\)",
+            "\\( a = v \\times r \\)",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est l'équation horaire d'un mouvement rectiligne sinusoïdal ?",
+          options: [
+            "\\( x = X_m \\cos(\\omega t + \\phi) \\)",
+            "\\( x = X_m \\sin(\\omega t + \\phi) \\)",
+            "\\( x = X_m \\tan(\\omega t + \\phi) \\)",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Qu'est-ce que \\( X_m \\) représente dans l'équation horaire du mouvement rectiligne sinusoïdal ?",
+          options: [
+            "La période du mouvement.",
+            "L'amplitude maximale du mouvement d'oscillation.",
+            "La fréquence du mouvement.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est l'unité de la pulsation \\( \\omega \\) dans le mouvement rectiligne sinusoïdal ?",
+          options: ["m/s", "rad/s", "Hz"],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est la période temporelle du mouvement rectiligne sinusoïdal ?",
+          options: [
+            "\\( T = 2\\pi \\)",
+            "\\( T = \\omega^2 \\)",
+            "\\( T = \\frac{1}{f} \\)",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est l'équation différentielle du mouvement rectiligne sinusoïdal ?",
+          options: [
+            "\\( x^{''} + \\omega^2 x = 0 \\)",
+            "\\( x^{''} - \\omega^2 x = 0 \\)",
+            "\\( x^{'} + \\omega x = 0 \\)",
+          ],
+          correctAnswer: 0,
+        },
+      ];
+
+      [
+        {
+          question: "Qu'est-ce que la cinématique ?",
+          options: [
+            "L'étude du mouvement d'un objet au cours du temps.",
+            "L'étude de la lumière.",
+            "L'étude des forces.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Que représente la dérivée temporelle du vecteur position ?",
+          options: [
+            "Le vecteur vitesse.",
+            "Le vecteur accélération.",
+            "La trajectoire.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Comment est déterminée la direction du vecteur vitesse ?",
+          options: [
+            "Par la variation de la direction du vecteur accélération.",
+            "Par la tangente à la trajectoire au point M.",
+            "Par la variation de la norme du vecteur vitesse.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: "Comment est calculée la vitesse ($$ V_i $$) ?",
+          options: [
+            "$$ V_i=\\frac{M_{i-1}M_{i+1}}{2T} $$",
+            "$$ V_i=\\frac{M_{i+1}-M_{i-1}}{2T} $$",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Comment est calculée l'accélération ($$ a_i $$) ?",
+          options: [
+            "$$ a_i=\\frac{M_{i-1}M_{i+1}}{2T} $$",
+            "$$ a_i=\\frac{V_{i+1}-V_{i-1}}{2T} $$",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: "Qu'est-ce qu'un mouvement rectiligne ?",
+          options: [
+            "Un mouvement dont la trajectoire est une droite.",
+            "Un mouvement dont la trajectoire est un cercle.",
+            "Un mouvement dont la trajectoire est une parabole.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est la particularité du vecteur accélération dans un mouvement rectiligne uniforme ?",
+          options: [
+            "Il est nul.",
+            "Il est dirigé vers l'intérieur de la trajectoire.",
+            "Il est constant.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est la particularité du vecteur accélération dans un mouvement circulaire uniforme ?",
+          options: [
+            "Il est dirigé vers l'extérieur de la trajectoire.",
+            "Il est dirigé vers l'intérieur de la trajectoire.",
+            "Il est constant.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question: "Qu'est-ce qu'un Mouvement Rectiligne Uniforme (MRU) ?",
+          options: [
+            "Un mouvement où un objet se déplace en ligne droite avec une vitesse constante.",
+            "Un mouvement où un objet se déplace en ligne courbe avec une vitesse variable.",
+            "Un mouvement où un objet se déplace en zigzag avec une vitesse constante.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est la caractéristique principale d'un MRU en termes de vitesse ?",
+          options: [
+            "La vitesse de l'objet reste constante au fil du temps.",
+            "La vitesse de l'objet varie de manière aléatoire.",
+            "La vitesse de l'objet augmente constamment.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Quelle est l'accélération dans un MRU ?",
+          options: [
+            "Elle est nulle.",
+            "Elle est constante.",
+            "Elle varie de manière aléatoire.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question: "Quelle est l'équation horaire pour un MRU ?",
+          options: [
+            "$$ x = V_0 \\cdot t + x_0 $$",
+            "$$ V_0 = x \\cdot t + x_0 $$",
+            "$$ x = V_0 \\cdot t - x_0 $$",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Qu'est-ce qu'un mouvement rectiligne uniformément varié (MRUV) ?",
+          options: [
+            "Un mouvement où l'accélération est constante en valeur, en direction et en sens.",
+            "Un mouvement où la vitesse est constante au fil du temps.",
+            "Un mouvement où la trajectoire est une ligne courbe.",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est l'équation horaire de la vitesse dans un MRUV ?",
+          options: [
+            "$$ v = at + v_0 $$",
+            "$$ x = \\frac{1}{2}at^2 + v_0t + x_0 $$",
+            "$$ v^2 - v_0^2 = 2a(x - x_0) $$",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Que représente \\( x_0 \\) dans l'équation de position d'un MRUV ?",
+          options: [
+            "La vitesse initiale.",
+            "La position initiale.",
+            "L'accélération constante.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelles sont les caractéristiques de la vitesse dans un MRUV lorsque l'accélération est positive (\( a > 0 \)) ?",
+          options: [
+            "La vitesse diminue au cours du temps.",
+            "La vitesse reste constante.",
+            "La vitesse augmente au cours du temps.",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question: "Qu'est-ce qu'un mouvement circulaire uniforme ?",
+          options: [
+            "Un mouvement où la vitesse varie de manière aléatoire au fil du temps.",
+            "Un mouvement où la trajectoire est un cercle et la vitesse reste constante en norme.",
+            "Un mouvement où la trajectoire est une ligne droite et la vitesse augmente constamment.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est la caractéristique principale du vecteur vitesse dans un mouvement circulaire uniforme ?",
+          options: [
+            "Il change de direction constamment.",
+            "Il est constant en norme, tangent à la trajectoire et orienté dans le sens du mouvement.",
+            "Il reste nul tout au long du mouvement.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est la direction du vecteur accélération dans un mouvement circulaire uniforme ?",
+          options: [
+            "Vers l'extérieur de la trajectoire.",
+            "Tangentielle à la trajectoire.",
+            "Vers le centre du cercle de la trajectoire (accélération centripète).",
+          ],
+          correctAnswer: 2,
+        },
+        {
+          question:
+            "Comment peut-on exprimer la valeur de l'accélération dans un mouvement circulaire uniforme en fonction de la vitesse et du rayon de la trajectoire ?",
+          options: [
+            "\\( a = \\frac{v}{r} \\)",
+            "\\( a = \\frac{v^2}{r} \\)",
+            "\\( a = v \\times r \\)",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est l'équation horaire d'un mouvement rectiligne sinusoïdal ?",
+          options: [
+            "$$ x = X_m \\cos(\\omega t + \\phi) $$",
+            "$$ x = X_m \\sin(\\omega t + \\phi) $$",
+            "$$ x = X_m \\tan(\\omega t + \\phi) $$",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Qu'est-ce que \\( X_m \\) représente dans l'équation horaire du mouvement rectiligne sinusoïdal ?",
+          options: [
+            "La période du mouvement.",
+            "L'amplitude maximale du mouvement d'oscillation.",
+            "La fréquence du mouvement.",
+          ],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est l'unité de la pulsation \\( \\omega \\) dans le mouvement rectiligne sinusoïdal ?",
+          options: ["m/s", "rad/s", "Hz"],
+          correctAnswer: 1,
+        },
+        {
+          question:
+            "Quelle est la période temporelle du mouvement rectiligne sinusoïdal ?",
+          options: [
+            "$$ T = 2\\pi $$",
+            "$$ T = \\omega^2 $$",
+            "$$ T = \\frac{1}{f} $$",
+          ],
+          correctAnswer: 0,
+        },
+        {
+          question:
+            "Quelle est l'équation différentielle du mouvement rectiligne sinusoïdal ?",
+          options: [
+            "$$ x^{''} + \\omega^2 x = 0 $$",
+            "$$ x^{''} - \\omega^2 x = 0 $$",
+            "$$ x^{'} + \\omega x = 0 $$",
+          ],
+          correctAnswer: 0,
+        },
+      ];
+
+      var form = document.getElementById("kinematics-exercise");
+
+      questions.forEach(function (question, index) {
+        var questionElement = document.createElement("p");
+        questionElement.textContent = index + 1 + ". " + question.question;
+        form.insertBefore(questionElement, form.lastElementChild);
+
+        question.options.forEach(function (option, optionIndex) {
+          var input = document.createElement("input");
+          input.type = "radio";
+          input.id = "q" + (index + 1) + "option" + optionIndex;
+          input.name = "q" + (index + 1);
+          input.value = optionIndex;
+          form.insertBefore(input, form.lastElementChild);
+
+          var label = document.createElement("label");
+          label.htmlFor = "q" + (index + 1) + "option" + optionIndex;
+          label.textContent = option;
+          form.insertBefore(label, form.lastElementChild);
+
+          form.insertBefore(
+            document.createElement("br"),
+            form.lastElementChild
+          );
+        });
+
+        var feedback = document.createElement("span");
+        feedback.id = "q" + (index + 1) + "-feedback";
+        form.insertBefore(feedback, form.lastElementChild);
+        form.insertBefore(document.createElement("br"), form.lastElementChild);
+      });
+
+      function calculateScore() {
+        var score = 0;
+
+        questions.forEach(function (question, index) {
+          var selectedOption = parseInt(form.elements["q" + (index + 1)].value);
+
+          if (selectedOption === question.correctAnswer) {
+            document.getElementById(
+              "q" + (index + 1) + "-feedback"
+            ).textContent = "Correct!";
+            score++;
+          } else {
+            document.getElementById(
+              "q" + (index + 1) + "-feedback"
+            ).textContent = "Incorrect!";
+          }
+        });
+
+        document.getElementById("score").innerHTML =
+          "Votre score est : <span>" +
+          score +
+          " / " +
+          questions.length +
+          "</span>";
+      }
+    </script>
+  </body>
+</html>
