@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Arc Generator with Center Points</title>
+    <title>Movable Segment Points</title>
     <style>
       #svg {
         border: 1px solid #000;
@@ -11,8 +11,8 @@
         padding: 5px 15px;
       }
       .point:hover {
-        filter: brightness(150%);
-        cursor: pointer;
+        cursor: move;
+        filter: brightness(120%);
       }
     </style>
   </head>
@@ -22,49 +22,52 @@
     <svg id="svg" width="800" height="600"></svg>
 
     <script>
-      const POINT_RADIUS = 5;
-      const SNAP_DISTANCE = 10;
+      const POINT_RADIUS = 7;
+      const SNAP_DISTANCE = 15;
 
       let segments = [];
       let currentMode = "arc";
       let tempPoints = [];
       let allPoints = [];
+      let draggedPoint = null;
+      let offset = { x: 0, y: 0 };
+
+      function getMousePosition(event) {
+        const rect = document.getElementById("svg").getBoundingClientRect();
+        return {
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top,
+        };
+      }
+
+      function findExistingPoint(x, y) {
+        return allPoints.find(
+          (p) => Math.hypot(p.x - x, p.y - y) <= SNAP_DISTANCE
+        );
+      }
 
       function handleClick(event) {
+        if (draggedPoint) return;
+
         const { x, y } = getMousePosition(event);
         const existing = findExistingPoint(x, y);
 
         if (existing) {
-          handleExistingPoint(existing);
+          tempPoints.push(existing);
         } else {
-          handleNewPoint(x, y);
+          const newPoint = { x, y, id: Date.now() + Math.random() };
+          allPoints.push(newPoint);
+          tempPoints.push(newPoint);
+        }
+
+        if (
+          (currentMode === "arc" && tempPoints.length === 3) ||
+          (currentMode === "line" && tempPoints.length === 2)
+        ) {
+          completeSegment();
         }
 
         redrawCanvas();
-      }
-
-      function handleExistingPoint(point) {
-        tempPoints.push(point);
-        if (shouldCompleteSegment()) {
-          completeSegment();
-        }
-      }
-
-      function handleNewPoint(x, y) {
-        const newPoint = { x, y, id: Date.now() + Math.random() };
-        allPoints.push(newPoint);
-        tempPoints.push(newPoint);
-
-        if (shouldCompleteSegment()) {
-          completeSegment();
-        }
-      }
-
-      function shouldCompleteSegment() {
-        return (
-          (currentMode === "arc" && tempPoints.length === 3) ||
-          (currentMode === "line" && tempPoints.length === 2)
-        );
       }
 
       function completeSegment() {
@@ -89,76 +92,34 @@
         tempPoints = [];
       }
 
-      function findExistingPoint(x, y) {
-        return allPoints.find(
-          (p) => Math.hypot(p.x - x, p.y - y) <= SNAP_DISTANCE
-        );
+      function startDrag(event) {
+        const pointId = event.target.getAttribute("data-point-id");
+        draggedPoint = allPoints.find((p) => p.id == pointId);
+
+        if (!draggedPoint) return;
+
+        const rect = document.getElementById("svg").getBoundingClientRect();
+        offset.x = event.clientX - rect.left - draggedPoint.x;
+        offset.y = event.clientY - rect.top - draggedPoint.y;
+
+        document.addEventListener("mousemove", drag);
+        document.addEventListener("mouseup", stopDrag);
       }
 
-      function redrawCanvas() {
-        clearCanvas();
+      function drag(event) {
+        if (!draggedPoint) return;
 
-        segments.forEach((segment) => {
-          if (segment.type === "arc") {
-            drawArcSegment(segment);
-          } else {
-            drawLineSegment(segment);
-          }
-        });
+        const rect = document.getElementById("svg").getBoundingClientRect();
+        draggedPoint.x = event.clientX - rect.left - offset.x;
+        draggedPoint.y = event.clientY - rect.top - offset.y;
 
-        tempPoints.forEach((p) => drawPointElement(p));
-        allPoints.forEach((p) => drawPointElement(p));
+        redrawCanvas();
       }
 
-      function drawArcSegment(segment) {
-        // Draw arc path
-        const sorted = [...segment.points].sort((a, b) => a.x - b.x);
-        const path = createArcPath(
-          segment.circle,
-          sorted[0],
-          sorted[1],
-          sorted[2]
-        );
-        document.getElementById("svg").appendChild(path);
-
-        // Draw center point (blue)
-        const center = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
-        center.setAttribute("class", "point");
-        center.setAttribute("cx", segment.circle.cx);
-        center.setAttribute("cy", segment.circle.cy);
-        center.setAttribute("r", POINT_RADIUS);
-        center.setAttribute("fill", "blue");
-        document.getElementById("svg").appendChild(center);
-      }
-
-      function drawLineSegment(segment) {
-        const line = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "line"
-        );
-        line.setAttribute("x1", segment.points[0].x);
-        line.setAttribute("y1", segment.points[0].y);
-        line.setAttribute("x2", segment.points[1].x);
-        line.setAttribute("y2", segment.points[1].y);
-        line.setAttribute("stroke", "green");
-        line.setAttribute("stroke-width", "2");
-        document.getElementById("svg").appendChild(line);
-      }
-
-      function drawPointElement(point) {
-        const element = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
-        element.setAttribute("class", "point");
-        element.setAttribute("cx", point.x);
-        element.setAttribute("cy", point.y);
-        element.setAttribute("r", POINT_RADIUS);
-        element.setAttribute("fill", currentMode === "arc" ? "red" : "green");
-        document.getElementById("svg").appendChild(element);
+      function stopDrag() {
+        draggedPoint = null;
+        document.removeEventListener("mousemove", drag);
+        document.removeEventListener("mouseup", stopDrag);
       }
 
       function calculateCircle(A, B, C) {
@@ -226,21 +187,74 @@
         );
       }
 
-      function getMousePosition(event) {
-        const rect = document.getElementById("svg").getBoundingClientRect();
-        return {
-          x: event.clientX - rect.left,
-          y: event.clientY - rect.top,
-        };
+      function drawPointElement(point) {
+        const element = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+        element.setAttribute("data-point-id", point.id);
+        element.setAttribute("cx", point.x);
+        element.setAttribute("cy", point.y);
+        element.setAttribute("r", POINT_RADIUS);
+        element.setAttribute("fill", currentMode === "arc" ? "red" : "green");
+        element.setAttribute("class", "point");
+        element.addEventListener("mousedown", startDrag);
+        return element;
       }
 
-      function clearCanvas() {
+      function redrawCanvas() {
         const svg = document.getElementById("svg");
-        while (svg.firstChild) {
-          svg.removeChild(svg.firstChild);
-        }
+        svg.innerHTML = "";
+
+        // Draw all segments
+        segments.forEach((segment) => {
+          if (segment.type === "arc") {
+            const circle = calculateCircle(...segment.points);
+            if (circle) {
+              // Draw arc
+              const sorted = [...segment.points].sort((a, b) => a.x - b.x);
+              const path = createArcPath(
+                circle,
+                sorted[0],
+                sorted[1],
+                sorted[2]
+              );
+              svg.appendChild(path);
+
+              // Draw center point
+              const center = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "circle"
+              );
+              center.setAttribute("cx", circle.cx);
+              center.setAttribute("cy", circle.cy);
+              center.setAttribute("r", POINT_RADIUS);
+              center.setAttribute("fill", "blue");
+              center.setAttribute("class", "center-point");
+              svg.appendChild(center);
+            }
+          } else {
+            // Draw line
+            const line = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "line"
+            );
+            line.setAttribute("x1", segment.points[0].x);
+            line.setAttribute("y1", segment.points[0].y);
+            line.setAttribute("x2", segment.points[1].x);
+            line.setAttribute("y2", segment.points[1].y);
+            line.setAttribute("stroke", "green");
+            line.setAttribute("stroke-width", "2");
+            svg.appendChild(line);
+          }
+        });
+
+        // Draw all points
+        allPoints.forEach((p) => svg.appendChild(drawPointElement(p)));
+        tempPoints.forEach((p) => svg.appendChild(drawPointElement(p)));
       }
 
+      // Event listeners
       document.getElementById("svg").addEventListener("click", handleClick);
       document.getElementById("toggleMode").addEventListener("click", () => {
         currentMode = currentMode === "arc" ? "line" : "arc";
@@ -256,6 +270,9 @@
         tempPoints = [];
         redrawCanvas();
       });
+
+      // Initial redraw
+      redrawCanvas();
     </script>
   </body>
 </html>
