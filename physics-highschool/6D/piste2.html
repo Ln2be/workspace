@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Multi-Segment Generator</title>
+    <title>Segment Generator with Point Reuse</title>
     <style>
       #svg {
         border: 1px solid #000;
@@ -9,6 +9,10 @@
       button {
         margin: 10px;
         padding: 5px 15px;
+      }
+      .point:hover {
+        filter: brightness(150%);
+        cursor: pointer;
       }
     </style>
   </head>
@@ -18,68 +22,83 @@
     <svg id="svg" width="800" height="600"></svg>
 
     <script>
-      let segments = []; // Stores all drawn segments
-      let currentMode = "arc"; // 'arc' or 'line'
-      let tempPoints = []; // Temporary points for current segment
+      const POINT_RADIUS = 5;
+      const SNAP_DISTANCE = 10;
 
-      // Main click handler
+      let segments = [];
+      let currentMode = "arc";
+      let tempPoints = [];
+      let allPoints = [];
+
       function handleClick(event) {
-        const svg = document.getElementById("svg");
-        const rect = svg.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        const { x, y } = getMousePosition(event);
+        const existing = findExistingPoint(x, y);
 
-        if (currentMode === "arc") {
-          handleArcClick(x, y);
+        if (existing) {
+          handleExistingPoint(existing);
         } else {
-          handleLineClick(x, y);
+          handleNewPoint(x, y);
+        }
+
+        redrawCanvas();
+      }
+
+      function handleExistingPoint(point) {
+        tempPoints.push(point);
+        if (shouldCompleteSegment()) {
+          completeSegment();
         }
       }
 
-      function handleArcClick(x, y) {
-        tempPoints.push({ x, y });
-        drawPoint(x, y, "arc-point");
+      function handleNewPoint(x, y) {
+        const newPoint = { x, y, id: Date.now() + Math.random() };
+        allPoints.push(newPoint);
+        tempPoints.push(newPoint);
 
-        if (tempPoints.length === 3) {
-          const [A, B, C] = tempPoints;
-          const circle = calculateCircle(A, B, C);
+        if (shouldCompleteSegment()) {
+          completeSegment();
+        }
+      }
 
+      function shouldCompleteSegment() {
+        return (
+          (currentMode === "arc" && tempPoints.length === 3) ||
+          (currentMode === "line" && tempPoints.length === 2)
+        );
+      }
+
+      function completeSegment() {
+        if (currentMode === "arc") {
+          const circle = calculateCircle(...tempPoints);
           if (!circle) {
             alert("Points are collinear!");
             tempPoints = [];
-            redrawCanvas();
             return;
           }
-
           segments.push({
             type: "arc",
             points: [...tempPoints],
-            circle: { ...circle },
+            circle: circle,
           });
-          tempPoints = [];
-          redrawCanvas();
-        }
-      }
-
-      function handleLineClick(x, y) {
-        tempPoints.push({ x, y });
-        drawPoint(x, y, "line-point");
-
-        if (tempPoints.length === 2) {
+        } else {
           segments.push({
             type: "line",
             points: [...tempPoints],
           });
-          tempPoints = [];
-          redrawCanvas();
         }
+        tempPoints = [];
       }
 
-      // Redraw entire canvas
+      function findExistingPoint(x, y) {
+        return allPoints.find(
+          (p) => Math.hypot(p.x - x, p.y - y) <= SNAP_DISTANCE
+        );
+      }
+
       function redrawCanvas() {
         clearCanvas();
 
-        // Draw stored segments
+        // Draw all segments
         segments.forEach((segment) => {
           if (segment.type === "arc") {
             drawArcSegment(segment);
@@ -89,9 +108,10 @@
         });
 
         // Draw temporary points
-        tempPoints.forEach((point) => {
-          drawPoint(point.x, point.y, `${currentMode}-point`);
-        });
+        tempPoints.forEach((p) => drawPointElement(p));
+
+        // Draw all existing points
+        allPoints.forEach((p) => drawPointElement(p));
       }
 
       function drawArcSegment(segment) {
@@ -109,12 +129,13 @@
 
         // Draw arc
         const sorted = [...segment.points].sort((a, b) => a.x - b.x);
-        const [left, middle, right] = sorted;
-        const path = createArcPath(segment.circle, left, middle, right);
+        const path = createArcPath(
+          segment.circle,
+          sorted[0],
+          sorted[1],
+          sorted[2]
+        );
         document.getElementById("svg").appendChild(path);
-
-        // Draw points
-        segment.points.forEach((p) => drawPoint(p.x, p.y, "arc-point"));
       }
 
       function drawLineSegment(segment) {
@@ -129,9 +150,44 @@
         line.setAttribute("stroke", "green");
         line.setAttribute("stroke-width", "2");
         document.getElementById("svg").appendChild(line);
+      }
 
-        // Draw points
-        segment.points.forEach((p) => drawPoint(p.x, p.y, "line-point"));
+      function drawPointElement(point) {
+        const element = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+        element.setAttribute("class", "point");
+        element.setAttribute("cx", point.x);
+        element.setAttribute("cy", point.y);
+        element.setAttribute("r", POINT_RADIUS);
+        element.setAttribute("fill", currentMode === "arc" ? "red" : "green");
+        document.getElementById("svg").appendChild(element);
+      }
+
+      // Circle calculation functions
+      function calculateCircle(A, B, C) {
+        const D =
+          2 * (A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y));
+        if (D === 0) return null;
+
+        const cx =
+          ((A.x ** 2 + A.y ** 2) * (B.y - C.y) +
+            (B.x ** 2 + B.y ** 2) * (C.y - A.y) +
+            (C.x ** 2 + C.y ** 2) * (A.y - B.y)) /
+          D;
+
+        const cy =
+          ((A.x ** 2 + A.y ** 2) * (C.x - B.x) +
+            (B.x ** 2 + B.y ** 2) * (A.x - C.x) +
+            (C.x ** 2 + C.y ** 2) * (B.x - A.x)) /
+          D;
+
+        return {
+          cx: cx,
+          cy: cy,
+          radius: Math.hypot(A.x - cx, A.y - cy),
+        };
       }
 
       function createArcPath(circle, left, middle, right) {
@@ -151,31 +207,14 @@
         );
         path.setAttribute(
           "d",
-          `M ${left.x},${left.y} A ${circle.radius} ${circle.radius} 0 ${largeArcFlag} ${sweepFlag} ${right.x},${right.y}`
+          `M ${left.x},${left.y} ` +
+            `A ${circle.radius} ${circle.radius} 0 ` +
+            `${largeArcFlag} ${sweepFlag} ${right.x},${right.y}`
         );
         path.setAttribute("stroke", "blue");
         path.setAttribute("fill", "none");
         path.setAttribute("stroke-width", "2");
         return path;
-      }
-
-      // Original utility functions
-      function calculateCircle(A, B, C) {
-        const D =
-          2 * (A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y));
-        if (D === 0) return null;
-
-        const cx =
-          ((A.x ** 2 + A.y ** 2) * (B.y - C.y) +
-            (B.x ** 2 + B.y ** 2) * (C.y - A.y) +
-            (C.x ** 2 + C.y ** 2) * (A.y - B.y)) /
-          D;
-        const cy =
-          ((A.x ** 2 + A.y ** 2) * (C.x - B.x) +
-            (B.x ** 2 + B.y ** 2) * (A.x - C.x) +
-            (C.x ** 2 + C.y ** 2) * (B.x - A.x)) /
-          D;
-        return { cx, cy, radius: Math.hypot(A.x - cx, A.y - cy) };
       }
 
       function calculateAngle(point, cx, cy) {
@@ -192,17 +231,13 @@
         );
       }
 
-      function drawPoint(x, y, className) {
-        const point = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
-        point.setAttribute("cx", x);
-        point.setAttribute("cy", y);
-        point.setAttribute("r", "3");
-        point.setAttribute("fill", className === "arc-point" ? "red" : "green");
-        point.classList.add(className);
-        document.getElementById("svg").appendChild(point);
+      // Helper functions
+      function getMousePosition(event) {
+        const rect = document.getElementById("svg").getBoundingClientRect();
+        return {
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top,
+        };
       }
 
       function clearCanvas() {
@@ -224,6 +259,7 @@
       });
       document.getElementById("clearAll").addEventListener("click", () => {
         segments = [];
+        allPoints = [];
         tempPoints = [];
         redrawCanvas();
       });
