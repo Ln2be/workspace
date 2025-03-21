@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Segment Generator with Point Reuse</title>
+    <title>Arc Generator with Center Points</title>
     <style>
       #svg {
         border: 1px solid #000;
@@ -98,7 +98,6 @@
       function redrawCanvas() {
         clearCanvas();
 
-        // Draw all segments
         segments.forEach((segment) => {
           if (segment.type === "arc") {
             drawArcSegment(segment);
@@ -107,27 +106,12 @@
           }
         });
 
-        // Draw temporary points
         tempPoints.forEach((p) => drawPointElement(p));
-
-        // Draw all existing points
         allPoints.forEach((p) => drawPointElement(p));
       }
 
       function drawArcSegment(segment) {
-        // Draw reference circle
-        const circle = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
-        circle.setAttribute("cx", segment.circle.cx);
-        circle.setAttribute("cy", segment.circle.cy);
-        circle.setAttribute("r", segment.circle.radius);
-        circle.setAttribute("stroke", "#cccccc");
-        circle.setAttribute("fill", "none");
-        document.getElementById("svg").appendChild(circle);
-
-        // Draw arc
+        // Draw arc path
         const sorted = [...segment.points].sort((a, b) => a.x - b.x);
         const path = createArcPath(
           segment.circle,
@@ -136,6 +120,18 @@
           sorted[2]
         );
         document.getElementById("svg").appendChild(path);
+
+        // Draw center point (blue)
+        const center = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+        center.setAttribute("class", "point");
+        center.setAttribute("cx", segment.circle.cx);
+        center.setAttribute("cy", segment.circle.cy);
+        center.setAttribute("r", POINT_RADIUS);
+        center.setAttribute("fill", "blue");
+        document.getElementById("svg").appendChild(center);
       }
 
       function drawLineSegment(segment) {
@@ -165,7 +161,6 @@
         document.getElementById("svg").appendChild(element);
       }
 
-      // Circle calculation functions
       function calculateCircle(A, B, C) {
         const D =
           2 * (A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y));
@@ -231,7 +226,6 @@
         );
       }
 
-      // Helper functions
       function getMousePosition(event) {
         const rect = document.getElementById("svg").getBoundingClientRect();
         return {
@@ -247,7 +241,6 @@
         }
       }
 
-      // Event listeners
       document.getElementById("svg").addEventListener("click", handleClick);
       document.getElementById("toggleMode").addEventListener("click", () => {
         currentMode = currentMode === "arc" ? "line" : "arc";
