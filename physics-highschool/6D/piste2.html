@@ -1,83 +1,81 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Three-Point Arc Generator</title>
+    <title>Arc & Line Generator</title>
     <style>
       #svg {
         border: 1px solid #000;
       }
+      button {
+        margin: 10px;
+        padding: 5px 15px;
+      }
     </style>
   </head>
   <body>
+    <button id="toggleMode">Switch to Line Mode</button>
     <svg id="svg" width="800" height="600"></svg>
 
     <script>
+      // Original Arc Feature Variables
       let points = [];
+      let isLineMode = false;
+      let linePoints = [];
 
-      // Handle SVG click events
+      // Main Click Handler
       function handleClick(event) {
         const svg = document.getElementById("svg");
         const rect = svg.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        // Clear existing elements if starting new points
-        if (points.length >= 3) {
-          clearElements();
-          points = [];
-        }
-
-        // Add new point
-        points.push({ x, y });
-        drawPoint(x, y);
-
-        // When three points are selected
-        if (points.length === 3) {
-          const [A, B, C] = points;
-          const circle = calculateCircle(A, B, C);
-
-          if (!circle) {
-            alert("Points are collinear!");
-            clearElements();
-            points = [];
-            return;
+        if (isLineMode) {
+          // Line Mode Handling
+          if (linePoints.length >= 2) {
+            clearLineElements();
+            linePoints = [];
           }
+          linePoints.push({ x, y });
+          drawPoint(x, y, "line-point");
+          if (linePoints.length === 2) {
+            drawLine(linePoints[0], linePoints[1]);
+          }
+        } else {
+          // Original Arc Mode Handling
+          if (points.length >= 3) {
+            clearArcElements();
+            points = [];
+          }
+          points.push({ x, y });
+          drawPoint(x, y, "arc-point");
+          if (points.length === 3) {
+            const [A, B, C] = points;
+            const circle = calculateCircle(A, B, C);
 
-          drawCircle(circle);
+            if (!circle) {
+              alert("Points are collinear!");
+              clearArcElements();
+              points = [];
+              return;
+            }
 
-          // Sort points by x-coordinate
-          const sortedPoints = [...points].sort((a, b) => a.x - b.x);
-          const [left, middle, right] = sortedPoints;
-
-          drawArc(circle, left, middle, right);
+            drawCircle(circle);
+            const sortedPoints = [...points].sort((a, b) => a.x - b.x);
+            const [left, middle, right] = sortedPoints;
+            drawArc(circle, left, middle, right);
+          }
         }
       }
 
-      // Draw individual points
-      function drawPoint(x, y) {
-        const point = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
-        point.setAttribute("class", "point");
-        point.setAttribute("cx", x);
-        point.setAttribute("cy", y);
-        point.setAttribute("r", "3");
-        point.setAttribute("fill", "red");
-        document.getElementById("svg").appendChild(point);
-      }
-
-      // Calculate circumcircle from three points
+      //=============== ORIGINAL ARC FUNCTIONS ===============//
       function calculateCircle(A, B, C) {
         const { x: Ax, y: Ay } = A;
         const { x: Bx, y: By } = B;
         const { x: Cx, y: Cy } = C;
 
-        // Calculate denominator
         const D = 2 * (Ax * (By - Cy) + Bx * (Cy - Ay) + Cx * (Ay - By));
-        if (D === 0) return null; // Collinear points
+        if (D === 0) return null;
 
-        // Calculate circle center
         const cx =
           ((Ax ** 2 + Ay ** 2) * (By - Cy) +
             (Bx ** 2 + By ** 2) * (Cy - Ay) +
@@ -88,14 +86,11 @@
             (Bx ** 2 + By ** 2) * (Ax - Cx) +
             (Cx ** 2 + Cy ** 2) * (Bx - Ax)) /
           D;
-
-        // Calculate radius
         const radius = Math.hypot(Ax - cx, Ay - cy);
 
         return { cx, cy, radius };
       }
 
-      // Draw full reference circle
       function drawCircle(circle) {
         const element = document.createElementNS(
           "http://www.w3.org/2000/svg",
@@ -110,59 +105,105 @@
         document.getElementById("svg").appendChild(element);
       }
 
-      // The whole part is only to draw an arc
-      function calculateAngle(point, cx, cy) {
-        const dx = point.x - cx;
-        const dy = point.y - cy;
-        const angle = Math.atan2(dy, dx);
-        return angle < 0 ? angle + 2 * Math.PI : angle; // Normalize to 0-2π
-      }
-
-      function isMiddleInClockwise(thetaL, thetaR, thetaM) {
-        const angleLR = (thetaR - thetaL + 2 * Math.PI) % (2 * Math.PI);
-        const angleLM = (thetaM - thetaL + 2 * Math.PI) % (2 * Math.PI);
-        return angleLM <= angleLR;
-      }
-
       function drawArc(circle, left, middle, right) {
         const thetaL = calculateAngle(left, circle.cx, circle.cy);
         const thetaM = calculateAngle(middle, circle.cx, circle.cy);
         const thetaR = calculateAngle(right, circle.cx, circle.cy);
 
         const sweepFlag = isMiddleInClockwise(thetaL, thetaR, thetaM) ? 1 : 0;
-
-        let angle;
-        if (sweepFlag) {
-          angle = (thetaR - thetaL + 2 * Math.PI) % (2 * Math.PI);
-        } else {
-          angle = (thetaL - thetaR + 2 * Math.PI) % (2 * Math.PI);
-        }
+        const angle = sweepFlag
+          ? (thetaR - thetaL + 2 * Math.PI) % (2 * Math.PI)
+          : (thetaL - thetaR + 2 * Math.PI) % (2 * Math.PI);
         const largeArcFlag = angle > Math.PI ? 1 : 0;
-
-        const pathData = `M ${left.x},${left.y} A ${circle.radius} ${circle.radius} 0 ${largeArcFlag} ${sweepFlag} ${right.x},${right.y}`;
 
         const path = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "path"
         );
         path.setAttribute("class", "arc");
-        path.setAttribute("d", pathData);
+        path.setAttribute(
+          "d",
+          `M ${left.x},${left.y} A ${circle.radius} ${circle.radius} 0 ${largeArcFlag} ${sweepFlag} ${right.x},${right.y}`
+        );
         path.setAttribute("stroke", "blue");
         path.setAttribute("fill", "none");
         path.setAttribute("stroke-width", "2");
         document.getElementById("svg").appendChild(path);
       }
 
-      function clearElements() {
+      function calculateAngle(point, cx, cy) {
+        const dx = point.x - cx;
+        const dy = point.y - cy;
+        const angle = Math.atan2(dy, dx);
+        return angle < 0 ? angle + 2 * Math.PI : angle;
+      }
+
+      function isMiddleInClockwise(thetaL, thetaR, thetaM) {
+        return (
+          (thetaM - thetaL + 2 * Math.PI) % (2 * Math.PI) <=
+          (thetaR - thetaL + 2 * Math.PI) % (2 * Math.PI)
+        );
+      }
+
+      //=============== LINE FEATURE (CAN BE REMOVED) ===============//
+      function drawLine(start, end) {
+        const line = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line"
+        );
+        line.setAttribute("class", "line");
+        line.setAttribute("x1", start.x);
+        line.setAttribute("y1", start.y);
+        line.setAttribute("x2", end.x);
+        line.setAttribute("y2", end.y);
+        line.setAttribute("stroke", "green");
+        line.setAttribute("stroke-width", "2");
+        document.getElementById("svg").appendChild(line);
+      }
+
+      //=============== UTILITY FUNCTIONS ===============//
+      function drawPoint(x, y, className) {
+        const point = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+        point.setAttribute("class", className);
+        point.setAttribute("cx", x);
+        point.setAttribute("cy", y);
+        point.setAttribute("r", "3");
+        point.setAttribute(
+          "fill",
+          className === "line-point" ? "green" : "red"
+        );
+        document.getElementById("svg").appendChild(point);
+      }
+
+      function clearArcElements() {
         const svg = document.getElementById("svg");
-        ["point", "circumference", "arc"].forEach((cls) => {
-          const elements = svg.querySelectorAll(`.${cls}`);
-          elements.forEach((el) => el.remove());
+        ["arc-point", "circumference", "arc"].forEach((cls) => {
+          svg.querySelectorAll(`.${cls}`).forEach((el) => el.remove());
         });
       }
 
-      // Initialize event listener
+      function clearLineElements() {
+        const svg = document.getElementById("svg");
+        ["line-point", "line"].forEach((cls) => {
+          svg.querySelectorAll(`.${cls}`).forEach((el) => el.remove());
+        });
+      }
+
+      //=============== INITIALIZATION ===============//
       document.getElementById("svg").addEventListener("click", handleClick);
+      document.getElementById("toggleMode").addEventListener("click", () => {
+        isLineMode = !isLineMode;
+        document.getElementById("toggleMode").textContent = isLineMode
+          ? "Switch to Arc Mode"
+          : "Switch to Line Mode";
+        clearArcElements();
+        clearLineElements();
+        points = [];
+        linePoints = [];
+      });
     </script>
   </body>
 </html>
