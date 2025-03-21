@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Arc & Line Generator</title>
+    <title>Multi-Segment Generator</title>
     <style>
       #svg {
         border: 1px solid #000;
@@ -14,98 +14,127 @@
   </head>
   <body>
     <button id="toggleMode">Switch to Line Mode</button>
+    <button id="clearAll">Clear All</button>
     <svg id="svg" width="800" height="600"></svg>
 
     <script>
-      // Original Arc Feature Variables
-      let points = [];
-      let isLineMode = false;
-      let linePoints = [];
+      let segments = []; // Stores all drawn segments
+      let currentMode = "arc"; // 'arc' or 'line'
+      let tempPoints = []; // Temporary points for current segment
 
-      // Main Click Handler
+      // Main click handler
       function handleClick(event) {
         const svg = document.getElementById("svg");
         const rect = svg.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        if (isLineMode) {
-          // Line Mode Handling
-          if (linePoints.length >= 2) {
-            clearLineElements();
-            linePoints = [];
-          }
-          linePoints.push({ x, y });
-          drawPoint(x, y, "line-point");
-          if (linePoints.length === 2) {
-            drawLine(linePoints[0], linePoints[1]);
-          }
+        if (currentMode === "arc") {
+          handleArcClick(x, y);
         } else {
-          // Original Arc Mode Handling
-          if (points.length >= 3) {
-            clearArcElements();
-            points = [];
-          }
-          points.push({ x, y });
-          drawPoint(x, y, "arc-point");
-          if (points.length === 3) {
-            const [A, B, C] = points;
-            const circle = calculateCircle(A, B, C);
-
-            if (!circle) {
-              alert("Points are collinear!");
-              clearArcElements();
-              points = [];
-              return;
-            }
-
-            drawCircle(circle);
-            const sortedPoints = [...points].sort((a, b) => a.x - b.x);
-            const [left, middle, right] = sortedPoints;
-            drawArc(circle, left, middle, right);
-          }
+          handleLineClick(x, y);
         }
       }
 
-      //=============== ORIGINAL ARC FUNCTIONS ===============//
-      function calculateCircle(A, B, C) {
-        const { x: Ax, y: Ay } = A;
-        const { x: Bx, y: By } = B;
-        const { x: Cx, y: Cy } = C;
+      function handleArcClick(x, y) {
+        tempPoints.push({ x, y });
+        drawPoint(x, y, "arc-point");
 
-        const D = 2 * (Ax * (By - Cy) + Bx * (Cy - Ay) + Cx * (Ay - By));
-        if (D === 0) return null;
+        if (tempPoints.length === 3) {
+          const [A, B, C] = tempPoints;
+          const circle = calculateCircle(A, B, C);
 
-        const cx =
-          ((Ax ** 2 + Ay ** 2) * (By - Cy) +
-            (Bx ** 2 + By ** 2) * (Cy - Ay) +
-            (Cx ** 2 + Cy ** 2) * (Ay - By)) /
-          D;
-        const cy =
-          ((Ax ** 2 + Ay ** 2) * (Cx - Bx) +
-            (Bx ** 2 + By ** 2) * (Ax - Cx) +
-            (Cx ** 2 + Cy ** 2) * (Bx - Ax)) /
-          D;
-        const radius = Math.hypot(Ax - cx, Ay - cy);
+          if (!circle) {
+            alert("Points are collinear!");
+            tempPoints = [];
+            redrawCanvas();
+            return;
+          }
 
-        return { cx, cy, radius };
+          segments.push({
+            type: "arc",
+            points: [...tempPoints],
+            circle: { ...circle },
+          });
+          tempPoints = [];
+          redrawCanvas();
+        }
       }
 
-      function drawCircle(circle) {
-        const element = document.createElementNS(
+      function handleLineClick(x, y) {
+        tempPoints.push({ x, y });
+        drawPoint(x, y, "line-point");
+
+        if (tempPoints.length === 2) {
+          segments.push({
+            type: "line",
+            points: [...tempPoints],
+          });
+          tempPoints = [];
+          redrawCanvas();
+        }
+      }
+
+      // Redraw entire canvas
+      function redrawCanvas() {
+        clearCanvas();
+
+        // Draw stored segments
+        segments.forEach((segment) => {
+          if (segment.type === "arc") {
+            drawArcSegment(segment);
+          } else {
+            drawLineSegment(segment);
+          }
+        });
+
+        // Draw temporary points
+        tempPoints.forEach((point) => {
+          drawPoint(point.x, point.y, `${currentMode}-point`);
+        });
+      }
+
+      function drawArcSegment(segment) {
+        // Draw reference circle
+        const circle = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "circle"
         );
-        element.setAttribute("class", "circumference");
-        element.setAttribute("cx", circle.cx);
-        element.setAttribute("cy", circle.cy);
-        element.setAttribute("r", circle.radius);
-        element.setAttribute("stroke", "#cccccc");
-        element.setAttribute("fill", "none");
-        document.getElementById("svg").appendChild(element);
+        circle.setAttribute("cx", segment.circle.cx);
+        circle.setAttribute("cy", segment.circle.cy);
+        circle.setAttribute("r", segment.circle.radius);
+        circle.setAttribute("stroke", "#cccccc");
+        circle.setAttribute("fill", "none");
+        document.getElementById("svg").appendChild(circle);
+
+        // Draw arc
+        const sorted = [...segment.points].sort((a, b) => a.x - b.x);
+        const [left, middle, right] = sorted;
+        const path = createArcPath(segment.circle, left, middle, right);
+        document.getElementById("svg").appendChild(path);
+
+        // Draw points
+        segment.points.forEach((p) => drawPoint(p.x, p.y, "arc-point"));
       }
 
-      function drawArc(circle, left, middle, right) {
+      function drawLineSegment(segment) {
+        const line = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line"
+        );
+        line.setAttribute("x1", segment.points[0].x);
+        line.setAttribute("y1", segment.points[0].y);
+        line.setAttribute("x2", segment.points[1].x);
+        line.setAttribute("y2", segment.points[1].y);
+        line.setAttribute("stroke", "green");
+        line.setAttribute("stroke-width", "2");
+        document.getElementById("svg").appendChild(line);
+
+        // Draw points
+        segment.points.forEach((p) => drawPoint(p.x, p.y, "line-point"));
+      }
+
+      function createArcPath(circle, left, middle, right) {
         const thetaL = calculateAngle(left, circle.cx, circle.cy);
         const thetaM = calculateAngle(middle, circle.cx, circle.cy);
         const thetaR = calculateAngle(right, circle.cx, circle.cy);
@@ -120,7 +149,6 @@
           "http://www.w3.org/2000/svg",
           "path"
         );
-        path.setAttribute("class", "arc");
         path.setAttribute(
           "d",
           `M ${left.x},${left.y} A ${circle.radius} ${circle.radius} 0 ${largeArcFlag} ${sweepFlag} ${right.x},${right.y}`
@@ -128,7 +156,26 @@
         path.setAttribute("stroke", "blue");
         path.setAttribute("fill", "none");
         path.setAttribute("stroke-width", "2");
-        document.getElementById("svg").appendChild(path);
+        return path;
+      }
+
+      // Original utility functions
+      function calculateCircle(A, B, C) {
+        const D =
+          2 * (A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y));
+        if (D === 0) return null;
+
+        const cx =
+          ((A.x ** 2 + A.y ** 2) * (B.y - C.y) +
+            (B.x ** 2 + B.y ** 2) * (C.y - A.y) +
+            (C.x ** 2 + C.y ** 2) * (A.y - B.y)) /
+          D;
+        const cy =
+          ((A.x ** 2 + A.y ** 2) * (C.x - B.x) +
+            (B.x ** 2 + B.y ** 2) * (A.x - C.x) +
+            (C.x ** 2 + C.y ** 2) * (B.x - A.x)) /
+          D;
+        return { cx, cy, radius: Math.hypot(A.x - cx, A.y - cy) };
       }
 
       function calculateAngle(point, cx, cy) {
@@ -145,64 +192,40 @@
         );
       }
 
-      //=============== LINE FEATURE (CAN BE REMOVED) ===============//
-      function drawLine(start, end) {
-        const line = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "line"
-        );
-        line.setAttribute("class", "line");
-        line.setAttribute("x1", start.x);
-        line.setAttribute("y1", start.y);
-        line.setAttribute("x2", end.x);
-        line.setAttribute("y2", end.y);
-        line.setAttribute("stroke", "green");
-        line.setAttribute("stroke-width", "2");
-        document.getElementById("svg").appendChild(line);
-      }
-
-      //=============== UTILITY FUNCTIONS ===============//
       function drawPoint(x, y, className) {
         const point = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "circle"
         );
-        point.setAttribute("class", className);
         point.setAttribute("cx", x);
         point.setAttribute("cy", y);
         point.setAttribute("r", "3");
-        point.setAttribute(
-          "fill",
-          className === "line-point" ? "green" : "red"
-        );
+        point.setAttribute("fill", className === "arc-point" ? "red" : "green");
+        point.classList.add(className);
         document.getElementById("svg").appendChild(point);
       }
 
-      function clearArcElements() {
+      function clearCanvas() {
         const svg = document.getElementById("svg");
-        ["arc-point", "circumference", "arc"].forEach((cls) => {
-          svg.querySelectorAll(`.${cls}`).forEach((el) => el.remove());
-        });
+        while (svg.firstChild) {
+          svg.removeChild(svg.firstChild);
+        }
       }
 
-      function clearLineElements() {
-        const svg = document.getElementById("svg");
-        ["line-point", "line"].forEach((cls) => {
-          svg.querySelectorAll(`.${cls}`).forEach((el) => el.remove());
-        });
-      }
-
-      //=============== INITIALIZATION ===============//
+      // Event listeners
       document.getElementById("svg").addEventListener("click", handleClick);
       document.getElementById("toggleMode").addEventListener("click", () => {
-        isLineMode = !isLineMode;
-        document.getElementById("toggleMode").textContent = isLineMode
-          ? "Switch to Arc Mode"
-          : "Switch to Line Mode";
-        clearArcElements();
-        clearLineElements();
-        points = [];
-        linePoints = [];
+        currentMode = currentMode === "arc" ? "line" : "arc";
+        document.getElementById("toggleMode").textContent = `Switch to ${
+          currentMode === "arc" ? "Line" : "Arc"
+        } Mode`;
+        tempPoints = [];
+        redrawCanvas();
+      });
+      document.getElementById("clearAll").addEventListener("click", () => {
+        segments = [];
+        tempPoints = [];
+        redrawCanvas();
       });
     </script>
   </body>
