@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Movable Segment Points</title>
+    <title>Complete Segment Generator</title>
     <style>
       #svg {
         border: 1px solid #000;
@@ -10,20 +10,36 @@
         margin: 10px;
         padding: 5px 15px;
       }
+      .controls {
+        margin: 10px;
+      }
       .point:hover {
         cursor: move;
         filter: brightness(120%);
       }
+      .point-label {
+        font-family: Arial;
+        font-size: 12px;
+        user-select: none;
+      }
     </style>
   </head>
   <body>
-    <button id="toggleMode">Switch to Line Mode</button>
-    <button id="clearAll">Clear All</button>
+    <div class="controls">
+      <button id="toggleMode">Switch to Line Mode</button>
+      <button id="clearLast">Clear Last Segment</button>
+      <button id="clearAll">Clear All</button>
+      <label>Point Size: </label>
+      <input type="range" id="pointSize" min="3" max="20" value="7" />
+      <label>Label: </label>
+      <input type="text" id="nextLabel" size="1" value="A" />
+    </div>
     <svg id="svg" width="800" height="600"></svg>
 
     <script>
-      const POINT_RADIUS = 7;
+      let POINT_RADIUS = 7;
       const SNAP_DISTANCE = 15;
+      let currentLabelCharCode = 65;
 
       let segments = [];
       let currentMode = "arc";
@@ -38,6 +54,18 @@
           x: event.clientX - rect.left,
           y: event.clientY - rect.top,
         };
+      }
+
+      function getNextLabel() {
+        const label = String.fromCharCode(currentLabelCharCode);
+        currentLabelCharCode =
+          currentLabelCharCode < 90 ? currentLabelCharCode + 1 : 65;
+        return label;
+      }
+
+      function updateLabelInput() {
+        document.getElementById("nextLabel").value =
+          String.fromCharCode(currentLabelCharCode);
       }
 
       function findExistingPoint(x, y) {
@@ -55,9 +83,18 @@
         if (existing) {
           tempPoints.push(existing);
         } else {
-          const newPoint = { x, y, id: Date.now() + Math.random() };
+          const newPoint = {
+            x,
+            y,
+            id: Date.now() + Math.random(),
+            label: document.getElementById("nextLabel").value,
+            size: POINT_RADIUS,
+          };
           allPoints.push(newPoint);
           tempPoints.push(newPoint);
+          currentLabelCharCode = newPoint.label.charCodeAt(0) + 1;
+          if (currentLabelCharCode > 90) currentLabelCharCode = 65;
+          updateLabelInput();
         }
 
         if (
@@ -199,19 +236,27 @@
         element.setAttribute("fill", currentMode === "arc" ? "red" : "green");
         element.setAttribute("class", "point");
         element.addEventListener("mousedown", startDrag);
-        return element;
+
+        const label = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text"
+        );
+        label.setAttribute("x", point.x + POINT_RADIUS + 2);
+        label.setAttribute("y", point.y - POINT_RADIUS - 2);
+        label.setAttribute("class", "point-label");
+        label.textContent = point.label;
+
+        return [element, label];
       }
 
       function redrawCanvas() {
         const svg = document.getElementById("svg");
         svg.innerHTML = "";
 
-        // Draw all segments
         segments.forEach((segment) => {
           if (segment.type === "arc") {
             const circle = calculateCircle(...segment.points);
             if (circle) {
-              // Draw arc
               const sorted = [...segment.points].sort((a, b) => a.x - b.x);
               const path = createArcPath(
                 circle,
@@ -221,7 +266,6 @@
               );
               svg.appendChild(path);
 
-              // Draw center point
               const center = document.createElementNS(
                 "http://www.w3.org/2000/svg",
                 "circle"
@@ -230,11 +274,18 @@
               center.setAttribute("cy", circle.cy);
               center.setAttribute("r", POINT_RADIUS);
               center.setAttribute("fill", "blue");
-              center.setAttribute("class", "center-point");
               svg.appendChild(center);
+
+              const centerLabel = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "text"
+              );
+              centerLabel.setAttribute("x", circle.cx + POINT_RADIUS + 2);
+              centerLabel.setAttribute("y", circle.cy - POINT_RADIUS - 2);
+              centerLabel.textContent = "C" + segment.points[0].label;
+              svg.appendChild(centerLabel);
             }
           } else {
-            // Draw line
             const line = document.createElementNS(
               "http://www.w3.org/2000/svg",
               "line"
@@ -249,12 +300,18 @@
           }
         });
 
-        // Draw all points
-        allPoints.forEach((p) => svg.appendChild(drawPointElement(p)));
-        tempPoints.forEach((p) => svg.appendChild(drawPointElement(p)));
+        allPoints.forEach((p) => {
+          const [pointElement, labelElement] = drawPointElement(p);
+          svg.appendChild(pointElement);
+          svg.appendChild(labelElement);
+        });
+        tempPoints.forEach((p) => {
+          const [pointElement, labelElement] = drawPointElement(p);
+          svg.appendChild(pointElement);
+          svg.appendChild(labelElement);
+        });
       }
 
-      // Event listeners
       document.getElementById("svg").addEventListener("click", handleClick);
       document.getElementById("toggleMode").addEventListener("click", () => {
         currentMode = currentMode === "arc" ? "line" : "arc";
@@ -264,14 +321,42 @@
         tempPoints = [];
         redrawCanvas();
       });
+
+      document.getElementById("clearLast").addEventListener("click", () => {
+        if (segments.length === 0) return;
+        const removed = segments.pop();
+
+        const usedIds = new Set();
+        segments.forEach((s) => s.points.forEach((p) => usedIds.add(p.id)));
+        tempPoints.forEach((p) => usedIds.add(p.id));
+
+        allPoints = allPoints.filter((p) => usedIds.has(p.id));
+        redrawCanvas();
+      });
+
       document.getElementById("clearAll").addEventListener("click", () => {
         segments = [];
         allPoints = [];
         tempPoints = [];
+        currentLabelCharCode = 65;
+        updateLabelInput();
         redrawCanvas();
       });
 
-      // Initial redraw
+      document.getElementById("pointSize").addEventListener("input", (e) => {
+        POINT_RADIUS = parseInt(e.target.value);
+        redrawCanvas();
+      });
+
+      document.getElementById("nextLabel").addEventListener("input", (e) => {
+        const val = e.target.value.toUpperCase();
+        if (val.length === 1 && val.match(/[A-Z]/i)) {
+          currentLabelCharCode = val.charCodeAt(0);
+          updateLabelInput();
+        }
+      });
+
+      updateLabelInput();
       redrawCanvas();
     </script>
   </body>
