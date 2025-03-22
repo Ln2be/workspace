@@ -88,6 +88,23 @@
           Exemple: Une masse de 2 kg, un temps de 5 s, une distance de 10 m.
         </p>
       </div>
+
+      <div class="card">
+        <h2>📐 Calcul de la hauteur h<sub>AB</sub></h2>
+        <div class="visual">
+          <img src="h1.svg" alt="Méthode sinus" /><br />
+          \( h_{AB} = r \cdot \sin(\alpha) \)
+        </div>
+        <div class="visual">
+          <img src="h2.svg" alt="Méthode cosinus" /><br />
+          \( h_{AB} = r \cdot (1 - \cos(\alpha)) \)
+        </div>
+        <div class="visual">
+          <img src="h3.svg" alt="Méthode arc de cercle" /><br />
+          \( h_{AB} = r \cdot (1 - \cos(\alpha)) \)
+        </div>
+      </div>
+
       <div class="card">
         <h2>🔷 Représentation des Forces</h2>
         <div class="formula">
@@ -107,6 +124,7 @@
           ↑ Opposé au mouvement
         </div>
       </div>
+
       <div class="card">
         <h2>📐 Calcul du Travail</h2>
         <div class="formula">
@@ -122,20 +140,27 @@
           <em>(Travail résistant)</em>
         </div>
       </div>
+
       <div class="card">
-        <h2>📐 Calcul de la hauteur h<sub>AB</sub></h2>
-        <div class="visual">
-          <img src="h1.svg" alt="Méthode sinus" /><br />
-          \( h_{AB} = r \cdot \sin(\alpha) \)
+        <h2>⚡ Théorème de l'Énergie Cinétique</h2>
+        <div class="formula">
+            <strong>1. Cas général</strong><br>
+            \( \Delta E_c = W_{\text{total}} \)<br>
+            \( \Delta E_c = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2 \)
         </div>
-        <div class="visual">
-          <img src="h2.svg" alt="Méthode cosinus" /><br />
-          \( h_{AB} = r \cdot (1 - \cos(\alpha)) \)
+        <div class="formula">
+            <strong>2. Poids seule force</strong><br>
+            \( \Delta E_c = W_P = mgh \) (descente)<br>
+            \( v_B^2 - v_A^2 = 2gh_{AB} \)  (descente)<br>  
+            \( v_B^2 - v_A^2 = -2gh_{AB} \)  (montée)<br>
         </div>
-        <div class="visual">
-          <img src="h3.svg" alt="Méthode arc de cercle" /><br />
-          \( h_{AB} = r \cdot (1 - \cos(\alpha)) \)
+        <div class="formula">
+            <strong>3. Poids + frottement</strong><br>
+            \( \Delta E_c = W_P + W_f \)<br>
+            \( \ mv_B^2 - mv_A^2= 2mgh_{AB} - 2f \cdot AB \) (descente)<br>
+            \( \ mv_B^2 - mv_A^2= -2mgh_{AB} - 2f \cdot AB \) (montée)
         </div>
+    </div>
       </div>
     </div>
   </body>
