@@ -296,6 +296,8 @@
         static currentMode = "arc";
         static adjustMode = false;
         static instance = null;
+        static GRID_SPACING = 20;
+        static GRID_COLOR = "#e0e0e0";
 
         constructor() {
           this.svg = document.getElementById("svg");
@@ -312,6 +314,48 @@
 
           CanvasManager.instance = this;
           this.setupEventListeners();
+          this.redraw();
+        }
+
+        drawGrid() {
+          const width = parseInt(this.svg.getAttribute("width"));
+          const height = parseInt(this.svg.getAttribute("height"));
+
+          const gridGroup = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "g"
+          );
+          gridGroup.setAttribute("id", "grid");
+
+          for (let x = 0; x <= width; x += CanvasManager.GRID_SPACING) {
+            const line = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "line"
+            );
+            line.setAttribute("x1", x);
+            line.setAttribute("y1", 0);
+            line.setAttribute("x2", x);
+            line.setAttribute("y2", height);
+            line.setAttribute("stroke", CanvasManager.GRID_COLOR);
+            line.setAttribute("stroke-width", "0.5");
+            gridGroup.appendChild(line);
+          }
+
+          for (let y = 0; y <= height; y += CanvasManager.GRID_SPACING) {
+            const line = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "line"
+            );
+            line.setAttribute("x1", 0);
+            line.setAttribute("y1", y);
+            line.setAttribute("x2", width);
+            line.setAttribute("y2", y);
+            line.setAttribute("stroke", CanvasManager.GRID_COLOR);
+            line.setAttribute("stroke-width", "0.5");
+            gridGroup.appendChild(line);
+          }
+
+          this.svg.appendChild(gridGroup);
         }
 
         getMousePosition(event) {
@@ -462,35 +506,20 @@
           if (!CanvasManager.adjustMode) return;
 
           const pointId = event.target.getAttribute("data-point-id");
-          const centerId = event.target.getAttribute("data-center-id");
-
           if (pointId) {
             this.draggedPoint = this.allPoints.find((p) => p.id == pointId);
             if (!this.draggedPoint) return;
-          } else if (centerId) {
-            this.draggedCenter = this.segments.find(
-              (s) => s.circle && s.circle.id == centerId
-            )?.circle;
-            if (!this.draggedCenter) return;
+          } else {
+            return;
           }
 
           const rect = this.svg.getBoundingClientRect();
-          this.offset.x =
-            event.clientX -
-            rect.left -
-            (this.draggedPoint?.x || this.draggedCenter?.cx);
-          this.offset.y =
-            event.clientY -
-            rect.top -
-            (this.draggedPoint?.y || this.draggedCenter?.cy);
+          this.offset.x = event.clientX - rect.left - this.draggedPoint.x;
+          this.offset.y = event.clientY - rect.top - this.draggedPoint.y;
         }
 
         drag(event) {
-          if (
-            !CanvasManager.adjustMode ||
-            (!this.draggedPoint && !this.draggedCenter)
-          )
-            return;
+          if (!CanvasManager.adjustMode || !this.draggedPoint) return;
 
           const { x, y } = this.getMousePosition(event);
 
@@ -507,15 +536,6 @@
               this.draggedPoint.x = x - this.offset.x;
               this.draggedPoint.y = y - this.offset.y;
             }
-          } else if (this.draggedCenter) {
-            this.draggedCenter.cx = x - this.offset.x;
-            this.draggedCenter.cy = y - this.offset.y;
-            const segment = this.segments.find(
-              (s) => s.circle === this.draggedCenter
-            );
-            if (segment) {
-              segment.circle.updateRadius(segment.points);
-            }
           }
 
           this.redraw();
@@ -528,6 +548,7 @@
 
         redraw() {
           this.svg.innerHTML = "";
+          this.drawGrid();
           this.segments.forEach((segment) => segment.draw(this.svg));
           this.allPoints.forEach((point) => {
             const element = point.draw(this.svg);
@@ -548,10 +569,57 @@
         }
 
         exportSVG() {
-          const svgClone = this.svg.cloneNode(false);
+          const svgClone = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "svg"
+          );
           svgClone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 
-          // Remove interactive attributes and event listeners
+          // Collect all points to determine bounding box
+          const allPoints = [...this.allPoints, ...this.tempPoints];
+          this.segments.forEach((segment) => {
+            if (segment.type === "line") {
+              allPoints.push(...segment.points);
+            } else if (segment.type === "arc" && segment.circle) {
+              allPoints.push(...segment.points);
+              allPoints.push({
+                x: segment.circle.cx,
+                y: segment.circle.cy,
+              });
+            }
+          });
+
+          if (allPoints.length === 0) {
+            // If no points, export a minimal SVG
+            svgClone.setAttribute("width", "100");
+            svgClone.setAttribute("height", "100");
+            svgClone.setAttribute("viewBox", "0 0 100 100");
+          } else {
+            // Calculate bounding box
+            let minX = Infinity,
+              minY = Infinity,
+              maxX = -Infinity,
+              maxY = -Infinity;
+
+            allPoints.forEach((point) => {
+              minX = Math.min(minX, point.x - CanvasManager.POINT_RADIUS - 10); // Padding for labels
+              minY = Math.min(minY, point.y - CanvasManager.POINT_RADIUS - 10);
+              maxX = Math.max(maxX, point.x + CanvasManager.POINT_RADIUS + 10);
+              maxY = Math.max(maxY, point.y + CanvasManager.POINT_RADIUS + 10);
+            });
+
+            const width = maxX - minX;
+            const height = maxY - minY;
+
+            svgClone.setAttribute("width", width);
+            svgClone.setAttribute("height", height);
+            svgClone.setAttribute(
+              "viewBox",
+              `${minX} ${minY} ${width} ${height}`
+            );
+          }
+
+          // Add drawing elements
           this.segments.forEach((segment) => {
             if (segment.type === "arc" && segment.circle) {
               const [p1, p2, p3] = segment.points;
@@ -858,7 +926,6 @@
             });
         }
       }
-
       const manager = new CanvasManager();
     </script>
   </body>
