@@ -37,327 +37,368 @@
     <svg id="svg" width="800" height="600"></svg>
 
     <script>
-      let POINT_RADIUS = 7;
-      const SNAP_DISTANCE = 15;
-      let currentLabelCharCode = 65;
-
-      let segments = [];
-      let currentMode = "arc";
-      let tempPoints = [];
-      let allPoints = [];
-      let draggedPoint = null;
-      let offset = { x: 0, y: 0 };
-
-      function getMousePosition(event) {
-        const rect = document.getElementById("svg").getBoundingClientRect();
-        return {
-          x: event.clientX - rect.left,
-          y: event.clientY - rect.top,
-        };
-      }
-
-      function getNextLabel() {
-        const label = String.fromCharCode(currentLabelCharCode);
-        currentLabelCharCode =
-          currentLabelCharCode < 90 ? currentLabelCharCode + 1 : 65;
-        return label;
-      }
-
-      function updateLabelInput() {
-        document.getElementById("nextLabel").value =
-          String.fromCharCode(currentLabelCharCode);
-      }
-
-      function findExistingPoint(x, y) {
-        return allPoints.find(
-          (p) => Math.hypot(p.x - x, p.y - y) <= SNAP_DISTANCE
-        );
-      }
-
-      function handleClick(event) {
-        if (draggedPoint) return;
-
-        const { x, y } = getMousePosition(event);
-        const existing = findExistingPoint(x, y);
-
-        if (existing) {
-          tempPoints.push(existing);
-        } else {
-          const newPoint = {
-            x,
-            y,
-            id: Date.now() + Math.random(),
-            label: document.getElementById("nextLabel").value,
-            size: POINT_RADIUS,
-          };
-          allPoints.push(newPoint);
-          tempPoints.push(newPoint);
-          currentLabelCharCode = newPoint.label.charCodeAt(0) + 1;
-          if (currentLabelCharCode > 90) currentLabelCharCode = 65;
-          updateLabelInput();
+      class Point {
+        constructor(x, y, label, size) {
+          this.x = x;
+          this.y = y;
+          this.id = Date.now() + Math.random();
+          this.label = label;
+          this.size = size;
         }
 
-        if (
-          (currentMode === "arc" && tempPoints.length === 3) ||
-          (currentMode === "line" && tempPoints.length === 2)
-        ) {
-          completeSegment();
+        draw(svg) {
+          const point = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "circle"
+          );
+          point.setAttribute("data-point-id", this.id);
+          point.setAttribute("cx", this.x);
+          point.setAttribute("cy", this.y);
+          point.setAttribute("r", this.size);
+          point.setAttribute(
+            "fill",
+            CanvasManager.currentMode === "arc" ? "red" : "green"
+          );
+          point.setAttribute("class", "point");
+
+          const label = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text"
+          );
+          label.setAttribute("x", this.x + this.size + 2);
+          label.setAttribute("y", this.y - this.size - 2);
+          label.setAttribute("class", "point-label");
+          label.textContent = this.label;
+
+          svg.appendChild(point);
+          svg.appendChild(label);
+          return point;
         }
 
-        redrawCanvas();
-      }
-
-      function completeSegment() {
-        if (currentMode === "arc") {
-          const circle = calculateCircle(...tempPoints);
-          if (!circle) {
-            alert("Points are collinear!");
-            tempPoints = [];
-            return;
-          }
-          segments.push({
-            type: "arc",
-            points: [...tempPoints],
-            circle: circle,
-          });
-        } else {
-          segments.push({
-            type: "line",
-            points: [...tempPoints],
-          });
+        distanceTo(x, y) {
+          return Math.hypot(this.x - x, this.y - y);
         }
-        tempPoints = [];
+
+        constrainToCircle(circle, mouseX, mouseY) {
+          const dx = mouseX - circle.cx;
+          const dy = mouseY - circle.cy;
+          const angle = Math.atan2(dy, dx);
+          this.x = circle.cx + circle.radius * Math.cos(angle);
+          this.y = circle.cy + circle.radius * Math.sin(angle);
+        }
       }
 
-      function startDrag(event) {
-        const pointId = event.target.getAttribute("data-point-id");
-        draggedPoint = allPoints.find((p) => p.id == pointId);
+      class Circle {
+        constructor(cx, cy, radius) {
+          this.cx = cx;
+          this.cy = cy;
+          this.radius = radius;
+        }
 
-        if (!draggedPoint) return;
+        static fromThreePoints(A, B, C) {
+          const D =
+            2 * (A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y));
+          if (D === 0) return null;
 
-        const rect = document.getElementById("svg").getBoundingClientRect();
-        offset.x = event.clientX - rect.left - draggedPoint.x;
-        offset.y = event.clientY - rect.top - draggedPoint.y;
+          const cx =
+            ((A.x ** 2 + A.y ** 2) * (B.y - C.y) +
+              (B.x ** 2 + B.y ** 2) * (C.y - A.y) +
+              (C.x ** 2 + C.y ** 2) * (A.y - B.y)) /
+            D;
 
-        document.addEventListener("mousemove", drag);
-        document.addEventListener("mouseup", stopDrag);
+          const cy =
+            ((A.x ** 2 + A.y ** 2) * (C.x - B.x) +
+              (B.x ** 2 + B.y ** 2) * (A.x - C.x) +
+              (C.x ** 2 + C.y ** 2) * (B.x - A.x)) /
+            D;
+
+          return new Circle(cx, cy, Math.hypot(A.x - cx, A.y - cy));
+        }
+
+        drawCenter(svg, label) {
+          const center = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "circle"
+          );
+          center.setAttribute("cx", this.cx);
+          center.setAttribute("cy", this.cy);
+          center.setAttribute("r", CanvasManager.POINT_RADIUS);
+          center.setAttribute("fill", "blue");
+
+          const centerLabel = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text"
+          );
+          centerLabel.setAttribute(
+            "x",
+            this.cx + CanvasManager.POINT_RADIUS + 2
+          );
+          centerLabel.setAttribute(
+            "y",
+            this.cy - CanvasManager.POINT_RADIUS - 2
+          );
+          centerLabel.textContent = "C" + label;
+
+          svg.appendChild(center);
+          svg.appendChild(centerLabel);
+        }
+
+        getAngle(point) {
+          const dx = point.x - this.cx;
+          const dy = point.y - this.cy;
+          const angle = Math.atan2(dy, dx);
+          return angle < 0 ? angle + 2 * Math.PI : angle;
+        }
       }
 
-      function drag(event) {
-        if (!draggedPoint) return;
+      class Segment {
+        constructor(type, points) {
+          this.type = type;
+          this.points = points;
+          this.circle =
+            type === "arc" ? Circle.fromThreePoints(...points) : null;
+        }
 
-        const rect = document.getElementById("svg").getBoundingClientRect();
-        draggedPoint.x = event.clientX - rect.left - offset.x;
-        draggedPoint.y = event.clientY - rect.top - offset.y;
-
-        redrawCanvas();
-      }
-
-      function stopDrag() {
-        draggedPoint = null;
-        document.removeEventListener("mousemove", drag);
-        document.removeEventListener("mouseup", stopDrag);
-      }
-
-      function calculateCircle(A, B, C) {
-        const D =
-          2 * (A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y));
-        if (D === 0) return null;
-
-        const cx =
-          ((A.x ** 2 + A.y ** 2) * (B.y - C.y) +
-            (B.x ** 2 + B.y ** 2) * (C.y - A.y) +
-            (C.x ** 2 + C.y ** 2) * (A.y - B.y)) /
-          D;
-
-        const cy =
-          ((A.x ** 2 + A.y ** 2) * (C.x - B.x) +
-            (B.x ** 2 + B.y ** 2) * (A.x - C.x) +
-            (C.x ** 2 + C.y ** 2) * (B.x - A.x)) /
-          D;
-
-        return {
-          cx: cx,
-          cy: cy,
-          radius: Math.hypot(A.x - cx, A.y - cy),
-        };
-      }
-
-      function createArcPath(circle, left, middle, right) {
-        const thetaL = calculateAngle(left, circle.cx, circle.cy);
-        const thetaM = calculateAngle(middle, circle.cx, circle.cy);
-        const thetaR = calculateAngle(right, circle.cx, circle.cy);
-
-        const sweepFlag = isMiddleInClockwise(thetaL, thetaR, thetaM) ? 1 : 0;
-        const angle = sweepFlag
-          ? (thetaR - thetaL + 2 * Math.PI) % (2 * Math.PI)
-          : (thetaL - thetaR + 2 * Math.PI) % (2 * Math.PI);
-        const largeArcFlag = angle > Math.PI ? 1 : 0;
-
-        const path = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "path"
-        );
-        path.setAttribute(
-          "d",
-          `M ${left.x},${left.y} ` +
-            `A ${circle.radius} ${circle.radius} 0 ` +
-            `${largeArcFlag} ${sweepFlag} ${right.x},${right.y}`
-        );
-        path.setAttribute("stroke", "blue");
-        path.setAttribute("fill", "none");
-        path.setAttribute("stroke-width", "2");
-        return path;
-      }
-
-      function calculateAngle(point, cx, cy) {
-        const dx = point.x - cx;
-        const dy = point.y - cy;
-        const angle = Math.atan2(dy, dx);
-        return angle < 0 ? angle + 2 * Math.PI : angle;
-      }
-
-      function isMiddleInClockwise(thetaL, thetaR, thetaM) {
-        return (
-          (thetaM - thetaL + 2 * Math.PI) % (2 * Math.PI) <=
-          (thetaR - thetaL + 2 * Math.PI) % (2 * Math.PI)
-        );
-      }
-
-      function drawPointElement(point) {
-        const element = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
-        element.setAttribute("data-point-id", point.id);
-        element.setAttribute("cx", point.x);
-        element.setAttribute("cy", point.y);
-        element.setAttribute("r", POINT_RADIUS);
-        element.setAttribute("fill", currentMode === "arc" ? "red" : "green");
-        element.setAttribute("class", "point");
-        element.addEventListener("mousedown", startDrag);
-
-        const label = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "text"
-        );
-        label.setAttribute("x", point.x + POINT_RADIUS + 2);
-        label.setAttribute("y", point.y - POINT_RADIUS - 2);
-        label.setAttribute("class", "point-label");
-        label.textContent = point.label;
-
-        return [element, label];
-      }
-
-      function redrawCanvas() {
-        const svg = document.getElementById("svg");
-        svg.innerHTML = "";
-
-        segments.forEach((segment) => {
-          if (segment.type === "arc") {
-            const circle = calculateCircle(...segment.points);
-            if (circle) {
-              const sorted = [...segment.points].sort((a, b) => a.x - b.x);
-              const path = createArcPath(
-                circle,
-                sorted[0],
-                sorted[1],
-                sorted[2]
-              );
-              svg.appendChild(path);
-
-              const center = document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "circle"
-              );
-              center.setAttribute("cx", circle.cx);
-              center.setAttribute("cy", circle.cy);
-              center.setAttribute("r", POINT_RADIUS);
-              center.setAttribute("fill", "blue");
-              svg.appendChild(center);
-
-              const centerLabel = document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "text"
-              );
-              centerLabel.setAttribute("x", circle.cx + POINT_RADIUS + 2);
-              centerLabel.setAttribute("y", circle.cy - POINT_RADIUS - 2);
-              centerLabel.textContent = "C" + segment.points[0].label;
-              svg.appendChild(centerLabel);
-            }
-          } else {
+        draw(svg) {
+          if (this.type === "arc" && this.circle) {
+            const [p1, p2, p3] = this.points;
+            const path = this.createArcPath(p1, p2, p3);
+            svg.appendChild(path);
+            this.circle.drawCenter(svg, this.points[0].label);
+          } else if (this.type === "line") {
             const line = document.createElementNS(
               "http://www.w3.org/2000/svg",
               "line"
             );
-            line.setAttribute("x1", segment.points[0].x);
-            line.setAttribute("y1", segment.points[0].y);
-            line.setAttribute("x2", segment.points[1].x);
-            line.setAttribute("y2", segment.points[1].y);
+            line.setAttribute("x1", this.points[0].x);
+            line.setAttribute("y1", this.points[0].y);
+            line.setAttribute("x2", this.points[1].x);
+            line.setAttribute("y2", this.points[1].y);
             line.setAttribute("stroke", "green");
             line.setAttribute("stroke-width", "2");
             svg.appendChild(line);
           }
-        });
+        }
 
-        allPoints.forEach((p) => {
-          const [pointElement, labelElement] = drawPointElement(p);
-          svg.appendChild(pointElement);
-          svg.appendChild(labelElement);
-        });
-        tempPoints.forEach((p) => {
-          const [pointElement, labelElement] = drawPointElement(p);
-          svg.appendChild(pointElement);
-          svg.appendChild(labelElement);
-        });
+        createArcPath(left, middle, right) {
+          const thetaL = this.circle.getAngle(left);
+          const thetaM = this.circle.getAngle(middle);
+          const thetaR = this.circle.getAngle(right);
+
+          const isClockwise =
+            (thetaM - thetaL + 2 * Math.PI) % (2 * Math.PI) <=
+            (thetaR - thetaL + 2 * Math.PI) % (2 * Math.PI);
+          const sweepFlag = isClockwise ? 1 : 0;
+
+          const angleDiff = sweepFlag
+            ? (thetaR - thetaL + 2 * Math.PI) % (2 * Math.PI)
+            : (thetaL - thetaR + 2 * Math.PI) % (2 * Math.PI);
+          const largeArcFlag = angleDiff > Math.PI ? 1 : 0;
+
+          const path = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+          );
+          path.setAttribute(
+            "d",
+            `M ${left.x},${left.y} ` +
+              `A ${this.circle.radius} ${this.circle.radius} 0 ` +
+              `${largeArcFlag} ${sweepFlag} ${right.x},${right.y}`
+          );
+          path.setAttribute("stroke", "blue");
+          path.setAttribute("fill", "none");
+          path.setAttribute("stroke-width", "2");
+          return path;
+        }
       }
 
-      document.getElementById("svg").addEventListener("click", handleClick);
-      document.getElementById("toggleMode").addEventListener("click", () => {
-        currentMode = currentMode === "arc" ? "line" : "arc";
-        document.getElementById("toggleMode").textContent = `Switch to ${
-          currentMode === "arc" ? "Line" : "Arc"
-        } Mode`;
-        tempPoints = [];
-        redrawCanvas();
-      });
+      class CanvasManager {
+        static POINT_RADIUS = 7;
+        static SNAP_DISTANCE = 15;
+        static currentMode = "arc";
 
-      document.getElementById("clearLast").addEventListener("click", () => {
-        if (segments.length === 0) return;
-        const removed = segments.pop();
+        constructor() {
+          this.svg = document.getElementById("svg");
+          this.segments = [];
+          this.tempPoints = [];
+          this.allPoints = [];
+          this.draggedPoint = null;
+          this.offset = { x: 0, y: 0 };
+          this.currentLabelCharCode = 65;
 
-        const usedIds = new Set();
-        segments.forEach((s) => s.points.forEach((p) => usedIds.add(p.id)));
-        tempPoints.forEach((p) => usedIds.add(p.id));
-
-        allPoints = allPoints.filter((p) => usedIds.has(p.id));
-        redrawCanvas();
-      });
-
-      document.getElementById("clearAll").addEventListener("click", () => {
-        segments = [];
-        allPoints = [];
-        tempPoints = [];
-        currentLabelCharCode = 65;
-        updateLabelInput();
-        redrawCanvas();
-      });
-
-      document.getElementById("pointSize").addEventListener("input", (e) => {
-        POINT_RADIUS = parseInt(e.target.value);
-        redrawCanvas();
-      });
-
-      document.getElementById("nextLabel").addEventListener("input", (e) => {
-        const val = e.target.value.toUpperCase();
-        if (val.length === 1 && val.match(/[A-Z]/i)) {
-          currentLabelCharCode = val.charCodeAt(0);
-          updateLabelInput();
+          this.setupEventListeners();
         }
-      });
 
-      updateLabelInput();
-      redrawCanvas();
+        getMousePosition(event) {
+          const rect = this.svg.getBoundingClientRect();
+          return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top,
+          };
+        }
+
+        getNextLabel() {
+          const label = String.fromCharCode(this.currentLabelCharCode);
+          this.currentLabelCharCode =
+            this.currentLabelCharCode < 90 ? this.currentLabelCharCode + 1 : 65;
+          return label;
+        }
+
+        findExistingPoint(x, y) {
+          return this.allPoints.find(
+            (p) => p.distanceTo(x, y) <= CanvasManager.SNAP_DISTANCE
+          );
+        }
+
+        handleClick(event) {
+          if (this.draggedPoint) return;
+
+          const { x, y } = this.getMousePosition(event);
+          const existing = this.findExistingPoint(x, y);
+          const nextLabel = document.getElementById("nextLabel").value;
+
+          const point =
+            existing || new Point(x, y, nextLabel, CanvasManager.POINT_RADIUS);
+          if (!existing) {
+            this.allPoints.push(point);
+            this.currentLabelCharCode = nextLabel.charCodeAt(0) + 1;
+            if (this.currentLabelCharCode > 90) this.currentLabelCharCode = 65;
+          }
+
+          this.tempPoints.push(point);
+
+          if (
+            (CanvasManager.currentMode === "arc" &&
+              this.tempPoints.length === 3) ||
+            (CanvasManager.currentMode === "line" &&
+              this.tempPoints.length === 2)
+          ) {
+            this.completeSegment();
+          }
+
+          this.redraw();
+        }
+
+        completeSegment() {
+          const segment = new Segment(CanvasManager.currentMode, [
+            ...this.tempPoints,
+          ]);
+          if (CanvasManager.currentMode === "arc" && !segment.circle) {
+            alert("Points are collinear!");
+          } else {
+            this.segments.push(segment);
+          }
+          this.tempPoints = [];
+        }
+
+        startDrag(event) {
+          const pointId = event.target.getAttribute("data-point-id");
+          this.draggedPoint = this.allPoints.find((p) => p.id == pointId);
+          if (!this.draggedPoint) return;
+
+          const rect = this.svg.getBoundingClientRect();
+          this.offset.x = event.clientX - rect.left - this.draggedPoint.x;
+          this.offset.y = event.clientY - rect.top - this.draggedPoint.y;
+        }
+
+        drag(event) {
+          if (!this.draggedPoint) return;
+
+          const { x, y } = this.getMousePosition(event);
+
+          // Find if this point belongs to an arc segment
+          const arcSegment = this.segments.find(
+            (s) =>
+              s.type === "arc" &&
+              s.points.some((p) => p.id === this.draggedPoint.id)
+          );
+
+          if (arcSegment && arcSegment.circle) {
+            // Constrain movement to the fixed circle
+            this.draggedPoint.constrainToCircle(arcSegment.circle, x, y);
+          } else {
+            // Free movement for line points or unconnected points
+            this.draggedPoint.x = x - this.offset.x;
+            this.draggedPoint.y = y - this.offset.y;
+          }
+
+          this.redraw();
+        }
+
+        stopDrag() {
+          this.draggedPoint = null;
+        }
+
+        redraw() {
+          this.svg.innerHTML = "";
+          this.segments.forEach((segment) => segment.draw(this.svg));
+          this.allPoints.forEach((point) => {
+            const element = point.draw(this.svg);
+            element.addEventListener("mousedown", (e) => this.startDrag(e));
+          });
+          this.tempPoints.forEach((point) => {
+            const element = point.draw(this.svg);
+            element.addEventListener("mousedown", (e) => this.startDrag(e));
+          });
+        }
+
+        setupEventListeners() {
+          this.svg.addEventListener("click", (e) => this.handleClick(e));
+          document.addEventListener("mousemove", (e) => this.drag(e));
+          document.addEventListener("mouseup", () => this.stopDrag());
+
+          document
+            .getElementById("toggleMode")
+            .addEventListener("click", () => {
+              CanvasManager.currentMode =
+                CanvasManager.currentMode === "arc" ? "line" : "arc";
+              document.getElementById("toggleMode").textContent = `Switch to ${
+                CanvasManager.currentMode === "arc" ? "Line" : "Arc"
+              } Mode`;
+              this.tempPoints = [];
+              this.redraw();
+            });
+
+          document.getElementById("clearLast").addEventListener("click", () => {
+            if (!this.segments.length) return;
+            this.segments.pop();
+            const usedIds = new Set();
+            this.segments.forEach((s) =>
+              s.points.forEach((p) => usedIds.add(p.id))
+            );
+            this.tempPoints.forEach((p) => usedIds.add(p.id));
+            this.allPoints = this.allPoints.filter((p) => usedIds.has(p.id));
+            this.redraw();
+          });
+
+          document.getElementById("clearAll").addEventListener("click", () => {
+            this.segments = [];
+            this.allPoints = [];
+            this.tempPoints = [];
+            this.currentLabelCharCode = 65;
+            document.getElementById("nextLabel").value = "A";
+            this.redraw();
+          });
+
+          document
+            .getElementById("pointSize")
+            .addEventListener("input", (e) => {
+              CanvasManager.POINT_RADIUS = parseInt(e.target.value);
+              this.redraw();
+            });
+
+          document
+            .getElementById("nextLabel")
+            .addEventListener("input", (e) => {
+              const val = e.target.value.toUpperCase();
+              if (val.length === 1 && val.match(/[A-Z]/i)) {
+                this.currentLabelCharCode = val.charCodeAt(0);
+              }
+            });
+        }
+      }
+
+      const manager = new CanvasManager();
     </script>
   </body>
 </html>
