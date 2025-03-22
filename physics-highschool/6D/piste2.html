@@ -22,11 +22,19 @@
         font-size: 12px;
         user-select: none;
       }
+      .adjust-controls {
+        display: none;
+        margin: 10px;
+      }
+      .adjust-mode .adjust-controls {
+        display: block;
+      }
     </style>
   </head>
   <body>
     <div class="controls">
       <button id="toggleMode">Switch to Line Mode</button>
+      <button id="toggleAdjust">Enter Adjust Mode</button>
       <button id="clearLast">Clear Last Segment</button>
       <button id="clearAll">Clear All</button>
       <label>Point Size: </label>
@@ -34,16 +42,34 @@
       <label>Label: </label>
       <input type="text" id="nextLabel" size="1" value="A" />
     </div>
+    <div class="adjust-controls">
+      <h3>Adjust Properties</h3>
+      <label>Selected Point Size: </label>
+      <input type="range" id="adjustPointSize" min="3" max="20" value="7" />
+      <label>Point Label: </label>
+      <input type="text" id="adjustPointLabel" size="1" />
+      <label>Point Color: </label>
+      <input type="color" id="adjustPointColor" value="#ff0000" />
+      <label>Segment Color: </label>
+      <input type="color" id="adjustSegmentColor" value="#0000ff" />
+      <label>Segment Label: </label>
+      <input type="text" id="adjustSegmentLabel" size="5" />
+      <label>Center Color: </label>
+      <input type="color" id="adjustCenterColor" value="#0000ff" />
+      <label>Center Label: </label>
+      <input type="text" id="adjustCenterLabel" size="5" />
+    </div>
     <svg id="svg" width="800" height="600"></svg>
 
     <script>
       class Point {
-        constructor(x, y, label, size) {
+        constructor(x, y, label, size, color = "#ff0000") {
           this.x = x;
           this.y = y;
           this.id = Date.now() + Math.random();
           this.label = label;
           this.size = size;
+          this.color = color;
         }
 
         draw(svg) {
@@ -57,7 +83,11 @@
           point.setAttribute("r", this.size);
           point.setAttribute(
             "fill",
-            CanvasManager.currentMode === "arc" ? "red" : "green"
+            CanvasManager.adjustMode
+              ? this.color
+              : CanvasManager.currentMode === "arc"
+              ? "#ff0000"
+              : "#00ff00"
           );
           point.setAttribute("class", "point");
 
@@ -89,10 +119,12 @@
       }
 
       class Circle {
-        constructor(cx, cy, radius) {
+        constructor(cx, cy, radius, color = "#0000ff", label = "") {
           this.cx = cx;
           this.cy = cy;
           this.radius = radius;
+          this.color = color;
+          this.label = label;
         }
 
         static fromThreePoints(A, B, C) {
@@ -115,15 +147,17 @@
           return new Circle(cx, cy, Math.hypot(A.x - cx, A.y - cy));
         }
 
-        drawCenter(svg, label) {
+        drawCenter(svg) {
           const center = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "circle"
           );
+          center.setAttribute("data-center-id", this.id);
           center.setAttribute("cx", this.cx);
           center.setAttribute("cy", this.cy);
           center.setAttribute("r", CanvasManager.POINT_RADIUS);
-          center.setAttribute("fill", "blue");
+          center.setAttribute("fill", this.color);
+          center.setAttribute("class", "point");
 
           const centerLabel = document.createElementNS(
             "http://www.w3.org/2000/svg",
@@ -137,10 +171,11 @@
             "y",
             this.cy - CanvasManager.POINT_RADIUS - 2
           );
-          centerLabel.textContent = "C" + label;
+          centerLabel.textContent = this.label || "";
 
           svg.appendChild(center);
           svg.appendChild(centerLabel);
+          return center;
         }
 
         getAngle(point) {
@@ -149,14 +184,23 @@
           const angle = Math.atan2(dy, dx);
           return angle < 0 ? angle + 2 * Math.PI : angle;
         }
+
+        updateRadius(points) {
+          this.radius = Math.max(
+            ...points.map((p) => Math.hypot(p.x - this.cx, p.y - this.cy))
+          );
+        }
       }
 
       class Segment {
-        constructor(type, points) {
+        constructor(type, points, color = "#0000ff", label = "") {
           this.type = type;
           this.points = points;
           this.circle =
             type === "arc" ? Circle.fromThreePoints(...points) : null;
+          this.color = color;
+          this.label = label;
+          if (this.circle) this.circle.id = Date.now() + Math.random();
         }
 
         draw(svg) {
@@ -164,7 +208,26 @@
             const [p1, p2, p3] = this.points;
             const path = this.createArcPath(p1, p2, p3);
             svg.appendChild(path);
-            this.circle.drawCenter(svg, this.points[0].label);
+            const centerElement = this.circle.drawCenter(svg);
+            if (CanvasManager.adjustMode) {
+              centerElement.addEventListener("mousedown", (e) =>
+                CanvasManager.instance.startDrag(e)
+              );
+            }
+
+            if (this.label) {
+              const midX = (p1.x + p3.x) / 2;
+              const midY = (p1.y + p3.y) / 2;
+              const labelEl = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "text"
+              );
+              labelEl.setAttribute("x", midX);
+              labelEl.setAttribute("y", midY);
+              labelEl.setAttribute("text-anchor", "middle");
+              labelEl.textContent = this.label;
+              svg.appendChild(labelEl);
+            }
           } else if (this.type === "line") {
             const line = document.createElementNS(
               "http://www.w3.org/2000/svg",
@@ -174,9 +237,23 @@
             line.setAttribute("y1", this.points[0].y);
             line.setAttribute("x2", this.points[1].x);
             line.setAttribute("y2", this.points[1].y);
-            line.setAttribute("stroke", "green");
+            line.setAttribute("stroke", this.color);
             line.setAttribute("stroke-width", "2");
             svg.appendChild(line);
+
+            if (this.label) {
+              const midX = (this.points[0].x + this.points[1].x) / 2;
+              const midY = (this.points[0].y + this.points[1].y) / 2;
+              const labelEl = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "text"
+              );
+              labelEl.setAttribute("x", midX);
+              labelEl.setAttribute("y", midY);
+              labelEl.setAttribute("text-anchor", "middle");
+              labelEl.textContent = this.label;
+              svg.appendChild(labelEl);
+            }
           }
         }
 
@@ -205,7 +282,7 @@
               `A ${this.circle.radius} ${this.circle.radius} 0 ` +
               `${largeArcFlag} ${sweepFlag} ${right.x},${right.y}`
           );
-          path.setAttribute("stroke", "blue");
+          path.setAttribute("stroke", this.color);
           path.setAttribute("fill", "none");
           path.setAttribute("stroke-width", "2");
           return path;
@@ -216,6 +293,8 @@
         static POINT_RADIUS = 7;
         static SNAP_DISTANCE = 15;
         static currentMode = "arc";
+        static adjustMode = false;
+        static instance = null;
 
         constructor() {
           this.svg = document.getElementById("svg");
@@ -223,9 +302,14 @@
           this.tempPoints = [];
           this.allPoints = [];
           this.draggedPoint = null;
+          this.draggedCenter = null;
+          this.selectedPoint = null;
+          this.selectedSegment = null;
+          this.selectedCenter = null;
           this.offset = { x: 0, y: 0 };
           this.currentLabelCharCode = 65;
 
+          CanvasManager.instance = this;
           this.setupEventListeners();
         }
 
@@ -251,9 +335,40 @@
         }
 
         handleClick(event) {
-          if (this.draggedPoint) return;
-
           const { x, y } = this.getMousePosition(event);
+
+          if (CanvasManager.adjustMode) {
+            const clickedPoint = this.allPoints.find(
+              (p) => p.distanceTo(x, y) <= p.size + 5
+            );
+            if (clickedPoint) {
+              this.selectedPoint = clickedPoint;
+              this.selectedSegment = null;
+              this.selectedCenter = null;
+              this.updateAdjustControls();
+            } else {
+              const clickedCenter = this.segments.find(
+                (s) =>
+                  s.circle &&
+                  Math.hypot(x - s.circle.cx, y - s.circle.cy) <=
+                    CanvasManager.POINT_RADIUS + 5
+              );
+              if (clickedCenter) {
+                this.selectedCenter = clickedCenter.circle;
+                this.selectedSegment = clickedCenter;
+                this.selectedPoint = null;
+                this.updateAdjustControls();
+              } else {
+                this.selectedSegment = this.findNearestSegment(x, y);
+                this.selectedPoint = null;
+                this.selectedCenter = null;
+                this.updateAdjustControls();
+              }
+            }
+            this.redraw();
+            return;
+          }
+
           const existing = this.findExistingPoint(x, y);
           const nextLabel = document.getElementById("nextLabel").value;
 
@@ -279,6 +394,57 @@
           this.redraw();
         }
 
+        findNearestSegment(x, y) {
+          let closestSegment = null;
+          let minDistance = Infinity;
+
+          this.segments.forEach((segment) => {
+            if (segment.type === "line") {
+              const [p1, p2] = segment.points;
+              const dist = this.pointToLineDistance(
+                x,
+                y,
+                p1.x,
+                p1.y,
+                p2.x,
+                p2.y
+              );
+              if (dist < minDistance && dist < 10) {
+                minDistance = dist;
+                closestSegment = segment;
+              }
+            } else if (segment.type === "arc") {
+              const dist = Math.abs(
+                this.circleDistance(segment.circle, x, y) -
+                  segment.circle.radius
+              );
+              if (dist < minDistance && dist < 10) {
+                minDistance = dist;
+                closestSegment = segment;
+              }
+            }
+          });
+
+          return closestSegment;
+        }
+
+        pointToLineDistance(px, py, x1, y1, x2, y2) {
+          const A = px - x1;
+          const B = py - y1;
+          const C = x2 - x1;
+          const D = y2 - y1;
+          const dot = A * C + B * D;
+          const len_sq = C * C + D * D;
+          const param = len_sq !== 0 ? dot / len_sq : -1;
+          const xx = param < 0 ? x1 : param > 1 ? x2 : x1 + param * C;
+          const yy = param < 0 ? y1 : param > 1 ? y2 : y1 + param * D;
+          return Math.hypot(px - xx, py - yy);
+        }
+
+        circleDistance(circle, x, y) {
+          return Math.hypot(x - circle.cx, y - circle.cy);
+        }
+
         completeSegment() {
           const segment = new Segment(CanvasManager.currentMode, [
             ...this.tempPoints,
@@ -292,34 +458,63 @@
         }
 
         startDrag(event) {
+          if (!CanvasManager.adjustMode) return;
+
           const pointId = event.target.getAttribute("data-point-id");
-          this.draggedPoint = this.allPoints.find((p) => p.id == pointId);
-          if (!this.draggedPoint) return;
+          const centerId = event.target.getAttribute("data-center-id");
+
+          if (pointId) {
+            this.draggedPoint = this.allPoints.find((p) => p.id == pointId);
+            if (!this.draggedPoint) return;
+          } else if (centerId) {
+            this.draggedCenter = this.segments.find(
+              (s) => s.circle && s.circle.id == centerId
+            )?.circle;
+            if (!this.draggedCenter) return;
+          }
 
           const rect = this.svg.getBoundingClientRect();
-          this.offset.x = event.clientX - rect.left - this.draggedPoint.x;
-          this.offset.y = event.clientY - rect.top - this.draggedPoint.y;
+          this.offset.x =
+            event.clientX -
+            rect.left -
+            (this.draggedPoint?.x || this.draggedCenter?.cx);
+          this.offset.y =
+            event.clientY -
+            rect.top -
+            (this.draggedPoint?.y || this.draggedCenter?.cy);
         }
 
         drag(event) {
-          if (!this.draggedPoint) return;
+          if (
+            !CanvasManager.adjustMode ||
+            (!this.draggedPoint && !this.draggedCenter)
+          )
+            return;
 
           const { x, y } = this.getMousePosition(event);
 
-          // Find if this point belongs to an arc segment
-          const arcSegment = this.segments.find(
-            (s) =>
-              s.type === "arc" &&
-              s.points.some((p) => p.id === this.draggedPoint.id)
-          );
+          if (this.draggedPoint) {
+            const arcSegment = this.segments.find(
+              (s) =>
+                s.type === "arc" &&
+                s.points.some((p) => p.id === this.draggedPoint.id)
+            );
 
-          if (arcSegment && arcSegment.circle) {
-            // Constrain movement to the fixed circle
-            this.draggedPoint.constrainToCircle(arcSegment.circle, x, y);
-          } else {
-            // Free movement for line points or unconnected points
-            this.draggedPoint.x = x - this.offset.x;
-            this.draggedPoint.y = y - this.offset.y;
+            if (arcSegment && arcSegment.circle) {
+              this.draggedPoint.constrainToCircle(arcSegment.circle, x, y);
+            } else {
+              this.draggedPoint.x = x - this.offset.x;
+              this.draggedPoint.y = y - this.offset.y;
+            }
+          } else if (this.draggedCenter) {
+            this.draggedCenter.cx = x - this.offset.x;
+            this.draggedCenter.cy = y - this.offset.y;
+            const segment = this.segments.find(
+              (s) => s.circle === this.draggedCenter
+            );
+            if (segment) {
+              segment.circle.updateRadius(segment.points);
+            }
           }
 
           this.redraw();
@@ -327,6 +522,7 @@
 
         stopDrag() {
           this.draggedPoint = null;
+          this.draggedCenter = null;
         }
 
         redraw() {
@@ -334,12 +530,43 @@
           this.segments.forEach((segment) => segment.draw(this.svg));
           this.allPoints.forEach((point) => {
             const element = point.draw(this.svg);
-            element.addEventListener("mousedown", (e) => this.startDrag(e));
+            if (CanvasManager.adjustMode && point === this.selectedPoint) {
+              element.setAttribute("stroke", "yellow");
+              element.setAttribute("stroke-width", "2");
+            }
+            if (CanvasManager.adjustMode) {
+              element.addEventListener("mousedown", (e) => this.startDrag(e));
+            }
           });
           this.tempPoints.forEach((point) => {
             const element = point.draw(this.svg);
-            element.addEventListener("mousedown", (e) => this.startDrag(e));
+            if (CanvasManager.adjustMode) {
+              element.addEventListener("mousedown", (e) => this.startDrag(e));
+            }
           });
+        }
+
+        updateAdjustControls() {
+          if (this.selectedPoint) {
+            document.getElementById("adjustPointSize").value =
+              this.selectedPoint.size;
+            document.getElementById("adjustPointLabel").value =
+              this.selectedPoint.label;
+            document.getElementById("adjustPointColor").value =
+              this.selectedPoint.color;
+          }
+          if (this.selectedSegment) {
+            document.getElementById("adjustSegmentColor").value =
+              this.selectedSegment.color;
+            document.getElementById("adjustSegmentLabel").value =
+              this.selectedSegment.label;
+          }
+          if (this.selectedCenter) {
+            document.getElementById("adjustCenterColor").value =
+              this.selectedCenter.color;
+            document.getElementById("adjustCenterLabel").value =
+              this.selectedCenter.label;
+          }
         }
 
         setupEventListeners() {
@@ -356,6 +583,22 @@
                 CanvasManager.currentMode === "arc" ? "Line" : "Arc"
               } Mode`;
               this.tempPoints = [];
+              this.redraw();
+            });
+
+          document
+            .getElementById("toggleAdjust")
+            .addEventListener("click", () => {
+              CanvasManager.adjustMode = !CanvasManager.adjustMode;
+              document.getElementById("toggleAdjust").textContent =
+                CanvasManager.adjustMode
+                  ? "Exit Adjust Mode"
+                  : "Enter Adjust Mode";
+              document.body.classList.toggle("adjust-mode");
+              this.tempPoints = [];
+              this.selectedPoint = null;
+              this.selectedSegment = null;
+              this.selectedCenter = null;
               this.redraw();
             });
 
@@ -393,6 +636,69 @@
               const val = e.target.value.toUpperCase();
               if (val.length === 1 && val.match(/[A-Z]/i)) {
                 this.currentLabelCharCode = val.charCodeAt(0);
+              }
+            });
+
+          document
+            .getElementById("adjustPointSize")
+            .addEventListener("input", (e) => {
+              if (this.selectedPoint) {
+                this.selectedPoint.size = parseInt(e.target.value);
+                this.redraw();
+              }
+            });
+
+          document
+            .getElementById("adjustPointLabel")
+            .addEventListener("input", (e) => {
+              if (this.selectedPoint) {
+                this.selectedPoint.label = e.target.value;
+                this.redraw();
+              }
+            });
+
+          document
+            .getElementById("adjustPointColor")
+            .addEventListener("input", (e) => {
+              if (this.selectedPoint) {
+                this.selectedPoint.color = e.target.value;
+                this.redraw();
+              }
+            });
+
+          document
+            .getElementById("adjustSegmentColor")
+            .addEventListener("input", (e) => {
+              if (this.selectedSegment) {
+                this.selectedSegment.color = e.target.value;
+                this.redraw();
+              }
+            });
+
+          document
+            .getElementById("adjustSegmentLabel")
+            .addEventListener("input", (e) => {
+              if (this.selectedSegment) {
+                this.selectedSegment.label = e.target.value;
+                this.redraw();
+              }
+            });
+
+          document
+            .getElementById("adjustCenterColor")
+            .addEventListener("input", (e) => {
+              if (this.selectedCenter) {
+                this.selectedCenter.color = e.target.value;
+                this.redraw();
+              }
+            });
+
+          document
+            .getElementById("adjustCenterLabel")
+            .addEventListener("input", (e) => {
+              if (this.selectedCenter) {
+                this.selectedCenter.label = e.target.value;
+                this.redraw();
               }
             });
         }
