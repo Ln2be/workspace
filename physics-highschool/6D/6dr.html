@@ -3,93 +3,139 @@
   <head>
     <meta charset="UTF-8" />
     <title>Physique - Plan Incliné</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          delimiters: [{ left: "\\(", right: "\\)", display: false }],
+        });
+      });
+    </script>
     <style>
-      /* Le CSS reste identique */
       body {
         font-family: "Segoe UI", sans-serif;
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
+        max-width: 900px;
+        margin: 10px auto;
+        padding: 10px;
         background: #f0f7ff;
+        font-size: 14px;
+      }
+      .cheatsheet {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
       }
       .card {
         background: white;
-        border-radius: 15px;
-        padding: 25px;
-        margin: 15px 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
       h2 {
         color: #2c3e50;
-        border-bottom: 3px solid #3498db;
-        padding-bottom: 8px;
+        font-size: 16px;
+        margin: 0 0 8px;
+        border-bottom: 2px solid #3498db;
       }
       .formula {
         background: #f8f9fa;
-        padding: 15px;
-        border-left: 4px solid #3498db;
-        margin: 15px 0;
+        padding: 8px;
+        border-left: 3px solid #3498db;
+        margin: 5px 0;
         font-family: monospace;
+        font-size: 13px;
       }
       .visual {
         text-align: center;
         color: #3498db;
-        font-size: 24px;
-        margin: 20px 0;
+        margin: 5px 0;
       }
       .key-term {
         color: #e74c3c;
         font-weight: bold;
       }
+      .katex {
+        font-size: 1.1em !important;
+      }
+      img {
+        max-width: 100px;
+        height: auto;
+      }
     </style>
   </head>
   <body>
-    <!-- Nouvelle section ajoutée -->
-    <div class="card">
-      <h2>📏 Unités de Base en Physique</h2>
-      <div class="formula">
-        <strong>Système International (SI)</strong><br />
-        • Masse : <span class="key-term">kilogramme (kg)</span><br />
-        • Temps : <span class="key-term">seconde (s)</span><br />
-        • Longueur : <span class="key-term">mètre (m)</span>
+    <div class="cheatsheet">
+      <div class="card">
+        <h2>📏 Unités de Base en Physique</h2>
+        <div class="formula">
+          <strong>Système International (SI)</strong><br />
+          • Masse: <span class="key-term">kilogramme (kg)</span><br />
+          • Temps: <span class="key-term">seconde (s)</span><br />
+          • Longueur: <span class="key-term">mètre (m)</span>
+        </div>
+        <p>
+          Exemple: Une masse de 2 kg, un temps de 5 s, une distance de 10 m.
+        </p>
       </div>
-      <p>Exemple : Une masse de 2 kg, un temps de 5 s, une distance de 10 m.</p>
-    </div>
-
-    <!-- Sections existantes -->
-    <div class="card">
-      <h2>🔷 Représentation des Forces</h2>
-      <div class="formula">
-        <strong>Poids (P)</strong><br />
-        ↓ Vertical dirigé vers le bas<br />
-        P = m·g → <span class="key-term">Décomposition </span> ( θ avec
-        l'horizontale ):<br />
-        P<sub>∥</sub> = P·sinθ (parallèle)<br />
-        P<sub>⊥</sub> = P·cosθ (perpendiculaire)
+      <div class="card">
+        <h2>🔷 Représentation des Forces</h2>
+        <div class="formula">
+          <strong>Poids (P)</strong><br />
+          ↓ Vertical dirigé vers le bas<br />
+          P = m·g → <span class="key-term">Décomposition</span> (θ avec
+          l'horizontale):<br />
+          P<sub>∥</sub> = P·sinθ (parallèle)<br />
+          P<sub>⊥</sub> = P·cosθ (perpendiculaire)
+        </div>
+        <div class="formula">
+          <strong>Réaction normale (N)</strong><br />
+          ⟂ Au plan → N = P<sub>⊥</sub>
+        </div>
+        <div class="formula">
+          <strong>Frottement (f)</strong><br />
+          ↑ Opposé au mouvement
+        </div>
       </div>
-      <div class="formula">
-        <strong>Réaction normale (N)</strong><br />
-        ⟂ Au plan → N = P<sub>⊥</sub>
+      <div class="card">
+        <h2>📐 Calcul du Travail</h2>
+        <div class="formula">
+          W<sub>P</sub> = +mgh<br />
+          <em>(Descente: Travail moteur)</em>
+        </div>
+        <div class="formula">
+          W<sub>P</sub> = -mgh<br />
+          <em>(Montée: Travail résistant)</em>
+        </div>
+        <div class="formula">
+          W<sub>f</sub> = -f·d<br />
+          <em>(Travail résistant)</em>
+        </div>
       </div>
-      <div class="formula">
-        <strong>Frottement (f)</strong><br />
-        ↑ Opposé au mouvement
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>📐 Calcul du Travail</h2>
-      <div class="formula">
-        W<sub>P</sub> = +mgh<br />
-        <em>(Descente : Travail moteur)</em>
-      </div>
-      <div class="formula">
-        W<sub>P</sub> = -mgh<br />
-        <em>(Montée : Travail résistant)</em>
-      </div>
-      <div class="formula">
-        W<sub>f</sub> = -f·d<br />
-        <em>(Travail résistant)</em>
+      <div class="card">
+        <h2>📐 Calcul de la hauteur h<sub>AB</sub></h2>
+        <div class="visual">
+          <img src="h1.svg" alt="Méthode sinus" /><br />
+          \( h_{AB} = r \cdot \sin(\alpha) \)
+        </div>
+        <div class="visual">
+          <img src="h2.svg" alt="Méthode cosinus" /><br />
+          \( h_{AB} = r \cdot (1 - \cos(\alpha)) \)
+        </div>
+        <div class="visual">
+          <img src="h3.svg" alt="Méthode arc de cercle" /><br />
+          \( h_{AB} = r \cdot (1 - \cos(\alpha)) \)
+        </div>
       </div>
     </div>
   </body>
