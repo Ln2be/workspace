@@ -37,6 +37,7 @@
       <button id="toggleAdjust">Enter Adjust Mode</button>
       <button id="clearLast">Clear Last Segment</button>
       <button id="clearAll">Clear All</button>
+      <button id="exportSVG">Export SVG</button>
       <label>Point Size: </label>
       <input type="range" id="pointSize" min="3" max="20" value="7" />
       <label>Label: </label>
@@ -546,6 +547,156 @@
           });
         }
 
+        exportSVG() {
+          const svgClone = this.svg.cloneNode(false);
+          svgClone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+          // Remove interactive attributes and event listeners
+          this.segments.forEach((segment) => {
+            if (segment.type === "arc" && segment.circle) {
+              const [p1, p2, p3] = segment.points;
+              const path = segment.createArcPath(p1, p2, p3);
+              svgClone.appendChild(path);
+
+              const center = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "circle"
+              );
+              center.setAttribute("cx", segment.circle.cx);
+              center.setAttribute("cy", segment.circle.cy);
+              center.setAttribute("r", CanvasManager.POINT_RADIUS);
+              center.setAttribute("fill", segment.circle.color);
+              svgClone.appendChild(center);
+
+              if (segment.circle.label) {
+                const centerLabel = document.createElementNS(
+                  "http://www.w3.org/2000/svg",
+                  "text"
+                );
+                centerLabel.setAttribute(
+                  "x",
+                  segment.circle.cx + CanvasManager.POINT_RADIUS + 2
+                );
+                centerLabel.setAttribute(
+                  "y",
+                  segment.circle.cy - CanvasManager.POINT_RADIUS - 2
+                );
+                centerLabel.textContent = segment.circle.label;
+                svgClone.appendChild(centerLabel);
+              }
+
+              if (segment.label) {
+                const midX = (p1.x + p3.x) / 2;
+                const midY = (p1.y + p3.y) / 2;
+                const labelEl = document.createElementNS(
+                  "http://www.w3.org/2000/svg",
+                  "text"
+                );
+                labelEl.setAttribute("x", midX);
+                labelEl.setAttribute("y", midY);
+                labelEl.setAttribute("text-anchor", "middle");
+                labelEl.textContent = segment.label;
+                svgClone.appendChild(labelEl);
+              }
+            } else if (segment.type === "line") {
+              const line = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "line"
+              );
+              line.setAttribute("x1", segment.points[0].x);
+              line.setAttribute("y1", segment.points[0].y);
+              line.setAttribute("x2", segment.points[1].x);
+              line.setAttribute("y2", segment.points[1].y);
+              line.setAttribute("stroke", segment.color);
+              line.setAttribute("stroke-width", "2");
+              svgClone.appendChild(line);
+
+              if (segment.label) {
+                const midX = (segment.points[0].x + segment.points[1].x) / 2;
+                const midY = (segment.points[0].y + segment.points[1].y) / 2;
+                const labelEl = document.createElementNS(
+                  "http://www.w3.org/2000/svg",
+                  "text"
+                );
+                labelEl.setAttribute("x", midX);
+                labelEl.setAttribute("y", midY);
+                labelEl.setAttribute("text-anchor", "middle");
+                labelEl.textContent = segment.label;
+                svgClone.appendChild(labelEl);
+              }
+            }
+          });
+
+          this.allPoints.forEach((point) => {
+            const pointEl = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "circle"
+            );
+            pointEl.setAttribute("cx", point.x);
+            pointEl.setAttribute("cy", point.y);
+            pointEl.setAttribute("r", point.size);
+            pointEl.setAttribute(
+              "fill",
+              CanvasManager.adjustMode
+                ? point.color
+                : CanvasManager.currentMode === "arc"
+                ? "#ff0000"
+                : "#00ff00"
+            );
+            svgClone.appendChild(pointEl);
+
+            const label = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "text"
+            );
+            label.setAttribute("x", point.x + point.size + 2);
+            label.setAttribute("y", point.y - point.size - 2);
+            label.textContent = point.label;
+            svgClone.appendChild(label);
+          });
+
+          this.tempPoints.forEach((point) => {
+            const pointEl = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "circle"
+            );
+            pointEl.setAttribute("cx", point.x);
+            pointEl.setAttribute("cy", point.y);
+            pointEl.setAttribute("r", point.size);
+            pointEl.setAttribute(
+              "fill",
+              CanvasManager.adjustMode
+                ? point.color
+                : CanvasManager.currentMode === "arc"
+                ? "#ff0000"
+                : "#00ff00"
+            );
+            svgClone.appendChild(pointEl);
+
+            const label = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "text"
+            );
+            label.setAttribute("x", point.x + point.size + 2);
+            label.setAttribute("y", point.y - point.size - 2);
+            label.textContent = point.label;
+            svgClone.appendChild(label);
+          });
+
+          const svgData = new XMLSerializer().serializeToString(svgClone);
+          const svgBlob = new Blob([svgData], {
+            type: "image/svg+xml;charset=utf-8",
+          });
+          const svgUrl = URL.createObjectURL(svgBlob);
+          const downloadLink = document.createElement("a");
+          downloadLink.href = svgUrl;
+          downloadLink.download = "drawing.svg";
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+          URL.revokeObjectURL(svgUrl);
+        }
+
         updateAdjustControls() {
           if (this.selectedPoint) {
             document.getElementById("adjustPointSize").value =
@@ -621,6 +772,10 @@
             this.currentLabelCharCode = 65;
             document.getElementById("nextLabel").value = "A";
             this.redraw();
+          });
+
+          document.getElementById("exportSVG").addEventListener("click", () => {
+            this.exportSVG();
           });
 
           document
