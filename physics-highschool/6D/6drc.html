@@ -6,32 +6,42 @@
     <style>
       body {
         font-family: "Segoe UI", sans-serif;
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background: #f0f7ff;
+        max-width: 900px;
+        margin: 10px auto;
+        padding: 10px;
+        background: #e6f0ff;
+        font-size: 14px;
+      }
+
+      .cheatsheet {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 10px;
       }
 
       .card {
-        background: white;
-        border-radius: 15px;
-        padding: 25px;
-        margin: 15px 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-top: 4px solid #3498db;
       }
 
       h2 {
         color: #2c3e50;
-        border-bottom: 3px solid #3498db;
-        padding-bottom: 8px;
+        font-size: 16px;
+        margin: 0 0 10px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #3498db;
       }
 
       .formula {
         background: #f8f9fa;
-        padding: 15px;
-        border-left: 4px solid #3498db;
-        margin: 15px 0;
+        padding: 10px;
+        border-left: 3px solid #3498db;
+        margin: 10px 0;
         font-family: monospace;
+        font-size: 13px;
       }
 
       .key-term {
@@ -40,71 +50,161 @@
       }
 
       ul {
-        padding-left: 20px;
+        padding-left: 15px;
+        margin: 5px 0;
+        list-style-type: square;
+      }
+
+      li {
+        margin: 3px 0;
+      }
+
+      strong {
+        color: #2c3e50;
       }
     </style>
   </head>
   <body>
-    <div class="card">
-      <h2>🔷 Formule Générale des Alcanes</h2>
-
-      <div class="formula">
-        <strong>Hydrocarbures saturés</strong><br />
-        Formule Générale :
-        <span class="key-term">C<sub>n</sub>H<sub>2n+2</sub></span>
+    <div class="cheatsheet">
+      <div class="card">
+        <h2>🔷 Formule Générale</h2>
+        <div class="formula">
+          <strong>Hydrocarbures saturés</strong><br />
+          <span class="key-term">C<sub>n</sub>H<sub>2n+2</sub></span>
+        </div>
+        <div class="formula">
+          <strong>Exemples</strong>:<br />
+          <ul>
+            <li>CH<sub>4</sub> (n=1)</li>
+            <li>C<sub>2</sub>H<sub>6</sub> (n=2)</li>
+            <li>C<sub>3</sub>H<sub>8</sub> (n=3)</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="formula">
-        <strong>Exemples</strong> :
-        <ul>
-          <li>Méthane : CH<sub>4</sub> (n=1)</li>
-          <li>Éthane : C<sub>2</sub>H<sub>6</sub> (n=2)</li>
-          <li>Propane : C<sub>3</sub>H<sub>8</sub> (n=3)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>⚖️ Masse Moléculaire des Alcanes</h2>
-
-      <div class="formula">
-        Calcul : <br />
-        <span class="key-term">M = (12 × n) + (1 × (2n + 2))</span><br />
-        Simplification : <span class="key-term">14n + 2 g/mol</span>
+      <div class="card">
+        <h2>⚖️ Masse Moléculaire</h2>
+        <div class="formula">
+          <span class="key-term">M = (12 × n) + (2n + 2)</span><br />
+          Simplifié : <span class="key-term">14n + 2 g/mol</span>
+        </div>
+        <div class="formula">
+          <strong>Exemple</strong> (C<sub>3</sub>H<sub>8</sub>):<br />
+          M = 36 + 8 = <span class="key-term">44 g/mol</span>
+        </div>
       </div>
 
-      <div class="formula">
-        Exemple pour le propane (C<sub>3</sub>H<sub>8</sub>) :<br />
-        M = (12×3) + (1×8) = 36 + 8 = <span class="key-term">44 g/mol</span>
+      <div class="card">
+        <h2>🌀 Isomères</h2>
+        <div class="formula">
+          <strong>Déf</strong>: Même
+          <span class="key-term">formule brute</span>,
+          <span class="key-term">structures</span> différentes.
+        </div>
+        <div class="formula">
+          <strong>Types</strong>:<br />
+          <ul>
+            <li>Chaîne</li>
+            <li>Position</li>
+            <li>Fonction</li>
+          </ul>
+        </div>
+        <div class="formula">
+          <strong>Ex</strong> (C<sub>4</sub>H<sub>10</sub>):<br />
+          <ul>
+            <li>
+              n-butane: CH<sub>3</sub>-CH<sub>2</sub>-CH<sub>2</sub>-CH<sub
+                >3</sub
+              >
+            </li>
+            <li>iso-butane: CH(CH<sub>3</sub>)<sub>3</sub></li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <h2>🌀 Isomères</h2>
-
-      <div class="formula">
-        <strong>Définition</strong> :<br />
-        Composés ayant <span class="key-term">même formule brute</span> mais
-        <span class="key-term">structures différentes</span>.
+      <div class="card">
+        <h2>📝 Nomenclature Alcanes</h2>
+        <div class="formula">
+          <strong>Règles IUPAC</strong>:<br />
+          1. Trouver la <span class="key-term">chaîne principale</span> (plus
+          longue).<br />
+          2. Compter C : méth-, éth-, prop-, but-, pent-.<br />
+          3. Ajouter <span class="key-term">-ane</span>.<br />
+          4. Numéroter pour <span class="key-term">n° les plus bas</span>.<br />
+          5. Substituants par ordre alpha.<br />
+          6. Préfixes : di-, tri-, tétra-.
+        </div>
+        <div class="formula">
+          <strong>Exemples</strong>:<br />
+          <ul>
+            <li>
+              CH<sub>3</sub>-CH<sub>2</sub>-CH<sub>3</sub> →
+              <span class="key-term">propane</span>
+            </li>
+            <li>
+              CH<sub>3</sub>-CH(CH<sub>3</sub>)-CH<sub>3</sub> →
+              <span class="key-term">2-méthylpropane</span>
+            </li>
+            <li>
+              CH<sub>3</sub>-C(CH<sub>3</sub>)<sub>2</sub>-CH<sub>3</sub> →
+              <span class="key-term">2,2-diméthylpropane</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <div class="formula">
-        <strong>Types d'isomérie</strong> :<br />
-        • Isomérie de chaîne<br />
-        • Isomérie de position<br />
-        • Isomérie de fonction
-      </div>
-
-      <div class="formula">
-        <strong>Exemple avec C<sub>4</sub>H<sub>10</sub></strong> :<br />
-        <ul>
-          <li>
-            n-butane : CH<sub>3</sub>-CH<sub>2</sub>-CH<sub>2</sub>-CH<sub
-              >3</sub
-            >
-          </li>
-          <li>iso-butane : CH(CH<sub>3</sub>)<sub>3</sub></li>
-        </ul>
+      <div class="card">
+        <h2>🧪 Nomenclature Groupes Fonctionnels</h2>
+        <div class="formula">
+          <strong>Éthers</strong>: C<sub>n</sub>H<sub>2n+2</sub>O (<span
+            class="key-term"
+            >R-O-R’</span
+          >) → <span class="key-term">alkoxyalcane</span>.<br />
+          <strong>Alcools</strong>: C<sub>n</sub>H<sub>2n+2</sub>O (<span
+            class="key-term"
+            >R-OH</span
+          >) → Chaîne + <span class="key-term">-ol</span>.<br />
+          <strong>Aldéhydes</strong>: C<sub>n</sub>H<sub>2n</sub>O (<span
+            class="key-term"
+            >R-CHO</span
+          >) → Chaîne + <span class="key-term">-al</span>.<br />
+          <strong>Cétones</strong>: C<sub>n</sub>H<sub>2n</sub>O (<span
+            class="key-term"
+            >R-CO-R’</span
+          >) → Chaîne + <span class="key-term">-one</span>.<br />
+          <strong>Acides</strong>: C<sub>n</sub>H<sub>2n</sub>O<sub>2</sub>
+          (<span class="key-term">R-COOH</span>) → Chaîne +
+          <span class="key-term">-oïque</span>.<br />
+          <strong>Esters</strong>: C<sub>n</sub>H<sub>2n</sub>O<sub>2</sub>
+          (<span class="key-term">R-COO-R’</span>) →
+          <span class="key-term">alcanoate d’alkyle</span>.
+        </div>
+        <div class="formula">
+          <strong>Exemples</strong>:<br />
+          <ul>
+            <li>
+              CH<sub>3</sub>-O-CH<sub>2</sub>CH<sub>3</sub> →
+              <span class="key-term">méthoxyéthane</span>
+            </li>
+            <li>
+              CH<sub>3</sub>CH<sub>2</sub>-OH →
+              <span class="key-term">éthanol</span>
+            </li>
+            <li>CH<sub>3</sub>CHO → <span class="key-term">éthanal</span></li>
+            <li>
+              CH<sub>3</sub>COCH<sub>3</sub> →
+              <span class="key-term">propanone</span>
+            </li>
+            <li>
+              CH<sub>3</sub>COOH →
+              <span class="key-term">acide éthanoïque</span>
+            </li>
+            <li>
+              CH<sub>3</sub>COOCH<sub>3</sub> →
+              <span class="key-term">éthanoate de méthyle</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>
