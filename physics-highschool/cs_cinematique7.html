@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fiche Récap - Dynamique Point Matériel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 10px;
+        background-color: #f0f0f0;
+        font-size: 14px;
+      }
+
+      .cheat-sheet {
+        max-width: 900px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 15px;
+      }
+
+      .section {
+        background: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 20px;
+        text-align: center;
+        grid-column: span 2;
+        margin: 0 0 10px;
+        color: #2c3e50;
+      }
+
+      h2 {
+        font-size: 16px;
+        margin: 0 0 5px;
+        color: #fff;
+        padding: 5px;
+        border-radius: 3px;
+      }
+
+      h3 {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+
+      .equation {
+        background: #f0f0f0;
+        padding: 5px;
+        margin: 5px 0;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        border-left: 3px solid #3498db;
+      }
+
+      ul {
+        margin: 5px 0;
+        padding-left: 15px;
+      }
+
+      li {
+        margin: 2px 0;
+      }
+
+      /* Color coding for sections */
+      .referentiels {
+        background: #e3f2fd;
+      }
+      .referentiels h2 {
+        background: #2196f3;
+      }
+      .cinematique {
+        background: #e8f5e9;
+      }
+      .cinematique h2 {
+        background: #4caf50;
+      }
+      .mouvements {
+        background: #fff3e0;
+      }
+      .mouvements h2 {
+        background: #ff9800;
+      }
+      .experimentale {
+        background: #fce4ec;
+      }
+      .experimentale h2 {
+        background: #e91e63;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cheat-sheet">
+      <h1>Dynamique du Point Matériel</h1>
+
+      <!-- Référentiels -->
+      <div class="section referentiels">
+        <h2>1. Référentiels</h2>
+        <p>Solide de référence pour mouvement :</p>
+        <ul>
+          <li>Terrestre : Axes fixes Terre</li>
+          <li>Géocentrique : Centre Terre + étoiles</li>
+          <li>Copernic : Centre système solaire</li>
+        </ul>
+      </div>
+
+      <!-- Cinématique -->
+      <div class="section cinematique">
+        <h2>2. Cinématique</h2>
+        <h3>Position</h3>
+        <div class="equation">
+          \(\overrightarrow{OM}(t) = x(t)\vec{i} + y(t)\vec{j} + z(t)\vec{k}\)
+        </div>
+        <h3>Vitesse</h3>
+        <div class="equation">
+          \(\vec{v} = \frac{dx}{dt}\vec{i} + \frac{dy}{dt}\vec{j} +
+          \frac{dz}{dt}\vec{k}\)
+        </div>
+        <h3>Accélération</h3>
+        <div class="equation">
+          \(\vec{a} = \frac{d^2\overrightarrow{OM}}{dt^2}\)
+        </div>
+      </div>
+
+      <!-- Mouvements -->
+      <div class="section mouvements">
+        <h2>3. Mouvements</h2>
+        <h3>MRU</h3>
+        <div class="equation">\(x(t) = v_0 t + x_0\)</div>
+        <h3>MRUV</h3>
+        <div class="equation">
+          \(v(t) = a t + v_0\)<br />
+          \(x(t) = \frac{1}{2}a t^2 + v_0 t + x_0\)
+        </div>
+      </div>
+
+      <!-- Expérimentale -->
+      <div class="section experimentale">
+        <h2>4. Expérimentale</h2>
+        <ul>
+          <li>Vitesse moyenne : \(v_m = \frac{A_{n-1}A_{n+1}}{2\theta}\)</li>
+          <li>Accélération : \(a_m = \frac{v_{n+1} - v_{n-1}}{2\theta}\)</li>
+          <li>MRUV : \(r = a \theta^2\) (suite arithmétique)</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

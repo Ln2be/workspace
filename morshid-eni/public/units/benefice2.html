@@ -25,7 +25,8 @@
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         border-top: 5px solid #2ecc71;
       }
-      h1, h2 {
+      h1,
+      h2 {
         text-align: center;
         color: #34495e;
       }
@@ -70,11 +71,12 @@
         text-align: center;
       }
     </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
       <h1>حساب الربح والخسارة في المعاملات التجارية</h1>
-      
+
       <div class="exercise">
         <h2>تمرين 1: حساب الربح</h2>
         <p>إذا كان ثمن البيع 500 أوقية وثمن الشراء 300 أوقية، فما هو الربح؟</p>
@@ -82,21 +84,25 @@
         <button class="btn" onclick="checkAnswer(1, 200)">تحقق</button>
         <p class="result" id="feedback1"></p>
       </div>
-      
+
       <div class="exercise">
         <h2>تمرين 2: حساب ثمن الشراء</h2>
-        <p>إذا كان ثمن البيع 700 أوقية وكان الربح 150 أوقية، فما هو ثمن الشراء؟</p>
+        <p>
+          إذا كان ثمن البيع 700 أوقية وكان الربح 150 أوقية، فما هو ثمن الشراء؟
+        </p>
         <input type="number" id="answer2" placeholder="أدخل الإجابة هنا" />
         <button class="btn" onclick="checkAnswer(2, 550)">تحقق</button>
         <p class="result" id="feedback2"></p>
       </div>
     </div>
-    
+
     <script>
       function checkAnswer(exerciseNumber, correctAnswer) {
-        let userAnswer = document.getElementById("answer" + exerciseNumber).value;
+        let userAnswer = document.getElementById(
+          "answer" + exerciseNumber
+        ).value;
         let feedback = document.getElementById("feedback" + exerciseNumber);
-        
+
         if (userAnswer == correctAnswer) {
           feedback.textContent = "إجابة صحيحة! ✅";
           feedback.style.color = "green";

@@ -112,8 +112,8 @@
         color: white;
         border-top: 5px solid #3498db;
       }
-        /* أنماط جديدة للتمارين التفاعلية */
-        .interactive-exercise {
+      /* أنماط جديدة للتمارين التفاعلية */
+      .interactive-exercise {
         background: #f8f9fa;
         padding: 20px;
         margin: 15px 0;
@@ -178,6 +178,7 @@
         display: block;
       }
     </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
@@ -255,44 +256,52 @@
         <h3>تمرين 1</h3>
         <p>\( (-7) + (-12) \)</p>
         <div class="input-group">
-          <input type="number" class="math-input" id="ex1">
+          <input type="number" class="math-input" id="ex1" />
           <button class="check-btn" onclick="checkAnswer(1, -19)">تحقق</button>
         </div>
         <div id="feedback1" class="feedback"></div>
-        <span class="show-solution" onclick="showSolution(1, '-19')">اظهر الحل</span>
+        <span class="show-solution" onclick="showSolution(1, '-19')"
+          >اظهر الحل</span
+        >
       </div>
 
       <div class="interactive-exercise">
         <h3>تمرين 2</h3>
         <p>\( 20 - (-5) \)</p>
         <div class="input-group">
-          <input type="number" class="math-input" id="ex2">
+          <input type="number" class="math-input" id="ex2" />
           <button class="check-btn" onclick="checkAnswer(2, 25)">تحقق</button>
         </div>
         <div id="feedback2" class="feedback"></div>
-        <span class="show-solution" onclick="showSolution(2, '25')">اظهر الحل</span>
+        <span class="show-solution" onclick="showSolution(2, '25')"
+          >اظهر الحل</span
+        >
       </div>
 
       <div class="interactive-exercise">
         <h3>تمرين 3</h3>
         <p>\( (-3) \times 7 \)</p>
         <div class="input-group">
-          <input type="number" class="math-input" id="ex3">
+          <input type="number" class="math-input" id="ex3" />
           <button class="check-btn" onclick="checkAnswer(3, -21)">تحقق</button>
         </div>
         <div id="feedback3" class="feedback"></div>
-        <span class="show-solution" onclick="showSolution(3, '-21')">اظهر الحل</span>
+        <span class="show-solution" onclick="showSolution(3, '-21')"
+          >اظهر الحل</span
+        >
       </div>
 
       <div class="interactive-exercise">
         <h3>تمرين 4</h3>
         <p>\( (-18) \div (-6) \)</p>
         <div class="input-group">
-          <input type="number" class="math-input" id="ex4">
+          <input type="number" class="math-input" id="ex4" />
           <button class="check-btn" onclick="checkAnswer(4, 3)">تحقق</button>
         </div>
         <div id="feedback4" class="feedback"></div>
-        <span class="show-solution" onclick="showSolution(4, '3')">اظهر الحل</span>
+        <span class="show-solution" onclick="showSolution(4, '3')"
+          >اظهر الحل</span
+        >
       </div>
 
       <a href="/" class="btn">رجوع</a>
@@ -304,10 +313,12 @@
 
     <script>
       function checkAnswer(exNum, correct) {
-        const userAnswer = parseInt(document.getElementById(`ex${exNum}`).value);
+        const userAnswer = parseInt(
+          document.getElementById(`ex${exNum}`).value
+        );
         const feedback = document.getElementById(`feedback${exNum}`);
-        
-        if(userAnswer === correct) {
+
+        if (userAnswer === correct) {
           feedback.innerHTML = "🎉 إجابة صحيحة! أحسنت!";
           feedback.className = "feedback correct";
         } else {
@@ -322,7 +333,7 @@
           1: "جمع عددين سالبين: نجمع القيم المطلقة ونحتفظ بالإشارة السالبة",
           2: "طرح عدد سالب يساوي جمع موجب",
           3: "ضرب إشارتين مختلفتين يعطي نتيجة سالبة",
-          4: "قسمة إشارتين متماثلتين تعطي نتيجة موجبة"
+          4: "قسمة إشارتين متماثلتين تعطي نتيجة موجبة",
         };
         return hints[exNum];
       }
