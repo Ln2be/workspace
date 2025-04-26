@@ -1,724 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <title>نتائج امتحان الفصل الثاني - السنة الخامسة</title>
-    <style>
-      /* General styles */
-      body {
-        font-family: "Arial", sans-serif;
-        margin: 0;
-        padding: 15mm 15mm 15mm 20mm; /* Top, Right, Bottom, Left - Added more padding on the left */
-        line-height: 1.4;
-        color: #000;
-        background-color: #fff;
-      }
-
-      /* Print-specific styles */
-      @media print {
-        body {
-          padding: 8mm 8mm 8mm 12mm; /* Adjusted for print: less on right, more on left */
-        }
-        .print-button {
-          display: none;
-        }
-        @page {
-          size: A4 landscape;
-          margin: 8mm;
-        }
-        table {
-          page-break-inside: auto;
-        }
-        tr {
-          page-break-inside: avoid;
-          page-break-after: auto;
-        }
-      }
-
-      /* Header section */
-      .header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10mm;
-        border-bottom: 2px solid #000;
-        padding-bottom: 8mm;
-      }
-      .header div {
-        flex: 1;
-        text-align: center;
-      }
-      .header h1 {
-        font-size: 12pt;
-        margin: 4px 0;
-        font-weight: bold;
-      }
-      .header h2 {
-        font-size: 10pt;
-        margin: 4px 0;
-        font-weight: normal;
-      }
-
-      /* Table styling */
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 10mm 0;
-      }
-      th,
-      td {
-        border: 1px solid #000;
-        padding: 4px;
-        text-align: center;
-        font-size: 8pt;
-        white-space: nowrap;
-      }
-      th {
-        background-color: #e0e0e0;
-        font-weight: bold;
-      }
-      td {
-        vertical-align: middle;
-      }
-      tr:nth-child(even) {
-        background-color: #f5f5f5;
-      }
-      @media print {
-        th {
-          background-color: #d3d3d3 !important;
-        }
-        tr:nth-child(even) {
-          background-color: #fafafa !important;
-        }
-      }
-
-      /* Print button */
-      .print-button {
-        padding: 8px 16px;
-        background-color: #333;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 10pt;
-        margin-bottom: 8mm;
-        float: left;
-      }
-      .print-button:hover {
-        background-color: #555;
-      }
-
-      /* Footer */
-      .footer {
-        text-align: center;
-        margin-top: 15mm;
-        font-size: 8pt;
-      }
-    </style>
-  </head>
-  <body>
-    <button class="print-button" onclick="window.print()">
-      🖨️ طباعة النتائج
-    </button>
-
-    <div class="header">
-      <div>
-        <h1>الجمهورية الإسلامية الموريتانية</h1>
-        <h2>وزارة التربية وإصلاح النظام التعليمي</h2>
-        <h2>الإدارة الجهوية بالترارزة</h2>
-        <h2>مفتشية أركيز</h2>
-        <h2>مدرسة أجوير 2</h2>
-      </div>
-      <div>
-        <h1>شرف - إخاء - عدل</h1>
-        <h2>المستوى: السنة الخامسة</h2>
-        <h2>السنة الدراسية: 2024 - 2025</h2>
-        <h2>نتائج امتحان الفصل الثاني</h2>
-      </div>
-    </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th>الاسم الكامل</th>
-          <th>اللغة العربية 50/</th>
-          <th>التربية الإسلامية 20/</th>
-          <th>التاريخ والجغرافيا 20/</th>
-          <th>التربية المدنية 10/</th>
-          <th>الفرنسية 30/</th>
-          <th>الرياضيات 50/</th>
-          <th>العلوم 20/</th>
-          <th>المجموع 200/</th>
-          <th>المعدل 20/</th>
-          <th>الرتبة</th>
-          <th>الملاحظات</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>محمدن ولد الصديق</td>
-          <td>42</td>
-          <td>20</td>
-          <td>16</td>
-          <td>10</td>
-          <td>24</td>
-          <td>39</td>
-          <td>13</td>
-          <td>164</td>
-          <td>16.4</td>
-          <td>1</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>فطمة بنت محمد</td>
-          <td>42</td>
-          <td>20</td>
-          <td>18</td>
-          <td>10</td>
-          <td>23</td>
-          <td>30</td>
-          <td>12</td>
-          <td>155</td>
-          <td>15.5</td>
-          <td>2</td>
-          <td>ناجحة</td>
-        </tr>
-        <tr>
-          <td>بناهي ولد أحمد يحظيه</td>
-          <td>36.5</td>
-          <td>18</td>
-          <td>16</td>
-          <td>10</td>
-          <td>19</td>
-          <td>29</td>
-          <td>12</td>
-          <td>140.5</td>
-          <td>14.05</td>
-          <td>3</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>معاذ ولد الدالي</td>
-          <td>31</td>
-          <td>19</td>
-          <td>16</td>
-          <td>10</td>
-          <td>10</td>
-          <td>35</td>
-          <td>12</td>
-          <td>133</td>
-          <td>13.3</td>
-          <td>4</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>محمد ولد آدو</td>
-          <td>34</td>
-          <td>15</td>
-          <td>12</td>
-          <td>8</td>
-          <td>19</td>
-          <td>29</td>
-          <td>12</td>
-          <td>129</td>
-          <td>12.9</td>
-          <td>5</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>الشيخ مالك ولد إبراهيم</td>
-          <td>31</td>
-          <td>17</td>
-          <td>17</td>
-          <td>7</td>
-          <td>14</td>
-          <td>20</td>
-          <td>12</td>
-          <td>118</td>
-          <td>11.8</td>
-          <td>6</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>شعيب ولد عبد الله</td>
-          <td>37</td>
-          <td>16</td>
-          <td>15</td>
-          <td>7</td>
-          <td>15</td>
-          <td>19</td>
-          <td>8</td>
-          <td>117</td>
-          <td>11.7</td>
-          <td>7</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>حجاب بنت محمدن</td>
-          <td>33.5</td>
-          <td>18</td>
-          <td>17</td>
-          <td>10</td>
-          <td>17</td>
-          <td>16</td>
-          <td>5</td>
-          <td>116.5</td>
-          <td>11.65</td>
-          <td>8</td>
-          <td>ناجحة</td>
-        </tr>
-        <tr>
-          <td>عيشة بنت نجم الدين</td>
-          <td>33</td>
-          <td>19</td>
-          <td>18</td>
-          <td>8</td>
-          <td>13</td>
-          <td>17</td>
-          <td>6</td>
-          <td>114</td>
-          <td>11.4</td>
-          <td>9</td>
-          <td>ناجحة</td>
-        </tr>
-        <tr>
-          <td>زينب بنت محمد مولود</td>
-          <td>30</td>
-          <td>14</td>
-          <td>12</td>
-          <td>7</td>
-          <td>15</td>
-          <td>14</td>
-          <td>15</td>
-          <td>107</td>
-          <td>10.7</td>
-          <td>10</td>
-          <td>ناجحة</td>
-        </tr>
-        <tr>
-          <td>عبدالرحمن ولد عيدالله</td>
-          <td>35</td>
-          <td>16</td>
-          <td>17</td>
-          <td>8</td>
-          <td>4</td>
-          <td>13</td>
-          <td>8</td>
-          <td>101</td>
-          <td>10.1</td>
-          <td>11</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>القاضي ولد محمدن</td>
-          <td>31</td>
-          <td>15</td>
-          <td>14</td>
-          <td>7</td>
-          <td>11</td>
-          <td>18</td>
-          <td>3</td>
-          <td>99</td>
-          <td>9.9</td>
-          <td>12</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>إسحاق ولد حماد</td>
-          <td>22</td>
-          <td>15</td>
-          <td>14</td>
-          <td>5</td>
-          <td>5</td>
-          <td>30</td>
-          <td>5</td>
-          <td>96</td>
-          <td>9.6</td>
-          <td>13</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>خالد ولد أبوه</td>
-          <td>25</td>
-          <td>12</td>
-          <td>11</td>
-          <td>5</td>
-          <td>11</td>
-          <td>22</td>
-          <td>6</td>
-          <td>92</td>
-          <td>9.2</td>
-          <td>14</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>فطمة بنت محمد لمين</td>
-          <td>31</td>
-          <td>17</td>
-          <td>17</td>
-          <td>8</td>
-          <td>8</td>
-          <td>5</td>
-          <td>6</td>
-          <td>92</td>
-          <td>9.2</td>
-          <td>15</td>
-          <td>ناجحة</td>
-        </tr>
-        <tr>
-          <td>أباه ولد المختار الله</td>
-          <td>20</td>
-          <td>11</td>
-          <td>10</td>
-          <td>5</td>
-          <td>5</td>
-          <td>31</td>
-          <td>7</td>
-          <td>89</td>
-          <td>8.9</td>
-          <td>16</td>
-          <td>ناجح</td>
-        </tr>
-        <tr>
-          <td>فايزة بنت همت</td>
-          <td>38</td>
-          <td>14</td>
-          <td>10</td>
-          <td>4</td>
-          <td>2</td>
-          <td>13</td>
-          <td>5</td>
-          <td>86</td>
-          <td>8.6</td>
-          <td>17</td>
-          <td>ناجحة</td>
-        </tr>
-        <tr>
-          <td>لبراز بنت لمرابط</td>
-          <td>18</td>
-          <td>13</td>
-          <td>11</td>
-          <td>5</td>
-          <td>10</td>
-          <td>20</td>
-          <td>7</td>
-          <td>84</td>
-          <td>8.4</td>
-          <td>18</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>أحمدو ولد أباه</td>
-          <td>22</td>
-          <td>14</td>
-          <td>15</td>
-          <td>8</td>
-          <td>6</td>
-          <td>9</td>
-          <td>6</td>
-          <td>80</td>
-          <td>8</td>
-          <td>19</td>
-          <td>راسب</td>
-        </tr>
-        <tr>
-          <td>نسيبة موسى</td>
-          <td>30</td>
-          <td>15</td>
-          <td>10</td>
-          <td>6</td>
-          <td>9</td>
-          <td>5</td>
-          <td>4</td>
-          <td>79</td>
-          <td>7.9</td>
-          <td>20</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>نور الدين ولد مجمدو</td>
-          <td>35</td>
-          <td>10</td>
-          <td>14</td>
-          <td>3</td>
-          <td>2</td>
-          <td>9</td>
-          <td>5</td>
-          <td>78</td>
-          <td>7.8</td>
-          <td>21</td>
-          <td>راسب</td>
-        </tr>
-        <tr>
-          <td>أخت البنين بنت أويك</td>
-          <td>26</td>
-          <td>15</td>
-          <td>12</td>
-          <td>6</td>
-          <td>4</td>
-          <td>3</td>
-          <td>9</td>
-          <td>75</td>
-          <td>7.5</td>
-          <td>22</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>خديجة بنت عبد الله</td>
-          <td>26</td>
-          <td>15</td>
-          <td>14</td>
-          <td>8</td>
-          <td>5</td>
-          <td>4</td>
-          <td>3</td>
-          <td>75</td>
-          <td>7.5</td>
-          <td>23</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>فطمة بنت محمدو السالم</td>
-          <td>27</td>
-          <td>14</td>
-          <td>12</td>
-          <td>6</td>
-          <td>4</td>
-          <td>3</td>
-          <td>3</td>
-          <td>69</td>
-          <td>6.9</td>
-          <td>24</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>مريم عيد الله السالم</td>
-          <td>21</td>
-          <td>13</td>
-          <td>11</td>
-          <td>6</td>
-          <td>5</td>
-          <td>7</td>
-          <td>3</td>
-          <td>66</td>
-          <td>6.6</td>
-          <td>25</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>منة بنت همت</td>
-          <td>20</td>
-          <td>8</td>
-          <td>10</td>
-          <td>4</td>
-          <td>2</td>
-          <td>13</td>
-          <td>7</td>
-          <td>64</td>
-          <td>6.4</td>
-          <td>26</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>منة بنت حماد</td>
-          <td>19</td>
-          <td>12</td>
-          <td>10</td>
-          <td>5</td>
-          <td>5</td>
-          <td>5</td>
-          <td>5</td>
-          <td>61</td>
-          <td>6.1</td>
-          <td>27</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>بوبه بنت لحيدو</td>
-          <td>21</td>
-          <td>10</td>
-          <td>10</td>
-          <td>6</td>
-          <td>2</td>
-          <td>5</td>
-          <td>5</td>
-          <td>59</td>
-          <td>5.9</td>
-          <td>28</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>الخليل ولد المصطفى</td>
-          <td>22</td>
-          <td>10</td>
-          <td>10</td>
-          <td>5</td>
-          <td>4</td>
-          <td>3</td>
-          <td>4</td>
-          <td>58</td>
-          <td>5.8</td>
-          <td>29</td>
-          <td>راسب</td>
-        </tr>
-        <tr>
-          <td>فايزة بنت موسى</td>
-          <td>18</td>
-          <td>14</td>
-          <td>11</td>
-          <td>5</td>
-          <td>2</td>
-          <td>5</td>
-          <td>3</td>
-          <td>58</td>
-          <td>5.8</td>
-          <td>30</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>زبيدة بنت يعقوب</td>
-          <td>18</td>
-          <td>12</td>
-          <td>11</td>
-          <td>5</td>
-          <td>2</td>
-          <td>3</td>
-          <td>5</td>
-          <td>56</td>
-          <td>5.6</td>
-          <td>31</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>ميمينة بنت حامد</td>
-          <td>15</td>
-          <td>8</td>
-          <td>12</td>
-          <td>4</td>
-          <td>6</td>
-          <td>3</td>
-          <td>3</td>
-          <td>51</td>
-          <td>5.1</td>
-          <td>32</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>محمدن ولد زكريا</td>
-          <td>10</td>
-          <td>12</td>
-          <td>9</td>
-          <td>5</td>
-          <td>2</td>
-          <td>7</td>
-          <td>3</td>
-          <td>48</td>
-          <td>4.8</td>
-          <td>33</td>
-          <td>راسب</td>
-        </tr>
-        <tr>
-          <td>عمر ولد عبد الله</td>
-          <td>7</td>
-          <td>8</td>
-          <td>5</td>
-          <td>3</td>
-          <td>5</td>
-          <td>8</td>
-          <td>3</td>
-          <td>39</td>
-          <td>3.9</td>
-          <td>34</td>
-          <td>راسب</td>
-        </tr>
-        <tr>
-          <td>النينة بنت محمود</td>
-          <td>8</td>
-          <td>8</td>
-          <td>10</td>
-          <td>3</td>
-          <td>2</td>
-          <td>5</td>
-          <td>3</td>
-          <td>39</td>
-          <td>3.9</td>
-          <td>35</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>زينب بنت محمد</td>
-          <td>10</td>
-          <td>6</td>
-          <td>4</td>
-          <td>3</td>
-          <td>4</td>
-          <td>3</td>
-          <td>3</td>
-          <td>33</td>
-          <td>3.3</td>
-          <td>36</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>أبوبكر الصديق عبد الله</td>
-          <td>7</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>1</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>8</td>
-          <td>0.8</td>
-          <td>37</td>
-          <td>راسب</td>
-        </tr>
-        <tr>
-          <td>شيماء بنت يحميه</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>0</td>
-          <td>0</td>
-          <td>38</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>فطمة بنت أحمد</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>0</td>
-          <td>0</td>
-          <td>38</td>
-          <td>راسبة</td>
-        </tr>
-        <tr>
-          <td>خديجة بنت أحمدو</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>غ</td>
-          <td>0</td>
-          <td>0</td>
-          <td>38</td>
-          <td>راسبة</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="footer">
-      <p>إعداد المعلم: محمدن ولد بتشاه</p>
-    </div>
-  </body>
-</html>
