@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tous les Exercices de Mécanique</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <style>
+      body {
+        font-family: Arial;
+        line-height: 1.4;
+        margin: 0.5cm;
+      }
+      .section {
+        margin-bottom: 30px;
+        border: 1px solid #3498db;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      h2 {
+        color: #2c3e50;
+        font-size: 18pt;
+        border-bottom: 2px solid #3498db;
+        margin-bottom: 10px;
+      }
+      .solution {
+        margin: 8px 0;
+        font-size: 10pt;
+      }
+      .final-answer {
+        background: #e8f6e9;
+        padding: 6px;
+        border: 1px solid #2ecc71;
+        margin: 4px 0;
+      }
+      .equation {
+        color: #c0392b;
+      }
+      .law {
+        color: #2980b9;
+        font-weight: bold;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      th,
+      td {
+        border: 1px solid #2c3e50;
+        padding: 5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Application -->
+    <div class="section">
+      <!-- Exercice I -->
+      <div>
+        <h2>App partie I : Mouvement d'une Bille</h2>
+
+        <div class="solution">
+          <strong>1. Vecteurs vitesse et position :</strong><br />
+          • Accélération : \( \vec{a} = \frac{d\vec{v}}{dt} = -4\vec{j} \)<br />
+          • Intégration vitesse : \( \vec{v}(t) = \int \vec{a} \, dt = 3\vec{i}
+          + (-4t + 2)\vec{j} \)<br />
+          • Intégration position : \( \overrightarrow{OM}(t) = \int \vec{v} \,
+          dt = 3t\vec{i} + (-2t^2 + 2t)\vec{j} \)
+          <div class="final-answer">
+            \(\boxed{\vec{v}(t) = 3\vec{i} + (-4t + 2)\vec{j} \quad
+            \overrightarrow{OM}(t) = 3t\vec{i} + (-2t^2 + 2t)\vec{j}}\)
+          </div>
+        </div>
+
+        <div class="solution">
+          <strong>2. Trajectoire :</strong><br />
+          • De \( x(t) = 3t \) → \( t = \frac{x}{3} \).<br />
+          • Substitution dans \( y(t) \) : \( y = -2\left(\frac{x}{3}\right)^2 +
+          2\left(\frac{x}{3}\right) \)
+          <div class="final-answer">
+            \(\boxed{y = -\frac{2}{9}x^2 + \frac{2}{3}x}\)
+          </div>
+        </div>
+
+        <div class="solution">
+          <strong>3. Point S (altitude max) :</strong><br />
+          • Condition : \( \frac{dy}{dt} = -4t_S + 2 = 0 \) → \( t_S = 0.5 \,
+          \text{s} \).<br />
+          • Coordonnées : \( x_S = 1.5 \, \text{m}, y_S = 0.5 \, \text{m} \).<br />
+          • Vitesse : \( \vec{v}_S = 3\vec{i} \, \text{m/s} \) (car \( v_y = 0
+          \))
+          <div class="final-answer">
+            \(\boxed{S(1.5\, \text{m}, 0.5\, \text{m}) \quad \vec{v}_S =
+            3\vec{i}\, \text{m/s}}\)
+          </div>
+        </div>
+
+        <div class="solution">
+          <strong>4. Point I (\( y = 0 \)) :</strong><br />
+          • Temps : \( -2t_I^2 + 2t_I = 0 \) → \( t_I = 1 \, \text{s} \).<br />
+          • Vitesse : \( \vec{v}_I = 3\vec{i} - 2\vec{j} \).<br />
+          • Angle \( \alpha \) : \( \tan\alpha = \frac{2}{3} \) → \( \alpha
+          \approx 33.7^\circ \).<br />
+          • Accélérations : \( a_t = \frac{d|\vec{v}|}{dt} = 2.22 \,
+          \text{m/s}^2, \, a_n = \sqrt{a^2 - a_t^2} = 3.33 \, \text{m/s}^2
+          \).<br />
+          • Rayon : \( R = \frac{|\vec{v}|^2}{a_n} = 3.9 \, \text{m} \).<br />
+          • Accélérations: \( \cos(\theta) = \frac{a_t}{a}\)→ \( a_t =
+          a\cos(\theta) \) on a \(\theta = 90 - \alpha\)
+          <div class="final-answer">
+            \(\boxed{\alpha = 33.7^\circ, \, a_t = 2.22\, \text{m/s}^2, \, a_n =
+            3.33\, \text{m/s}^2, \, R = 3.9\, \text{m}}\)
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice II -->
+      <div>
+        <h2>App partie II : Mouvement du Plateau</h2>
+
+        <div class="solution">
+          <strong>1. Nature du mouvement :</strong><br />
+          • Distances : \( 2.5\, \text{m}, 3.75\, \text{m}, 5\, \text{m}, 6.25\,
+          \text{m}, 7.5\, \text{m} \).<br />
+          • Suite arithmétique → MRUV.<br />
+          • Accélération : \( a = \frac{r}{\tau^2} = \frac{1.25}{0.5^2} = 5\,
+          \text{m/s}^2 \)
+          <div class="final-answer">
+            \(\boxed{\text{MRUV avec } a = 5\, \text{m/s}^2}\)
+          </div>
+        </div>
+
+        <div class="solution">
+          <strong>2. Équation horaire :</strong><br />
+          • Formule : \( x_p(t) = \frac{1}{2}at^2 + V_0t + x_0 \).<br />
+          • Substitution : \( x_p(t) = 2.5t^2 + V_0t - 7.5 \)
+          <div class="final-answer">
+            \(\boxed{x_p(t) = 2.5t^2 + V_0t - 7.5}\)
+          </div>
+        </div>
+
+        <div class="solution">
+          <strong>3. Vitesse initiale \( V_0 \) :</strong><br />
+          • Condition : \( x_p(1) = 3\, \text{m} \).<br />
+          • Équation : \( 2.5(1)^2 + V_0(1) - 7.5 = 3 \) → \( V_0 = 8\,
+          \text{m/s} \)
+          <div class="final-answer">\(\boxed{V_0 = 8\, \text{m/s}}\)</div>
+        </div>
+      </div>
+    </div>
+    <!-- Exercice 1 -->
+    <div class="section">
+      <h2>Exercice 1 : Dépassement d'un Camion</h2>
+
+      <!-- Question 1 -->
+      <div class="solution">
+        <strong>1. Durée du dépassement :</strong><br />
+        <span class="law">Loi utilisée : Vitesse relative</span><br />
+        • Conversion des vitesses en m/s :<br />
+        \( V_{\text{voiture}} = 90 \, \text{km/h} = \frac{90}{3.6} = 25 \,
+        \text{m/s} \), <br />
+        \( V_{\text{camion}} = 72 \, \text{km/h} = \frac{72}{3.6} = 20 \,
+        \text{m/s} \).<br />
+        • Vitesse relative : <br />
+        \( V_{\text{rel}} = V_{\text{voiture}} - V_{\text{camion}} = 25 - 20 = 5
+        \, \text{m/s} \).<br />
+        • Distance totale à couvrir : <br />
+        \( d_{\text{total}} = d_1 + \ell + L + d_2 = 20 \, \text{m} + 5 \,
+        \text{m} + 10 \, \text{m} + 30 \, \text{m} = 65 \, \text{m} \).<br />
+        • Temps de dépassement : <br />
+        \( t = \frac{d_{\text{total}}}{V_{\text{rel}}} = \frac{65}{5} = 13 \,
+        \text{s} \).
+        <div class="final-answer">\(\boxed{13 \, \text{secondes}}\)</div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="solution">
+        <strong>2. Distance parcourue par la voiture :</strong><br />
+        <span class="law">Loi utilisée : Distance = Vitesse × Temps</span><br />
+        • Calcul direct : <br />
+        \( d_{\text{voiture}} = V_{\text{voiture}} \times t = 25 \, \text{m/s}
+        \times 13 \, \text{s} = 325 \, \text{m} \).
+        <div class="final-answer">\(\boxed{325 \, \text{mètres}}\)</div>
+      </div>
+    </div>
+
+    <!-- Exercice 3 -->
+    <div class="section">
+      <h2>Exercice 3 : Freinage avec Retard</h2>
+
+      <div class="solution">
+        <strong>1. Condition pour éviter la collision :</strong><br />
+        <span class="law">Loi utilisée : Distance de freinage et retard</span
+        ><br />
+        • <u>Dérivation</u> : <br />
+        La distance de freinage pour un MRUV est \( s = \frac{v_0^2}{2a} \).<br />
+        Pour \( M_2 \), il faut ajouter la distance parcourue pendant le retard
+        (\( \Delta t = 1 \, \text{s} \)) :<br />
+        \( s_2 = v_0 \cdot \Delta t + \frac{v_0^2}{2a_2} \).<br />
+        • Application numérique :<br />
+        \( s_1 = \frac{30^2}{2 \times 6} = 75 \, \text{m} \),<br />
+        \( s_2 = 30 \times 1 + \frac{30^2}{2 \times 5} = 120 \, \text{m} \).<br />
+        • Condition de sécurité : \( d \geq s_2 - s_1 = 45 \, \text{m} \).
+        <div class="final-answer">\(\boxed{d \geq 45 \, \text{mètres}}\)</div>
+      </div>
+
+      <div class="solution">
+        <strong>2. Instant du choc (d=30m) :</strong><br />
+        <span class="law">Loi utilisée : Équations horaires MRUV</span><br />
+        • <u>Dérivation</u> : <br />
+        Pour \( M_1 \) : \( x_1(t) = v_0 t - \frac{1}{2} a_1 t^2 \).<br />
+        Pour \( M_2 \) : \( x_2(t) = v_0 (t - \Delta t) - \frac{1}{2} a_2 (t -
+        \Delta t)^2 \) (valide pour \( t \geq \Delta t \)).<br />
+        • Équation de collision : \( x_1(t) - x_2(t) = d \).<br />
+        • Simplification : \( -0.5t^2 + 5t - 30 = 0 \).<br />
+        • Solution : \( t = \frac{-5 \pm \sqrt{25 + 60}}{-1} \approx 4.48 \,
+        \text{s} \).<br />
+        • Calcul des vitesses :<br />
+        \( v_{M_1} = 30 - 6 \times 4.48 \approx 3.09 \, \text{m/s} \),<br />
+        \( v_{M_2} = 30 - 5 \times (4.48 - 1) \approx 12.58 \, \text{m/s} \).
+        <div class="final-answer">
+          \(\boxed{t \approx 4.48 \, \text{s}, \, v_{M_1} \approx 3.09 \,
+          \text{m/s}, \, v_{M_2} \approx 12.58 \, \text{m/s}}\)
+        </div>
+      </div>
+
+      <div class="solution">
+        <strong>3. Distance finale D (d=55m) :</strong><br />
+        <span class="law">Loi utilisée : Distance résiduelle après arrêt</span
+        ><br />
+        • <u>Dérivation</u> : <br />
+        \( M_1 \) s'arrête après \( s_1 = 75 \, \text{m} \).<br />
+        \( M_2 \) s'arrête après \( s_2 = 120 \, \text{m} \).<br />
+        • Distance résiduelle : \( D = s_1 + d - s_2 = 75 + 55 - 120 = 10 \,
+        \text{m} \).
+        <div class="final-answer">\(\boxed{D = 10 \, \text{mètres}}\)</div>
+      </div>
+    </div>
+
+    <!-- Exercice 4 -->
+    <div class="section">
+      <h2>Exercice 4 : Dépassement Croisé Voiture-Camion</h2>
+
+      <!-- Question 1 : Dates des dépassements -->
+      <div class="solution">
+        <strong>1. Dates des dépassements :</strong><br />
+        <span class="law"
+          >Lois utilisées : MRUV (phase accélérée) et MRU (phase
+          constante)</span
+        ><br />
+
+        <u>Équations horaires :</u><br />
+        • <em>Voiture (phase accélérée : \(0 \leq t \leq 6 \, \text{s}\))</em> :
+        <span class="equation">\( x_{\text{voiture}}(t) = 1.25 t^2 \).</span
+        ><br />
+        • <em>Voiture (phase constante : \(t > 6 \, \text{s}\))</em> :
+        <span class="equation"
+          >\( x_{\text{voiture}}(t) = 45 + 15(t - 6) \).</span
+        ><br />
+        • <em>Camion</em> :
+        <span class="equation">\( x_{\text{camion}}(t) = -20 + 12.5 t \).</span
+        ><br /><br />
+
+        • <em>Premier dépassement (camion rattrape la voiture)</em> :<br />
+        Résoudre \(1.25 t^2 = -20 + 12.5 t\) :
+        <span class="equation"
+          >\(1.25 t^2 - 12.5 t + 20 = 0 \quad \Rightarrow \quad t = \frac{12.5
+          \pm \sqrt{56.25}}{2.5} \).</span
+        ><br />
+        Solution : \(t = 2 \, \text{s}\) (valide car \(t < 6 \, \text{s}\)).<br /><br />
+
+        • <em>Deuxième dépassement (voiture rattrape le camion)</em> :<br />
+        Résoudre \(45 + 15(t - 6) = -20 + 12.5 t\) :
+        <span class="equation"
+          >\(2.5 t = 25 \quad \Rightarrow \quad t = 10 \, \text{s}\).</span
+        >
+
+        <div class="final-answer">
+          \(\boxed{t_1 = 2 \, \text{s} \, \text{(camion rattrape)}, \quad t_2 =
+          10 \, \text{s} \, \text{(voiture rattrape)}}\)
+        </div>
+      </div>
+
+      <!-- Question 2 : Positions des dépassements -->
+      <div class="solution">
+        <strong>2. Positions des dépassements :</strong><br />
+        • <em>À \(t_1 = 2 \, \text{s}\)</em> :
+        <span class="equation">\(x_1 = 1.25 \cdot (2)^2 = 5 \, \text{m}\).</span
+        ><br />
+        • <em>À \(t_2 = 10 \, \text{s}\)</em> :
+        <span class="equation"
+          >\(x_2 = -20 + 12.5 \cdot 10 = 105 \, \text{m}\).</span
+        >
+
+        <div class="final-answer">
+          \(\boxed{x_1 = 5 \, \text{m}, \quad x_2 = 105 \, \text{m}}\)
+        </div>
+      </div>
+
+      <!-- Question 3 : Vitesses de la voiture -->
+      <div class="solution">
+        <strong>3. Vitesses de la voiture :</strong><br />
+        • <em>À \(t_1 = 2 \, \text{s}\)</em> :
+        <span class="equation">\(v_1 = 2.5 \cdot 2 = 5 \, \text{m/s}\).</span
+        ><br />
+        • <em>À \(t_2 = 10 \, \text{s}\)</em> :
+        <span class="equation"
+          >\(v_2 = 15 \, \text{m/s}\) (vitesse constante).</span
+        >
+
+        <div class="final-answer">
+          \(\boxed{v_1 = 5 \, \text{m/s}, \quad v_2 = 15 \, \text{m/s}}\)
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercice 5 -->
+    <div class="section">
+      <h2>Exercice 5 : Rattrapage d'un Train en Démarrage</h2>
+
+      <!-- Question 1 -->
+      <div class="solution">
+        <strong>1. Le voyageur peut-il rattraper le train ?</strong><br />
+        <span class="law">Lois utilisées : MRU (voyageur) et MRUV (train)</span
+        ><br />
+
+        <u>Étapes :</u><br />
+        • Conversion de la vitesse :
+        <span class="equation"
+          >\( V = 24 \, \text{km/h} = \frac{24}{3.6} \approx 6.67 \, \text{m/s}
+          \).</span
+        ><br />
+        • Équations horaires :<br />
+        - Voyageur :
+        <span class="equation">\( x_{\text{voyageur}}(t) = 6.67 t \).</span
+        ><br />
+        - Train :
+        <span class="equation">\( x_{\text{train}}(t) = 0.6 t^2 + 25 \).</span
+        ><br />
+        • Équation de rattrapage :
+        <span class="equation"
+          >\( 6.67 t = 0.6 t^2 + 25 \quad \Rightarrow \quad 0.6 t^2 - 6.67 t +
+          25 = 0 \).</span
+        ><br />
+        • Discriminant :
+        <span class="equation"
+          >\( \Delta = (-6.67)^2 - 4 \cdot 0.6 \cdot 25 \approx -15.6 \).</span
+        ><br />
+        • Conclusion :
+        <span class="equation"
+          >\( \Delta < 0 \Rightarrow \text{Aucune solution réelle} \).</span
+        >
+
+        <div class="final-answer">
+          \(\boxed{\text{Non, le voyageur ne peut pas rattraper le train.}}\)
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="solution">
+        <strong>2. Distance minimale entre le voyageur et la portière :</strong
+        ><br />
+        <span class="law">Loi utilisée : Minimisation de la distance</span
+        ><br />
+
+        <u>Étapes :</u><br />
+        • Distance entre les deux :
+        <span class="equation">\( D(t) = 0.6 t^2 + 25 - 6.67 t \).</span><br />
+        • Dérivée :
+        <span class="equation">\( D'(t) = 1.2 t - 6.67 \).</span><br />
+        • Temps de distance minimale :
+        <span class="equation"
+          >\( t = \frac{6.67}{1.2} \approx 5.56 \, \text{s} \).</span
+        ><br />
+        • Calcul de \( D_{\text{min}} \) :
+        <span class="equation"
+          >\( D_{\text{min}} \approx 0.6 (5.56)^2 + 25 - 6.67 \cdot 5.56 \approx
+          6.4 \, \text{m} \).</span
+        >
+
+        <div class="final-answer">
+          \(\boxed{D_{\text{min}} \approx 6.4 \, \text{mètres}}\)
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercice 6 -->
+    <div class="section">
+      <h2>Exercice 6 : Freinage d'Urgence avec Temps de Réaction</h2>
+
+      <!-- Question 1 -->
+      <div class="solution">
+        <strong>1. Calcul de la décélération :</strong><br />
+        <span class="law"
+          >Loi utilisée : \( a = \frac{\Delta v}{\Delta t} \)</span
+        ><br />
+        • Conversion des vitesses :<br />
+        <span class="equation"
+          >\( V_0 = 144 \, \text{km/h} = 40 \, \text{m/s}, \quad V = 108 \,
+          \text{km/h} = 30 \, \text{m/s} \).</span
+        ><br />
+        • Calcul de la décélération :<br />
+        <span class="equation"
+          >\( a = \frac{30 - 40}{1} = -10 \, \text{m/s}^2 \quad \Rightarrow
+          \quad |a| = 10 \, \text{m/s}^2 \).</span
+        >
+        <div class="final-answer">\(\boxed{10 \, \text{m/s}^2}\)</div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="solution">
+        <strong>2. Distance d'arrêt avec freinage immédiat :</strong><br />
+        <span class="law">Loi utilisée : \( v^2 = v_0^2 + 2a d \)</span><br />
+        • Distance de freinage :<br />
+        <span class="equation"
+          >\( 0 = 40^2 + 2(-10)d \quad \Rightarrow \quad d = \frac{1600}{20} =
+          80 \, \text{m} \).</span
+        ><br />
+        • Distance depuis l'obstacle :<br />
+        <span class="equation"
+          >\( 130 \, \text{m} - 80 \, \text{m} = 50 \, \text{m} \).</span
+        >
+        <div class="final-answer">\(\boxed{50 \, \text{mètres}}\)</div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="solution">
+        <strong>3. Collision avec réaction retardée (1.5 s) :</strong><br />
+        <span class="law">Lois utilisées : Distance de réaction + Freinage</span
+        ><br />
+        • Distance pendant la réaction :<br />
+        <span class="equation"
+          >\( d_{\text{réaction}} = 40 \times 1.5 = 60 \, \text{m} \).</span
+        ><br />
+        • Distance restante : \( 130 - 60 = 70 \, \text{m} \).<br />
+        • Distance de freinage nécessaire : \( 80 \, \text{m} \).<br />
+        • Collision à : \( 70 - 80 = -10 \, \text{m} \).<br />
+        <div class="final-answer">
+          \(\boxed{\text{Collision à } 10 \, \text{mètres \, derrière \,
+          l'obstacle}}\)
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercice 9 -->
+    <div class="section">
+      <h2>Exercice 9 : Analyse du Mouvement d'un Mobile</h2>
+
+      <!-- Données -->
+      <table>
+        <tr>
+          <th>Positions</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+          <th>G</th>
+        </tr>
+        <tr>
+          <td><strong>x(cm)</strong></td>
+          <td>-4</td>
+          <td>-2.5</td>
+          <td>0</td>
+          <td>3.5</td>
+          <td>8</td>
+          <td>13.5</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td><strong>t(ms)</strong></td>
+          <td>0</td>
+          <td>40</td>
+          <td>80</td>
+          <td>120</td>
+          <td>160</td>
+          <td>200</td>
+          <td>240</td>
+        </tr>
+      </table>
+
+      <!-- Question 1 -->
+      <div class="solution">
+        <strong>1. Nature du mouvement et accélération :</strong><br />
+        <span class="law"
+          >Loi utilisée : Différences secondes constantes ⇒ MRUA</span
+        ><br />
+        • Conversion des unités :
+        <span class="equation">\( x \) en mètres, \( t \) en secondes.</span
+        ><br />
+        • Calcul des différences secondes :
+        <span class="equation"
+          >\( \Delta^2 x = 0.25 \, \text{m/s}^2 \) (constant).</span
+        ><br />
+        <div class="final-answer">
+          \(\boxed{\text{Mouvement uniformément accéléré avec } a = 0.25 \,
+          \text{m/s}^2}\)
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="solution">
+        <strong>2. Vitesses aux points B, C, D, E, F :</strong><br />
+        <span class="law">Loi utilisée : \( v(t) = v_0 + a t \)</span><br />
+        • \( v_0 = 0.37 \, \text{m/s} \) (calculé à partir de \( t = 0 \)).<br />
+        • Calculs :<br />
+        <table>
+          <tr>
+            <th>Point</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+            <th>E</th>
+            <th>F</th>
+          </tr>
+          <tr>
+            <td><strong>\( v \, (\text{m/s}) \)</strong></td>
+            <td>0.38</td>
+            <td>0.39</td>
+            <td>0.40</td>
+            <td>0.41</td>
+            <td>0.42</td>
+          </tr>
+        </table>
+        <div class="final-answer">
+          \(\boxed{v_B = 0.38 \, \text{m/s}, \quad v_C = 0.39 \, \text{m/s},
+          \quad v_D = 0.40 \, \text{m/s}, \quad v_E = 0.41 \, \text{m/s}, \quad
+          v_F = 0.42 \, \text{m/s}}\)
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="solution">
+        <strong>3. Vitesses aux points A et G :</strong><br />
+        • \( v_A = v_0 = 0.37 \, \text{m/s} \).<br />
+        • \( v_G = 0.37 + 0.25 \times 0.24 = 0.43 \, \text{m/s} \).<br />
+        <div class="final-answer">
+          \(\boxed{v_A = 0.37 \, \text{m/s}, \quad v_G = 0.43 \, \text{m/s}}\)
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="solution">
+        <strong>4. Équation horaire du mouvement :</strong><br />
+        <span class="law"
+          >Loi utilisée : \( x(t) = x_0 + v_0 t + \frac{1}{2} a t^2 \)</span
+        ><br />
+        • Substitution des valeurs :
+        <span class="equation">\( x(t) = -0.04 + 0.37 t + 0.125 t^2 \).</span>
+        <div class="final-answer">
+          \(\boxed{x(t) = -0.04 + 0.37 t + 0.125 t^2}\)
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

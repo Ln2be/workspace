@@ -2,151 +2,186 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Fiche Récap - Dynamique Point Matériel</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <title>Exercice 9 - Accélération via Suite Arithmétique</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
     <style>
       body {
-        font-family: "Arial", sans-serif;
-        margin: 10px;
-        background-color: #f0f0f0;
-        font-size: 14px;
+        font-family: Arial;
+        line-height: 1.4;
+        margin: 0.5cm;
       }
-
-      .cheat-sheet {
-        max-width: 900px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        padding: 15px;
-      }
-
       .section {
-        background: white;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
       }
-
-      h1 {
-        font-size: 20px;
-        text-align: center;
-        grid-column: span 2;
-        margin: 0 0 10px;
-        color: #2c3e50;
-      }
-
       h2 {
-        font-size: 16px;
-        margin: 0 0 5px;
-        color: #fff;
-        padding: 5px;
-        border-radius: 3px;
+        color: #2c3e50;
+        font-size: 14pt;
+        border-bottom: 2px solid #3498db;
       }
-
-      h3 {
-        font-size: 14px;
-        margin: 5px 0;
+      .solution {
+        margin: 8px 0;
+        font-size: 10pt;
       }
-
+      .final-answer {
+        background: #e8f6e9;
+        padding: 6px;
+        border: 1px solid #2ecc71;
+        margin: 4px 0;
+      }
       .equation {
-        background: #f0f0f0;
+        color: #c0392b;
+      }
+      .law {
+        color: #2980b9;
+        font-weight: bold;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      th,
+      td {
+        border: 1px solid #2c3e50;
         padding: 5px;
-        margin: 5px 0;
-        font-family: "Courier New", monospace;
-        font-size: 13px;
-        border-left: 3px solid #3498db;
-      }
-
-      ul {
-        margin: 5px 0;
-        padding-left: 15px;
-      }
-
-      li {
-        margin: 2px 0;
-      }
-
-      /* Color coding for sections */
-      .referentiels {
-        background: #e3f2fd;
-      }
-      .referentiels h2 {
-        background: #2196f3;
-      }
-      .cinematique {
-        background: #e8f5e9;
-      }
-      .cinematique h2 {
-        background: #4caf50;
-      }
-      .mouvements {
-        background: #fff3e0;
-      }
-      .mouvements h2 {
-        background: #ff9800;
-      }
-      .experimentale {
-        background: #fce4ec;
-      }
-      .experimentale h2 {
-        background: #e91e63;
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <div class="cheat-sheet">
-      <h1>Dynamique du Point Matériel</h1>
+    <div class="section">
+      <h2>
+        Exercice 9 : Détermination de l'Accélération via Suite Arithmétique
+      </h2>
 
-      <!-- Référentiels -->
-      <div class="section referentiels">
-        <h2>1. Référentiels</h2>
-        <p>Solide de référence pour mouvement :</p>
-        <ul>
-          <li>Terrestre : Axes fixes Terre</li>
-          <li>Géocentrique : Centre Terre + étoiles</li>
-          <li>Copernic : Centre système solaire</li>
-        </ul>
+      <!-- Données -->
+      <table>
+        <tr>
+          <th>Positions</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+          <th>G</th>
+        </tr>
+        <tr>
+          <td><strong>x(cm)</strong></td>
+          <td>-4</td>
+          <td>-2.5</td>
+          <td>0</td>
+          <td>3.5</td>
+          <td>8</td>
+          <td>13.5</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td><strong>Δt(ms)</strong></td>
+          <td>0</td>
+          <td>40</td>
+          <td>80</td>
+          <td>120</td>
+          <td>160</td>
+          <td>200</td>
+          <td>240</td>
+        </tr>
+      </table>
+
+      <!-- Solution -->
+      <div class="solution">
+        <strong>Étapes de résolution :</strong><br />
+        <span class="law">Loi utilisée : \( r = a \theta^2 \)</span><br />
+        1. <u>Identifier la suite arithmétique des positions</u> :<br />
+        • Les positions ne forment pas une suite arithmétique, mais les
+        <strong>différences secondes</strong> (Δ²x) sont constantes.<br />
+        • Differences de positions constituent une suite arithmetique de raison
+        r :<br />
+        <span class="equation">
+          \( r = 1 \text{cm} = 0.01 \, \text{m} \quad (\text{valeur constante})
+          \). </span
+        ><br />
+        2. <u>Déterminer θ</u> :<br />
+        • Intervalle de temps entre les mesures :
+        <span class="equation"
+          >\( \theta = 40 \, \text{ms} = 0.04 \, \text{s} \).</span
+        ><br />
+        3. <u>Calculer l'accélération</u> :<br />
+        <span class="equation">
+          \( a = \frac{r}{\theta^2} = \frac{0.01}{(0.04)^2} =
+          \frac{0.01}{0.0016} = 6.25 \, \text{m/s}^2 \).
+        </span>
+        <div class="final-answer">\(\boxed{a = 6.25 \, \text{m/s}^2}\)</div>
+      </div>
+      <!-- Question 2 -->
+      <div class="solution">
+        <strong>2. Vitesses aux points B, C, D, E, F :</strong><br />
+        <span class="law"
+          >Formule : \( v(t) = v_0 + a t \) avec \( v_0 = 0.25 \, \text{m/s} \)
+          et \( a = 6.25 \, \text{m/s}^2 \).</span
+        ><br />
+        <table>
+          <tr>
+            <th>Point</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+            <th>E</th>
+            <th>F</th>
+          </tr>
+          <tr>
+            <td><strong>\( v \, (\text{m/s}) \)</strong></td>
+            <td>0.5</td>
+            <td>0.75</td>
+            <td>1.0</td>
+            <td>1.25</td>
+            <td>1.5</td>
+          </tr>
+        </table>
+        <div class="final-answer">
+          \(\boxed{v_B = 0.5 \, \text{m/s}, \quad v_C = 0.75 \, \text{m/s},
+          \quad v_D = 1.0 \, \text{m/s}, \quad v_E = 1.25 \, \text{m/s}, \quad
+          v_F = 1.5 \, \text{m/s}}\)
+        </div>
       </div>
 
-      <!-- Cinématique -->
-      <div class="section cinematique">
-        <h2>2. Cinématique</h2>
-        <h3>Position</h3>
-        <div class="equation">
-          \(\overrightarrow{OM}(t) = x(t)\vec{i} + y(t)\vec{j} + z(t)\vec{k}\)
-        </div>
-        <h3>Vitesse</h3>
-        <div class="equation">
-          \(\vec{v} = \frac{dx}{dt}\vec{i} + \frac{dy}{dt}\vec{j} +
-          \frac{dz}{dt}\vec{k}\)
-        </div>
-        <h3>Accélération</h3>
-        <div class="equation">
-          \(\vec{a} = \frac{d^2\overrightarrow{OM}}{dt^2}\)
+      <!-- Question 3 -->
+      <div class="solution">
+        <strong>3. Vitesses aux points A et G :</strong><br />
+        • Point A (\( t = 0 \, \text{s} \)) :
+        <span class="equation">\( v_A = v_0 = 0.25 \, \text{m/s} \).</span
+        ><br />
+        • Point G (\( t = 0.24 \, \text{s} \)) :
+        <span class="equation"
+          >\( v_G = 0.25 + 6.25 \times 0.24 = 1.75 \, \text{m/s} \).</span
+        >
+        <div class="final-answer">
+          \(\boxed{v_A = 0.25 \, \text{m/s}, \quad v_G = 1.75 \, \text{m/s}}\)
         </div>
       </div>
 
-      <!-- Mouvements -->
-      <div class="section mouvements">
-        <h2>3. Mouvements</h2>
-        <h3>MRU</h3>
-        <div class="equation">\(x(t) = v_0 t + x_0\)</div>
-        <h3>MRUV</h3>
-        <div class="equation">
-          \(v(t) = a t + v_0\)<br />
-          \(x(t) = \frac{1}{2}a t^2 + v_0 t + x_0\)
+      <!-- Question 4 -->
+      <div class="solution">
+        <strong>4. Équation horaire du mouvement :</strong><br />
+        <span class="law"
+          >Formule générale : \( x(t) = x_0 + v_0 t + \frac{1}{2} a t^2
+          \).</span
+        ><br />
+        • Substitution des valeurs :
+        <span class="equation">\( x(t) = -0.04 + 0.25 t + 3.125 t^2 \).</span
+        ><br />
+        • Vérification à \( t = 0.24 \, \text{s} \) :
+        <span class="equation"
+          >\( x(0.24) = -0.04 + 0.25 \times 0.24 + 3.125 \times (0.24)^2 = 0.20
+          \, \text{m} \).</span
+        >
+        <div class="final-answer">
+          \(\boxed{x(t) = -0.04 + 0.25 t + 3.125 t^2}\)
         </div>
-      </div>
-
-      <!-- Expérimentale -->
-      <div class="section experimentale">
-        <h2>4. Expérimentale</h2>
-        <ul>
-          <li>Vitesse moyenne : \(v_m = \frac{A_{n-1}A_{n+1}}{2\theta}\)</li>
-          <li>Accélération : \(a_m = \frac{v_{n+1} - v_{n-1}}{2\theta}\)</li>
-          <li>MRUV : \(r = a \theta^2\) (suite arithmétique)</li>
-        </ul>
       </div>
     </div>
   </body>

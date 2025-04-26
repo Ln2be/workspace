@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fiche Récap - Dynamique Fondamentale</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 10px;
+        background-color: #f0f0f0;
+        font-size: 14px;
+      }
+
+      .cheat-sheet {
+        max-width: 900px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 15px;
+      }
+
+      .section {
+        background: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 20px;
+        text-align: center;
+        grid-column: span 2;
+        margin: 0 0 10px;
+        color: #2c3e50;
+      }
+
+      h2 {
+        font-size: 16px;
+        margin: 0 0 5px;
+        color: #fff;
+        padding: 5px;
+        border-radius: 3px;
+      }
+
+      .equation {
+        background: #f0f0f0;
+        padding: 5px;
+        margin: 5px 0;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        border-left: 3px solid #3498db;
+      }
+
+      ul, ol {
+        margin: 5px 0;
+        padding-left: 15px;
+      }
+
+      /* Couleurs des sections */
+      .forces {
+        background: #fff3e0;
+      }
+      .forces h2 {
+        background: #ff9800;
+      }
+      .rfd {
+        background: #e3f2fd;
+      }
+      .rfd h2 {
+        background: #2196f3;
+      }
+      .galileen {
+        background: #fce4ec;
+      }
+      .galileen h2 {
+        background: #e91e63;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cheat-sheet">
+      <h1>Relation Fondamentale de la Dynamique</h1>
+
+      <!-- Forces -->
+      <div class="section forces">
+        <h2>1. Forces intérieures/extérieures</h2>
+        <ul>
+          <li><strong>Intérieure</strong> : Interaction interne</li>
+          <li><strong>Extérieure</strong> : Agent extérieur</li>
+        </ul>
+        <div class="equation">
+          Exemple camion-remorque :<br>
+          \( \text{Système R} \Rightarrow \vec{F}_{C/R} \text{ (ext)} \)<br>
+          \( \text{Système C+R} \Rightarrow \vec{F} \text{ (int)} \)
+        </div>
+      </div>
+
+      <!-- RFD -->
+      <div class="section rfd">
+        <h2>2. Relation Fondamentale (RFD)</h2>
+        <div class="equation">\( \sum \vec{F_{ext}} = m \cdot \vec{a} \)</div>
+        <ul>
+          <li>Valable en <strong>référentiel galiléen</strong></li>
+          <li>Étapes d'application :
+            <ol>
+              <li>Définir le système étudié</li>
+              <li>Lister toutes les forces extérieures</li>
+              <li>Choisir un référentiel galiléen</li>
+              <li>Faire un schéma clair</li>
+              <li>Projeter les forces sur les axes si nécessaire</li>
+            </ol>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Référentiels Galiléens -->
+      <div class="section galileen">
+        <h2>3. Référentiels Galiléens</h2>
+        <ul>
+          <li>Copernic (héliocentrique)</li>
+          <li>Kepler (solaire)</li>
+          <li>Géocentrique</li>
+          <li>Terrestre (approché)</li>
+        </ul>
+        <div class="equation">
+          Principe d'inertie :<br>
+          \( \sum \vec{F_{ext}} = 0 \Rightarrow \vec{v} = \text{constante} \)
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
